@@ -11,66 +11,10 @@ import TbGitHub from '@/components/icons/TbGithub';
 import { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-
-const quotes = [
-  {
-    quote:
-      "In the realm of business, there's an unwavering truth - the numbers never lie, serving as the compass that guides us through the labyrinth of commerce.",
-    author: 'John D. Rockefeller'
-  },
-  {
-    quote:
-      'Accounting, the language of business, is the bridge that connects aspirations to actions, transforming dreams into economic reality.',
-    author: 'Warren Buffett'
-  },
-  {
-    quote:
-      'The heartbeat of business is the customer, and successful enterprises are those that not only serve but inspire their clientele to become ambassadors of their brand.',
-    author: 'Shiv Singh'
-  },
-  {
-    quote:
-      'In the world of commerce, the art of negotiation is the fulcrum upon which fortunes pivot, where the skillful dance between interests dictates outcomes',
-    author: 'Chester L. Karrass'
-  },
-  {
-    quote:
-      'Within the numerical tapestry of business, every digit is a brushstroke, every ledger a canvas, and every financial statement a masterpiece in the making.',
-    author: 'Warren Buffett'
-  },
-  {
-    quote:
-      'Predicting the future in business is an act of creation, where entrepreneurs craft their destinies through innovation, determination, and relentless pursuit of excellence.',
-    author: 'Peter Drucker'
-  },
-  {
-    quote:
-      'In the corporate landscape, compensation comes in the form of two currencies - experience, which is your teacher, and cash, which is your paycheck. Embrace the lessons, and the rewards will follow.',
-    author: 'Harold S. Geneen'
-  },
-  {
-    quote:
-      "Accounting, a true art, is more than just number-crunching; it is the chronicler of a company's journey, capturing the narrative of its successes and challenges, painting a story with financial strokes.",
-    author: 'Charles W. Mulford'
-  },
-  {
-    quote:
-      "When the winds of adversity blow in the business world, it's not the fall that defines you but the resilience to rise again, stronger and wiser.",
-    author: 'Vince Lombardi'
-  },
-  {
-    quote:
-      "Accounting is not the calculus of commerce; it is the comprehension of companies. It's about peering beyond the numbers and into the heart of enterprises, decoding their stories, and revealing their essence.",
-    author: 'Warren Buffett'
-  }
-];
+import Jaen from '@/components/icons/snek';
 
 const SignIn: FC = () => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
-
-  const quote = React.useMemo(() => {
-    return quotes[Math.floor(Math.random() * quotes.length)];
-  }, []);
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault();
@@ -82,27 +26,56 @@ const SignIn: FC = () => {
   }
 
   return (
-    <div className="flex justify-center items-center h-screen w-screen">
-      <div className="container h-[60vh] rounded-2xl shadow-xl grid grid-cols-2 p-0 overflow-hidden border border-gray-200">
-        <div className="bg-gray-900 p-10 flex flex-col text-white">
-          <div className="grow">
-            <Image
-              src="/ontax_logo_transparent.svg"
-              alt="Ontax branding"
-              width={50}
-              height={50}
-              className="inline-block align-middle"
-            />
-            <span className="pl-3 text-lg align-middle">Ontax</span>
-          </div>
-          <div>
-            <p>"{quote.quote}"</p>
-            <p className="text-sm mt-2 opacity-90">{quote.author}</p>
-          </div>
+    <>
+      <Link
+        href="/sign-up"
+        className="absolute top-8 right-8 px-4 py-2 rounded-md inline-flex items-center text-sm text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:bg-accent"
+      >
+        Login
+      </Link>
+      <div className="mx-auto flex flex-col w-full justify-center space-y-6 sm:w-[350px]">
+        <div className="flex flex-col space-y-2 text-center">
+          <h1 className="text-2xl font-semibold">Create an account</h1>
+          <p className="text-sm text-gray-500 px-10">Enter your email below to get started</p>
         </div>
-        <div className="p-10"></div>
+        <div className="grid gap-6">
+          <form action="">
+            <div className="text-center grid gap-2">
+              <div className="grid gap-1">
+                <label className="sr-only">Email</label>
+                <input
+                  type="email"
+                  className="w-full border border-input h-9 px-3 py-1 rounded-md shadow-sm text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                  placeholder="emily.brooks@ontax.com"
+                />
+              </div>
+              <button className="w-full rounded-md bg-primary text-primary-foreground px-4 py-2">
+                Sign In with Email
+              </button>
+            </div>
+          </form>
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t"></span>
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">or continue with</span>
+            </div>
+          </div>
+          <button className="w-full rounded-md bg-transparent text-primary px-4 py-2 border border-input text-sm inline-flex items-center justify-center font-[500]">
+            <Jaen className="stroke-primary h-4 w-4 mr-2" />
+            Jaen
+          </button>
+          <p className="px-8 text-center text-sm text-muted-foreground">
+            By signin in, you agree to our
+            <br />
+            <a className="underline underline-offset-4 hover:text-primary">Terms of Service</a>
+            &nbsp; and &nbsp;
+            <a className="underline underline-offset-4 hover:text-primary">Privacy Policy</a>
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
