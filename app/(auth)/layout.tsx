@@ -112,7 +112,7 @@ const AuthLayout: FC<ILayoutProps> = ({ children }) => {
           </div>
           {quote && (
             <div className="text-lg">
-              <p>"{quote.quote}"</p>
+              <p>&quot;{quote.quote}&quot;</p>
               <p className="text-base mt-2 opacity-90">{quote.author}</p>
             </div>
           )}
