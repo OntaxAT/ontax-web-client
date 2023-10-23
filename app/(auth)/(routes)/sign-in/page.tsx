@@ -44,11 +44,11 @@ const SignIn: FC = () => {
     <>
       <Link
         href="/sign-up"
-        className="absolute top-8 right-8 px-4 py-2 rounded-md inline-flex items-center text-sm font-medium text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:bg-accent transition-colors"
+        className="absolute top-8 right-8 px-4 py-2 rounded-md inline-flex items-center text-sm font-medium text-accent-foreground dark:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:bg-accent transition-colors"
       >
         Login
       </Link>
-      <div className="mx-auto flex flex-col w-full justify-center space-y-6 sm:w-[350px]">
+      <div className="mx-auto flex flex-col w-full justify-center space-y-6 sm:w-[350px] text-primary-foreground">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold">Create an account</h1>
           <p className="text-sm text-gray-500 px-10">Only takes a few seconds, we promise</p>
@@ -77,7 +77,7 @@ const SignIn: FC = () => {
                   <label className="text-sm text-muted-foreground sr-only">Password</label>
                   <div
                     className={cn(
-                      'flex justify-between w-full border border-input h-9 pl-3 pr-2 py-1 rounded-md shadow-sm text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
+                      'flex justify-between w-full border border-input dark:border-gray-800 h-9 pl-3 pr-2 py-1 rounded-md shadow-sm text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring',
                       errors.password && 'ring-red-500 ring-1',
                       isPasswordFocused && 'ring-1 ring-ring'
                     )}
@@ -110,7 +110,7 @@ const SignIn: FC = () => {
                 </div>
               </div>
               <button
-                className="w-full rounded-md transition-colors transiton-opacity bg-primary hover:bg-gray-800 text-primary-foreground px-4 py-2 flex justify-center items-center gap-2 disabled:pointer-events-none disabled:opacity-50"
+                className="w-full rounded-md transition-colors transiton-opacity bg-primary dark:bg-white hover:bg-gray-800 text-primary-foreground dark:text-primary px-4 py-2 flex justify-center items-center gap-2 disabled:pointer-events-none disabled:opacity-50"
                 disabled={isLoading}
               >
                 {isLoading && <TbLoader className="animate-spin" />}Create account
