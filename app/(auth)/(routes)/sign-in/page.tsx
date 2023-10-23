@@ -29,7 +29,7 @@ const SignIn: FC = () => {
     <>
       <Link
         href="/sign-up"
-        className="absolute top-8 right-8 px-4 py-2 rounded-md inline-flex items-center text-sm text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:bg-accent"
+        className="absolute top-8 right-8 px-4 py-2 rounded-md inline-flex items-center text-sm text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:bg-accent transition-colors"
       >
         Login
       </Link>
@@ -49,7 +49,7 @@ const SignIn: FC = () => {
                   placeholder="emily.brooks@ontax.com"
                 />
               </div>
-              <button className="w-full rounded-md bg-primary text-primary-foreground px-4 py-2">
+              <button className="w-full rounded-md transition-colors bg-primary hover:bg-gray-800 text-primary-foreground px-4 py-2">
                 Sign In with Email
               </button>
             </div>
@@ -62,7 +62,7 @@ const SignIn: FC = () => {
               <span className="bg-background px-2 text-muted-foreground">or continue with</span>
             </div>
           </div>
-          <button className="w-full rounded-md bg-transparent text-primary px-4 py-2 border border-input text-sm inline-flex items-center justify-center font-[500]">
+          <button className="w-full rounded-md bg-transparent tansition-colors text-primary hover:bg-accent px-4 py-2 border border-input text-sm inline-flex items-center justify-center font-[500]">
             <Jaen className="stroke-primary h-4 w-4 mr-2" />
             Jaen
           </button>
