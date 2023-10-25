@@ -3,14 +3,11 @@
 import * as React from 'react';
 
 import { cn, validateEmail } from '@/lib/utils';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import TbLoader from '@/components/icons/TbLoader';
-import TbGitHub from '@/components/icons/TbGithub';
 import { FC, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import Jaen from '@/components/icons/snek';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import TbEye from '@/components/icons/TbEye';
@@ -141,12 +138,9 @@ const SignIn: FC = () => {
                   )}
                 </div>
               </div>
-              <button
-                className="w-full rounded-md transition-colors transiton-opacity bg-primary hover:bg-primary/90 text-primary-foreground dark:text-primary-foreground px-4 py-2 flex justify-center items-center gap-2 disabled:pointer-events-none disabled:opacity-50"
-                disabled={isLoading}
-              >
+              <Button disabled={isLoading}>
                 {isLoading && <TbLoader className="animate-spin" />}Create account
-              </button>
+              </Button>
             </div>
           </form>
           <div className="relative">
@@ -157,10 +151,10 @@ const SignIn: FC = () => {
               <span className="bg-background px-2 text-muted-foreground">or continue with</span>
             </div>
           </div>
-          <button className="w-full rounded-md tansition-colors bg-transparent text-primary hover:bg-accent px-4 py-2 border border-input text-sm inline-flex items-center justify-center font-medium">
+          <Button variant="outline" size="sm">
             <Jaen className="stroke-primary h-4 w-4 mr-2" />
             Jaen
-          </button>
+          </Button>
           <p className="px-8 text-center text-sm text-muted-foreground">
             By signin in, you agree to our
             <br />
