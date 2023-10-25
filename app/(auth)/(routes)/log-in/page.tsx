@@ -140,23 +140,12 @@ const SignUp: FC = () => {
             <Jaen className="stroke-primary h-4 w-4 mr-2" />
             Jaen
           </Button>
-          <p className="px-8 text-center text-sm text-muted-foreground">
-            By signin in, you agree to our
-            <br />
-            <Link
-              href="#"
-              className="underline underline-offset-4 hover:text-primary transition-colors"
-            >
-              Terms of Service
-            </Link>
-            &nbsp; and &nbsp;
-            <Link
-              href="#"
-              className="underline underline-offset-4 hover:text-primary transition-colors"
-            >
-              Privacy Policy
-            </Link>
-          </p>
+          <Link
+            href="/forgot-password"
+            className="text-center text-sm text-muted-foreground hover:text-primary hover:underline transition-colors"
+          >
+            Forgot password?
+          </Link>
         </div>
       </div>
     </>

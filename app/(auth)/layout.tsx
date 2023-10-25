@@ -3,6 +3,7 @@
 import { FC, useEffect, useState } from 'react';
 import { ILayoutProps } from '../types/layouts';
 import Image from 'next/image';
+import ThemeMenu from '@/components/theme/theme-menu';
 
 const quotes = [
   {
@@ -119,6 +120,7 @@ const AuthLayout: FC<ILayoutProps> = ({ children }) => {
         </div>
         <div className="p-10 flex items-center relative dark:bg-black text-foreground">
           {children}
+          <ThemeMenu className="absolute bottom-5 right-5" variant="ghost" />
         </div>
       </div>
     </div>
