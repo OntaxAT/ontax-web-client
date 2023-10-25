@@ -19,6 +19,8 @@ import TbEyeOff from '@/components/icons/TbEyeOff';
 type InputFields = {
   email: string;
   password: string;
+  firstname: string;
+  lastname: string;
 };
 
 const SignIn: FC = () => {
@@ -59,34 +61,31 @@ const SignIn: FC = () => {
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="text-center grid gap-5">
               <div className="grid gap-3 text-left">
-                <div className="grid grid-cols-2 gap-2">
-                  <label className="text-sm text-muted-foreground sr-only">Firstname</label>
-                  <Input
-                    type="text"
-                    className={cn(errors.email && 'ring-red-500 ring-1')}
-                    placeholder="Emily"
-                    {...register('email', { required: true, validate: validateEmail })}
-                  />
-                  {errors.email && (
-                    <span className="text-sm text-red-500 text-left">
-                      {errors.email.type === 'validate'
-                        ? 'Please enter a valid email'
-                        : 'Please enter your email'}
-                    </span>
-                  )}
-                  <label className="text-sm text-muted-foreground sr-only">Firstname</label>
-                  <Input
-                    type="text"
-                    className={cn(errors.email && 'ring-red-500 ring-1')}
-                    placeholder="Brooks"
-                    {...register('email', { required: true, validate: validateEmail })}
-                  />
-                  {errors.email && (
-                    <span className="text-sm text-red-500 text-left">
-                      {errors.email.type === 'validate'
-                        ? 'Please enter a valid email'
-                        : 'Please enter your email'}
-                    </span>
+                <div className="grid gap-1">
+                  <div className="grid grid-cols-2 gap-2">
+                    <label htmlFor="firstname" className="text-sm text-muted-foreground sr-only">
+                      Firstname
+                    </label>
+                    <Input
+                      type="text"
+                      className={cn(errors.firstname && 'ring-red-500 ring-1')}
+                      placeholder="Emily"
+                      autoComplete="given-name"
+                      {...register('firstname', { required: true, minLength: 3 })}
+                    />
+                    <label htmlFor="lastname" className="text-sm text-muted-foreground sr-only">
+                      Lastname
+                    </label>
+                    <Input
+                      type="text"
+                      className={cn(errors.lastname && 'ring-red-500 ring-1')}
+                      placeholder="Brooks"
+                      autoComplete="family-name"
+                      {...register('lastname', { required: true, minLength: 3 })}
+                    />
+                  </div>
+                  {(errors.firstname || errors.lastname) && (
+                    <span className="text-sm text-red-500 text-left">How may we call you?</span>
                   )}
                 </div>
                 <div className="grid gap-1">
@@ -95,6 +94,7 @@ const SignIn: FC = () => {
                     type="email"
                     className={errors.email && 'ring-red-500 ring-1'}
                     placeholder="emily.brooks@ontax.com"
+                    autoComplete="email"
                     {...register('email', { required: true, validate: validateEmail })}
                   />
                   {errors.email && (
