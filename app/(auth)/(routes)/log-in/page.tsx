@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import TbLoader from '@/components/icons/TbLoader';
 import TbGitHub from '@/components/icons/TbGithub';
-import { FC, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Jaen from '@/components/icons/snek';
@@ -16,21 +16,38 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import TbEye from '@/components/icons/TbEye';
 import TbEyeOff from '@/components/icons/TbEyeOff';
 
+const phrases = [
+  'Lets get down to business',
+  'Lets get things done',
+  'Lets get to work',
+  'No time to waste',
+  'Ready to dive in?',
+  'Efficiency starts here',
+  'Start now, conquer today',
+  'Lets achieve more',
+  'Make it happen'
+];
+
 type InputFields = {
   email: string;
   password: string;
 };
 
-const SignIn: FC = () => {
+const SignUp: FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState<boolean>(false);
+  const [phrase, setPhrase] = useState<string>();
 
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<InputFields>();
+
+  useEffect(() => {
+    setPhrase(phrases[Math.floor(Math.random() * phrases.length)]);
+  }, []);
 
   const onSubmit: SubmitHandler<InputFields> = data => {
     setIsLoading(true);
@@ -43,52 +60,20 @@ const SignIn: FC = () => {
   return (
     <>
       <Link
-        href="/log-in"
+        href="/sign-in"
         className="absolute top-8 right-8 px-4 py-2 rounded-md inline-flex items-center text-sm font-medium text-accent-foreground dark:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:bg-accent transition-colors"
       >
-        Login
+        Sign In
       </Link>
       <div className="mx-auto flex flex-col w-full justify-center space-y-6 sm:w-[350px] text-primary dark:text-white">
         <div className="flex flex-col space-y-2 text-center">
-          <h1 className="text-2xl font-semibold">Create an account</h1>
-          <p className="text-sm text-muted-foreground px-10">
-            Only takes a few seconds, we promise
-          </p>
+          <h1 className="text-2xl font-semibold">Welcome back</h1>
+          <p className="text-sm text-muted-foreground px-10">{phrase}</p>
         </div>
         <div className="grid gap-6">
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <div className="text-center grid gap-5">
               <div className="grid gap-3 text-left">
-                <div className="grid grid-cols-2 gap-2">
-                  <label className="text-sm text-muted-foreground sr-only">Firstname</label>
-                  <Input
-                    type="text"
-                    className={cn(errors.email && 'ring-red-500 ring-1')}
-                    placeholder="Emily"
-                    {...register('email', { required: true, validate: validateEmail })}
-                  />
-                  {errors.email && (
-                    <span className="text-sm text-red-500 text-left">
-                      {errors.email.type === 'validate'
-                        ? 'Please enter a valid email'
-                        : 'Please enter your email'}
-                    </span>
-                  )}
-                  <label className="text-sm text-muted-foreground sr-only">Firstname</label>
-                  <Input
-                    type="text"
-                    className={cn(errors.email && 'ring-red-500 ring-1')}
-                    placeholder="Brooks"
-                    {...register('email', { required: true, validate: validateEmail })}
-                  />
-                  {errors.email && (
-                    <span className="text-sm text-red-500 text-left">
-                      {errors.email.type === 'validate'
-                        ? 'Please enter a valid email'
-                        : 'Please enter your email'}
-                    </span>
-                  )}
-                </div>
                 <div className="grid gap-1">
                   <label className="text-sm text-muted-foreground sr-only">Email</label>
                   <Input
@@ -145,7 +130,7 @@ const SignIn: FC = () => {
                 className="w-full rounded-md transition-colors transiton-opacity bg-primary hover:bg-primary/90 text-primary-foreground dark:text-primary-foreground px-4 py-2 flex justify-center items-center gap-2 disabled:pointer-events-none disabled:opacity-50"
                 disabled={isLoading}
               >
-                {isLoading && <TbLoader className="animate-spin" />}Create account
+                {isLoading && <TbLoader className="animate-spin" />}Log in
               </button>
             </div>
           </form>
@@ -184,4 +169,4 @@ const SignIn: FC = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
