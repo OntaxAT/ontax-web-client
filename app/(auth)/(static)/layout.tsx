@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, useEffect, useState } from 'react';
-import { ILayoutProps } from '../types/layouts';
+import { ILayoutProps } from '../../types/layouts';
 import Image from 'next/image';
 import ThemeMenu from '@/components/theme/theme-menu';
 
@@ -101,7 +101,7 @@ const AuthLayout: FC<ILayoutProps> = ({ children }) => {
           </svg>
           <div className="grow z-10">
             <Image
-              src="ontax_logo_transparent_white.svg"
+              src="/ontax_logo_transparent_white.svg"
               alt="Ontax branding"
               width={50}
               height={50}
@@ -119,7 +119,7 @@ const AuthLayout: FC<ILayoutProps> = ({ children }) => {
         <div className="dark:bg-black text-foreground h-full p-5 sm:p-5 relative">
           <div className="flex sm:hidden mb-10 justify-center w-full">
             <Image
-              src="ontax_logo_transparent_white.svg"
+              src="/ontax_logo_transparent_white.svg"
               alt="Ontax branding"
               width={30}
               height={30}

@@ -26,4 +26,6 @@ const Link = forwardRef<HTMLAnchorElement, ILinkProps>(({ className, variant, ..
   return <NextLink {...props} className={cn(linkVariants({ variant, className }))} ref={ref} />;
 });
 
+Link.displayName = 'Link';
+
 export default Link;
