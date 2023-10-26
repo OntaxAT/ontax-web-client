@@ -59,7 +59,7 @@ const SignUp: FC = () => {
       <Link
         href="/sign-in"
         className="absolute hidden top-5 right-5 px-4 py-2 rounded-md sm:inline-flex items-center text-sm font-medium text-accent-foreground"
-        variant="button"
+        variant="hoverButton"
       >
         Sign In
       </Link>

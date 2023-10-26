@@ -49,7 +49,7 @@ const SignIn: FC = () => {
       <Link
         href="/log-in"
         className="absolute top-5 right-5 hidden px-4 py-2 rounded-md sm:inline-flex items-center text-sm font-medium text-accent-foreground"
-        variant="button"
+        variant="hoverButton"
       >
         Login
       </Link>
