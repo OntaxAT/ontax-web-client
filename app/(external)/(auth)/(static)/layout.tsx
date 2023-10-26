@@ -1,7 +1,7 @@
 'use client';
 
 import { FC, useEffect, useState } from 'react';
-import { ILayoutProps } from '../../types/layouts';
+import { ILayoutProps } from '../../../types/layouts';
 import Image from 'next/image';
 import ThemeMenu from '@/components/theme/theme-menu';
 import Ontax from '@/components/icons/Ontax';
