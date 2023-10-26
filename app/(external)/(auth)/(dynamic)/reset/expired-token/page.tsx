@@ -2,16 +2,8 @@
 
 import * as React from 'react';
 
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import TbLoader from '@/components/icons/TbLoader';
-import { FC, useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { FC } from 'react';
 import Link from '@/components/ui/link';
-import TbEye from '@/components/icons/TbEye';
-import TbEyeOff from '@/components/icons/TbEyeOff';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { useRouter } from 'next/navigation';
 
 const ExpiredToken: FC = () => {
   return (

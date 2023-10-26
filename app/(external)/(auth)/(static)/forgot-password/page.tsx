@@ -94,7 +94,7 @@ const SignIn: FC = () => {
                   </Tooltip>
                 </TooltipProvider>
                 <p className="text-sm text-muted-foreground">
-                  Remembered your password?
+                  Remembered your password?&nbsp;
                   <Link href="/sign-in" className="dark:text-muted-foreground">
                     Sign in
                   </Link>
