@@ -7,11 +7,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import TbLoader from '@/components/icons/TbLoader';
 import { FC, useEffect, useState } from 'react';
-import Link from 'next/link';
 import Jaen from '@/components/icons/snek';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import TbEye from '@/components/icons/TbEye';
 import TbEyeOff from '@/components/icons/TbEyeOff';
+import Link from '@/components/ui/link';
 
 const phrases = [
   'Lets get down to business',
@@ -58,7 +58,8 @@ const SignUp: FC = () => {
     <>
       <Link
         href="/sign-in"
-        className="absolute top-8 right-8 px-4 py-2 rounded-md inline-flex items-center text-sm font-medium text-accent-foreground dark:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:bg-accent transition-colors"
+        className="absolute hidden top-5 right-5 px-4 py-2 rounded-md sm:inline-flex items-center text-sm font-medium text-accent-foreground"
+        variant="button"
       >
         Sign In
       </Link>
@@ -123,9 +124,14 @@ const SignUp: FC = () => {
                   )}
                 </div>
               </div>
-              <Button disabled={isLoading}>
-                {isLoading && <TbLoader className="animate-spin" />}Log in
-              </Button>
+              <div className="grid gap-3">
+                <Button disabled={isLoading}>
+                  {isLoading && <TbLoader className="animate-spin" />}Log in
+                </Button>
+                <p className="text-sm text-muted-foreground">
+                  New to Ontax? <Link href="/sign-in">Sign in</Link>
+                </p>
+              </div>
             </div>
           </form>
           <div className="relative">
@@ -142,7 +148,8 @@ const SignUp: FC = () => {
           </Button>
           <Link
             href="/forgot-password"
-            className="text-center text-sm text-muted-foreground hover:text-primary hover:underline transition-colors"
+            className="text-center text-sm text-muted-foreground transition-colors"
+            variant="hoverUnderline"
           >
             Forgot password?
           </Link>

@@ -67,12 +67,10 @@ const AuthLayout: FC<ILayoutProps> = ({ children }) => {
 
   return (
     <div className="flex justify-center items-center h-screen w-screen relative">
-      <div className="container h-[60vh] rounded-2xl shadow-xl grid grid-cols-2 p-0 overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950">
-        <div className="bg-primary dark:bg-[#18181b] p-10 flex flex-col text-white relative">
+      <div className="container h-auto sm:h-[60vh] w-11/12 sm:w-auto rounded-2xl shadow-xl sm:grid sm:grid-cols-2 p-0 sm:py-0 overflow-hidden border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950">
+        <div className="bg-primary dark:bg-[#18181b] p-5 sm:p-10 hidden sm:flex flex-col text-white relative">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="603"
-            height="603"
             viewBox="0 0 800 800"
             className="absolute w-full h-full top-0 left-0 opacity-70 dark:hidden"
           >
@@ -103,7 +101,7 @@ const AuthLayout: FC<ILayoutProps> = ({ children }) => {
           </svg>
           <div className="grow z-10">
             <Image
-              src="/ontax_logo_transparent.svg"
+              src="ontax_logo_transparent_white.svg"
               alt="Ontax branding"
               width={50}
               height={50}
@@ -112,15 +110,24 @@ const AuthLayout: FC<ILayoutProps> = ({ children }) => {
             <span className="pl-3 text-lg align-middle">Ontax</span>
           </div>
           {quote && (
-            <div className="text-lg">
+            <div className="text-lg z-10">
               <p>&quot;{quote.quote}&quot;</p>
               <p className="text-base mt-2 opacity-90">{quote.author}</p>
             </div>
           )}
         </div>
-        <div className="p-10 flex items-center relative dark:bg-black text-foreground">
-          {children}
-          <ThemeMenu className="absolute bottom-5 right-5" variant="ghost" />
+        <div className="dark:bg-black text-foreground h-full p-5 sm:p-5 relative">
+          <div className="flex sm:hidden mb-10 justify-center w-full">
+            <Image
+              src="ontax_logo_transparent_white.svg"
+              alt="Ontax branding"
+              width={30}
+              height={30}
+              className="inline-block align-middle"
+            />
+          </div>
+          <div className="flex items-center h-full">{children}</div>
+          <ThemeMenu className="hidden sm:block sm:absolute bottom-5 right-5" variant="ghost" />
         </div>
       </div>
     </div>

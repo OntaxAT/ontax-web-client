@@ -7,7 +7,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import TbLoader from '@/components/icons/TbLoader';
 import { FC, useState } from 'react';
-import Link from 'next/link';
 import Jaen from '@/components/icons/snek';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
@@ -19,6 +18,7 @@ import {
   AlertDialogHeader
 } from '@/components/ui/alert-dialog';
 import { useRouter } from 'next/navigation';
+import Link from '@/components/ui/link';
 
 type InputFields = {
   email: string;
@@ -48,7 +48,8 @@ const SignIn: FC = () => {
     <>
       <Link
         href="/log-in"
-        className="absolute top-8 right-8 px-4 py-2 rounded-md inline-flex items-center text-sm font-medium text-accent-foreground dark:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:bg-accent transition-colors"
+        className="absolute top-5 right-5 hidden px-4 py-2 rounded-md sm:inline-flex items-center text-sm font-medium text-accent-foreground"
+        variant="button"
       >
         Login
       </Link>
@@ -79,49 +80,28 @@ const SignIn: FC = () => {
                   )}
                 </div>
               </div>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button disabled={isLoading}>
-                      {isLoading && <TbLoader className="animate-spin" />}Reset password
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent side="bottom">
-                    We will send you an email with a link to reset your password.
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+              <div className="grid gap-3">
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button disabled={isLoading}>
+                        {isLoading && <TbLoader className="animate-spin" />}Reset password
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom">
+                      We will send you an email with a link to reset your password.
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+                <p className="text-sm text-muted-foreground">
+                  Remembered your password?
+                  <Link href="/sign-in" className="dark:text-muted-foreground">
+                    Sign in
+                  </Link>
+                </p>
+              </div>
             </div>
           </form>
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t"></span>
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">or continue with</span>
-            </div>
-          </div>
-          <Button variant="outline" size="sm">
-            <Jaen className="stroke-primary h-4 w-4 mr-2" />
-            Jaen
-          </Button>
-          <p className="px-8 text-center text-sm text-muted-foreground">
-            By signin in, you agree to our
-            <br />
-            <Link
-              href="#"
-              className="underline underline-offset-4 hover:text-primary transition-colors"
-            >
-              Terms of Service
-            </Link>
-            &nbsp; and &nbsp;
-            <Link
-              href="#"
-              className="underline underline-offset-4 hover:text-primary transition-colors"
-            >
-              Privacy Policy
-            </Link>
-          </p>
         </div>
       </div>
       <AlertDialog open={showDialog}>

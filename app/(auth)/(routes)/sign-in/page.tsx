@@ -7,11 +7,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import TbLoader from '@/components/icons/TbLoader';
 import { FC, useState } from 'react';
-import Link from 'next/link';
 import Jaen from '@/components/icons/snek';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import TbEye from '@/components/icons/TbEye';
 import TbEyeOff from '@/components/icons/TbEyeOff';
+import Link from '@/components/ui/link';
 
 type InputFields = {
   email: string;
@@ -43,7 +43,8 @@ const SignIn: FC = () => {
     <>
       <Link
         href="/log-in"
-        className="absolute top-8 right-8 px-4 py-2 rounded-md inline-flex items-center text-sm font-medium text-accent-foreground dark:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring hover:bg-accent transition-colors"
+        className="absolute top-5 right-5 hidden px-4 py-2 rounded-md sm:inline-flex items-center text-sm font-medium text-accent-foreground"
+        variant="button"
       >
         Login
       </Link>
@@ -138,9 +139,14 @@ const SignIn: FC = () => {
                   )}
                 </div>
               </div>
-              <Button disabled={isLoading}>
-                {isLoading && <TbLoader className="animate-spin" />}Create account
-              </Button>
+              <div className="grid gap-3">
+                <Button disabled={isLoading}>
+                  {isLoading && <TbLoader className="animate-spin" />}Create account
+                </Button>
+                <p className="text-sm text-muted-foreground">
+                  Already have an account? <Link href="/log-in">Log in</Link>
+                </p>
+              </div>
             </div>
           </form>
           <div className="relative">
