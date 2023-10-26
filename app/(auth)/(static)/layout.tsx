@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from 'react';
 import { ILayoutProps } from '../../types/layouts';
 import Image from 'next/image';
 import ThemeMenu from '@/components/theme/theme-menu';
+import Ontax from '@/components/icons/Ontax';
 
 const quotes = [
   {
@@ -100,13 +101,7 @@ const AuthLayout: FC<ILayoutProps> = ({ children }) => {
             </g>
           </svg>
           <div className="grow z-10">
-            <Image
-              src="/ontax_logo_transparent_white.svg"
-              alt="Ontax branding"
-              width={50}
-              height={50}
-              className="inline-block align-middle"
-            />
+            <Ontax variant="light" width={50} height={50} className="inline-block align-middle" />
             <span className="pl-3 text-lg align-middle">Ontax</span>
           </div>
           {quote && (
@@ -118,13 +113,7 @@ const AuthLayout: FC<ILayoutProps> = ({ children }) => {
         </div>
         <div className="dark:bg-black text-foreground h-full p-5 sm:p-5 relative">
           <div className="flex sm:hidden mb-10 justify-center w-full">
-            <Image
-              src="/ontax_logo_transparent_white.svg"
-              alt="Ontax branding"
-              width={30}
-              height={30}
-              className="inline-block align-middle"
-            />
+            <Ontax width={30} height={30} className="inline-block align-middle" />
           </div>
           <div className="flex items-center h-full">{children}</div>
           <ThemeMenu className="hidden sm:block sm:absolute bottom-5 right-5" variant="ghost" />

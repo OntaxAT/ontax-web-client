@@ -1,8 +1,5 @@
 import { FC } from 'react';
 
-/**
- * Tabler icon for "brand-github"
- */
 const Jaen: FC<IIconProps> = props => {
   return (
     <svg
