@@ -10,6 +10,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import Link from '@/components/ui/link';
 import TbEye from '@/components/icons/TbEye';
 import TbEyeOff from '@/components/icons/TbEyeOff';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { useRouter } from 'next/navigation';
 
 type InputFields = {
   password: string;
@@ -19,6 +21,7 @@ const ResetPassword: FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const {
     register,
@@ -30,6 +33,7 @@ const ResetPassword: FC = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
+      router.push('/home');
     }, 2000);
   };
 
@@ -38,7 +42,7 @@ const ResetPassword: FC = () => {
       <div className="mx-auto flex flex-col w-full justify-center space-y-6 sm:w-[350px] text-primary dark:text-white">
         <div className="flex flex-col space-y-2 text-center">
           <h1 className="text-2xl font-semibold">Enter new password</h1>
-          <p className="text-sm text-muted-foreground px-10">We won't tell anyone</p>
+          <p className="text-sm text-muted-foreground px-10">We won&apos;t tell anyone</p>
         </div>
         <div className="grid gap-6">
           <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -80,15 +84,18 @@ const ResetPassword: FC = () => {
                 </div>
               </div>
               <div className="grid gap-3">
-                <Button disabled={isLoading}>
-                  {isLoading && <TbLoader className="animate-spin" />}Reset password
-                </Button>
-                <p className="text-sm text-muted-foreground">
-                  Remembered your password?
-                  <Link href="/sign-in" className="dark:text-muted-foreground">
-                    Sign in
-                  </Link>
-                </p>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button disabled={isLoading}>
+                        {isLoading && <TbLoader className="animate-spin" />}Reset password
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom">
+                      This will reset your password and log you in.
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
             </div>
           </form>
