@@ -1,6 +1,6 @@
 import { useTheme } from 'next-themes';
 import Image, { ImageProps } from 'next/image';
-import { FC, memo } from 'react';
+import { FC } from 'react';
 
 const Ontax: FC<Omit<ImageProps, 'src' | 'alt'> & { variant?: 'light' | 'dark' }> = ({
   variant,
@@ -16,4 +16,4 @@ const Ontax: FC<Omit<ImageProps, 'src' | 'alt'> & { variant?: 'light' | 'dark' }
 };
 Ontax.displayName = 'Ontax Logo';
 
-export default memo(Ontax);
+export default Ontax;
