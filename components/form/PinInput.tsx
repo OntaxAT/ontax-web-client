@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Input } from '../ui/input';
 
 interface IPinInputProps {
@@ -8,6 +8,7 @@ interface IPinInputProps {
   containerClassName?: string;
   inputClassName?: string;
   length?: number;
+  onComplete: (code: string[]) => Promise<boolean>;
 }
 
 /**
@@ -18,8 +19,26 @@ const PinInput: FC<IPinInputProps> = ({
   isOTP,
   containerClassName,
   inputClassName,
-  length = 4
+  length = 4,
+  onComplete
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState<'incomplete' | 'success' | 'error'>('incomplete');
+  const [code, setCode] = useState<Array<string | undefined>>(new Array(length).fill(undefined));
+
+  useEffect(() => {
+    if (code.length === length && code.every(c => c !== undefined)) {
+      const handleComplete = async () => {
+        setStatus('incomplete');
+        setIsLoading(true);
+        const success = await onComplete(code as string[]);
+        setStatus(success ? 'success' : 'error');
+        setIsLoading(false);
+      };
+      handleComplete();
+    }
+  }, [code, onComplete, length]);
+
   return (
     <div className={cn('flex justify-between w-10/12 mx-auto', containerClassName)}>
       {Array.from({ length }).map((_, i) => (
@@ -28,10 +47,22 @@ const PinInput: FC<IPinInputProps> = ({
           maxLength={1}
           type="text"
           {...(isOTP && { autoComplete: 'one-time-code' })}
-          className={cn('w-9', inputClassName)}
+          className={cn(
+            'w-9',
+            inputClassName,
+            status === 'error' && 'ring-1 ring-red-500',
+            status === 'success' && 'ring-1 ring-green-500'
+          )}
           placeholder="○"
+          disabled={isLoading}
           onKeyDown={async e => {
             e.preventDefault();
+            console.log(status, code.length, length);
+            // Reset code if it's incomplete
+            if (status !== 'incomplete' && code.some(c => c === undefined)) {
+              setStatus('incomplete');
+            }
+            // Delete currently selected input if it's empty or focus previous input
             if (e.key === 'Backspace') {
               if (i > 0 && e.currentTarget.value === '') {
                 const input = e.currentTarget.previousElementSibling as HTMLInputElement;
@@ -39,13 +70,25 @@ const PinInput: FC<IPinInputProps> = ({
                 input.value = '';
               }
               e.currentTarget.value = '';
-            } else if (e.key === 'Delete') {
+              const newCode = [...code];
+              newCode[i] = undefined;
+              setCode(newCode);
+              return;
+            }
+            // Remove next input if it's not empty and focus it
+            else if (e.key === 'Delete') {
               if (i < length - 1) {
                 const input = e.currentTarget.nextElementSibling as HTMLInputElement;
                 input.focus();
+                const newCode = [...code];
+                newCode[i + 1] = undefined;
+                setCode(newCode);
+                input.value = '';
               }
-              e.currentTarget.value = '';
-            } else if (e.key === 'ArrowLeft') {
+              return;
+            }
+            // Focus previous input and select the number
+            else if (e.key === 'ArrowLeft') {
               if (e.currentTarget.selectionStart === 0) {
                 const input = e.currentTarget.previousElementSibling as HTMLInputElement;
                 if (input) {
@@ -56,7 +99,10 @@ const PinInput: FC<IPinInputProps> = ({
               } else {
                 e.currentTarget.selectionStart = e.currentTarget.selectionEnd = 0;
               }
-            } else if (e.key === 'ArrowRight' || e.key === 'Tab') {
+              return;
+            }
+            // Focus next input and select the number
+            else if (e.key === 'ArrowRight' || e.key === 'Tab') {
               if (e.currentTarget.selectionStart === 1 || e.key === 'Tab') {
                 const input = e.currentTarget.nextElementSibling as HTMLInputElement;
                 if (input) {
@@ -67,14 +113,18 @@ const PinInput: FC<IPinInputProps> = ({
               } else {
                 e.currentTarget.selectionStart = e.currentTarget.selectionEnd = 1;
               }
-            } else if (e.key === 'v' && (e.ctrlKey || e.metaKey)) {
-              const value = await navigator.clipboard.readText();
+              return;
+            }
+            // Paste code from clipboard if it's valid into all following input fields
+            else if (e.key === 'v' && (e.ctrlKey || e.metaKey)) {
+              const value = (await navigator.clipboard.readText()).slice(0, length);
               if (
                 !value ||
                 (variant === 'numeric' && !/^\d+$/.test(value)) ||
                 (variant === 'alpha' && !/^[a-zA-Z]+$/.test(value))
               ) {
                 e.currentTarget.value = '';
+                setCode([]);
                 return;
               }
 
@@ -87,21 +137,24 @@ const PinInput: FC<IPinInputProps> = ({
                 }
                 nextSibling = nextSibling.nextElementSibling as HTMLInputElement;
               }
-            } else if (variant === 'numeric' && /^\d$/.test(e.key)) {
-              const input = e.currentTarget.nextElementSibling as HTMLInputElement;
-              if (input) {
-                input.focus();
-              }
-              e.currentTarget.value = e.key;
-              return;
-            } else if (variant === 'alpha' && /^[a-zA-Z]$/.test(e.key)) {
-              const input = e.currentTarget.nextElementSibling as HTMLInputElement;
-              if (input) {
-                input.focus();
-              }
-              e.currentTarget.value = e.key;
+              setCode(value.split(''));
               return;
             }
+            // Set input value to the pressed key if it's valid and focus next input
+            else if (
+              (variant === 'numeric' && /^\d$/.test(e.key)) ||
+              (variant === 'alpha' && /^[a-zA-Z]$/.test(e.key))
+            ) {
+              const input = e.currentTarget.nextElementSibling as HTMLInputElement;
+              if (input) {
+                input.focus();
+              }
+              e.currentTarget.value = e.key;
+            }
+
+            const newCode = [...code];
+            newCode[i] = e.key;
+            setCode(newCode);
           }}
         />
       ))}

@@ -4,9 +4,11 @@ import { FC, useState } from 'react';
 import { SubmitHandler } from 'react-hook-form';
 import Link from '@/components/ui/link';
 import PinInput from '@/components/form/PinInput';
+import { useRouter } from 'next/navigation';
 
 const TwoFactorAuth: FC = () => {
   const [hasExpired, setHasExpired] = useState(false);
+  const router = useRouter();
   //   const onSubmit: SubmitHandler<SignInFormFields> = async data => {
   //     return new Promise(resolve => {
   //       console.log('form data', data);
@@ -15,6 +17,16 @@ const TwoFactorAuth: FC = () => {
   //       }, 2000);
   //     });
   //   };
+
+  const onSubmit = async (code: string[]): Promise<boolean> => {
+    return new Promise(resolve => {
+      console.log('code: ', code);
+      setTimeout(() => {
+        resolve(true);
+        router.push('/home');
+      }, 2000);
+    });
+  };
 
   return (
     <>
@@ -26,7 +38,7 @@ const TwoFactorAuth: FC = () => {
           </p>
         </div>
         <div className="grid gap-6">
-          <PinInput length={6} />
+          <PinInput length={6} onComplete={onSubmit} />
         </div>
       </div>
     </>
