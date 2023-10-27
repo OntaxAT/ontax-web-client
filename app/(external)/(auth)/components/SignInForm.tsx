@@ -20,12 +20,20 @@ interface ISignInFormProps {
   onSubmit: SubmitHandler<SignInFormFields>;
   showLogInLink?: boolean;
   className?: string;
+  disabledFields?: { [key in keyof SignInFormFields]?: boolean };
+  defaultValues?: Partial<SignInFormFields>;
 }
 
 /**
  * Sign in form component
  */
-const SignInForm: FC<ISignInFormProps> = ({ onSubmit, showLogInLink, className }) => {
+const SignInForm: FC<ISignInFormProps> = ({
+  onSubmit,
+  showLogInLink,
+  className,
+  disabledFields,
+  defaultValues
+}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
@@ -34,13 +42,23 @@ const SignInForm: FC<ISignInFormProps> = ({ onSubmit, showLogInLink, className }
     register,
     handleSubmit,
     formState: { errors }
-  } = useForm<SignInFormFields>();
+  } = useForm<SignInFormFields>({ defaultValues });
 
   /**
    * Initiate submit
    */
   const initSubmit = async (data: SignInFormFields) => {
     setIsLoading(true);
+    // Since default values are not set in the form state, we need to merge them manually if they haven been changed by the user
+    if (defaultValues) {
+      for (const key in data) {
+        const defaultValue = defaultValues[key as keyof typeof defaultValues];
+        if (data[key as keyof typeof data] === undefined && defaultValue !== undefined) {
+          data[key as keyof typeof data] = defaultValue;
+        }
+      }
+    }
+
     await onSubmit(data);
     setIsLoading(false);
   };
@@ -60,7 +78,11 @@ const SignInForm: FC<ISignInFormProps> = ({ onSubmit, showLogInLink, className }
                   className={cn(errors.firstname && 'ring-red-500 ring-1')}
                   placeholder="Emily"
                   autoComplete="given-name"
-                  {...register('firstname', { required: true, minLength: 3 })}
+                  {...register('firstname', {
+                    required: true,
+                    minLength: 3,
+                    disabled: disabledFields?.firstname
+                  })}
                 />
                 <label htmlFor="lastname" className="text-sm text-muted-foreground sr-only">
                   Lastname
@@ -70,7 +92,11 @@ const SignInForm: FC<ISignInFormProps> = ({ onSubmit, showLogInLink, className }
                   className={cn(errors.lastname && 'ring-red-500 ring-1')}
                   placeholder="Brooks"
                   autoComplete="family-name"
-                  {...register('lastname', { required: true, minLength: 3 })}
+                  {...register('lastname', {
+                    required: true,
+                    minLength: 3,
+                    disabled: disabledFields?.lastname
+                  })}
                 />
               </div>
               {(errors.firstname || errors.lastname) && (
@@ -84,7 +110,11 @@ const SignInForm: FC<ISignInFormProps> = ({ onSubmit, showLogInLink, className }
                 className={errors.email && 'ring-red-500 ring-1'}
                 placeholder="emily.brooks@ontax.com"
                 autoComplete="email"
-                {...register('email', { required: true, validate: validateEmail })}
+                {...register('email', {
+                  required: true,
+                  validate: validateEmail,
+                  disabled: disabledFields?.email
+                })}
               />
               {errors.email && (
                 <span className="text-sm text-red-500 text-left">
@@ -109,7 +139,11 @@ const SignInForm: FC<ISignInFormProps> = ({ onSubmit, showLogInLink, className }
                     'h-full outline-none w-[87%] text-sm focus-visible:outline-none bg-transparent placeholder:text-muted-foreground'
                   }
                   placeholder="Password"
-                  {...register('password', { required: true, minLength: 3 })}
+                  {...register('password', {
+                    required: true,
+                    minLength: 3,
+                    disabled: disabledFields?.password
+                  })}
                   onFocus={() => setIsPasswordFocused(true)}
                   onBlur={() => setIsPasswordFocused(false)}
                 />

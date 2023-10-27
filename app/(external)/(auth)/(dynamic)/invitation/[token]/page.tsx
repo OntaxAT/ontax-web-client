@@ -4,11 +4,27 @@ import { FC, useState } from 'react';
 import Link from '@/components/ui/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
-import SignInForm from '../../../components/SignInForm';
+import SignInForm, { SignInFormFields } from '../../../components/SignInForm';
+import { SubmitHandler } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 const ExpiredToken: FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const router = useRouter();
+
+  /**
+   * Handle account creation
+   */
+  const handleAccountCreation: SubmitHandler<SignInFormFields> = data => {
+    console.log('data: ', data);
+    return new Promise(resolve => {
+      setTimeout(() => {
+        router.push('/home');
+        resolve(undefined);
+      }, 2000);
+    });
+  };
 
   return (
     <>
@@ -46,7 +62,18 @@ const ExpiredToken: FC = () => {
                   )}
                 </>
               )}
-              {showForm && <SignInForm onSubmit={console.log} className="my-10" />}
+              {showForm && (
+                <SignInForm
+                  onSubmit={handleAccountCreation}
+                  className="my-10"
+                  disabledFields={{ email: true, firstname: true, lastname: true }}
+                  defaultValues={{
+                    email: 'emily.brooks@ontax.com',
+                    firstname: 'Emily',
+                    lastname: 'Brooks'
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
