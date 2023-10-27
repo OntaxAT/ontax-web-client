@@ -42,35 +42,6 @@ const SignIn: FC = () => {
         </div>
         <div className="grid gap-6">
           <SignInForm onSubmit={onSubmit} showLogInLink />
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t"></span>
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">or continue with</span>
-            </div>
-          </div>
-          <Button variant="outline" size="sm">
-            <Jaen className="stroke-primary h-4 w-4 mr-2" />
-            Jaen
-          </Button>
-          <p className="px-8 text-center text-sm text-muted-foreground">
-            By signin in, you agree to our
-            <br />
-            <Link
-              href="#"
-              className="underline underline-offset-4 hover:text-primary transition-colors"
-            >
-              Terms of Service
-            </Link>
-            &nbsp; and &nbsp;
-            <Link
-              href="#"
-              className="underline underline-offset-4 hover:text-primary transition-colors"
-            >
-              Privacy Policy
-            </Link>
-          </p>
         </div>
       </div>
     </>
