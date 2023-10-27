@@ -2,15 +2,8 @@
 
 import * as React from 'react';
 
-import { cn, validateEmail } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import TbLoader from '@/components/icons/TbLoader';
-import { FC, useState } from 'react';
-import Jaen from '@/components/icons/snek';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import TbEye from '@/components/icons/TbEye';
-import TbEyeOff from '@/components/icons/TbEyeOff';
+import { FC } from 'react';
+import { SubmitHandler } from 'react-hook-form';
 import Link from '@/components/ui/link';
 import SignInForm, { SignInFormFields } from '../../components/SignInForm';
 
@@ -41,7 +34,7 @@ const SignIn: FC = () => {
           </p>
         </div>
         <div className="grid gap-6">
-          <SignInForm onSubmit={onSubmit} showLogInLink />
+          <SignInForm onSubmit={onSubmit} />
         </div>
       </div>
     </>
