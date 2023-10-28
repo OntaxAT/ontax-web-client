@@ -33,7 +33,7 @@ const InternalTopNav: FC = () => {
           />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Avatar>
+              <Avatar className="cursor-pointer">
                 <AvatarImage
                   src="https://api.dicebear.com/7.x/lorelei/svg?hair=variant41&mouth=happy02"
                   className="bg-gray-200 border"
