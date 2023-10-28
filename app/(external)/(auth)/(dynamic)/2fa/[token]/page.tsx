@@ -15,7 +15,7 @@ const TwoFactorAuth: FC = () => {
       console.log('code: ', code);
       setTimeout(() => {
         resolve(true);
-        router.push('/home');
+        router.push('/dash');
       }, 2000);
     });
   };

@@ -23,7 +23,7 @@ const LogIn: FC = () => {
     setTimeout(() => {
       setIsFormSubmitting(false);
       if (has2FA) setShow2FA(true);
-      else router.push('/home');
+      else router.push('/dash');
     }, 2000);
   };
 
@@ -34,7 +34,7 @@ const LogIn: FC = () => {
         const isValid = code.join('') === '123456';
         res(isValid);
         if (isValid) {
-          router.push('/home');
+          router.push('/dash');
         }
       }, 2000);
     });

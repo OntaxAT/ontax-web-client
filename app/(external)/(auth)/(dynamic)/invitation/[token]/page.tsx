@@ -20,7 +20,7 @@ const ExpiredToken: FC = () => {
     console.log('data: ', data);
     return new Promise(resolve => {
       setTimeout(() => {
-        router.push('/home');
+        router.push('/dash');
         resolve(undefined);
       }, 2000);
     });

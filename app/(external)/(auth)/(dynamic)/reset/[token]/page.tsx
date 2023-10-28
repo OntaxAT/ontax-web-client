@@ -33,7 +33,7 @@ const ResetPassword: FC = () => {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      router.push('/home');
+      router.push('/dash');
     }, 2000);
   };
 
