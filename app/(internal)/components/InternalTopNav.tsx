@@ -7,23 +7,29 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
+import Link from 'next/link';
 import { FC } from 'react';
+import BusinessSelect from './BusinessSelect';
+import TopNavMenu from './TopNavMenu';
 
 /**
  * Top navigation bar for internal pages
  */
 const InternalTopNav: FC = () => {
   return (
-    <div className="flex items-center justify-center h-16 w-full mx-auto px-4 sm:px-0 border-b">
+    <div className="flex justify-center h-16 w-full mx-auto px-4 sm:px-0 border-b">
       <div className="flex items-center justify-between w-full max-w-7xl">
-        <div className="flex items-center space-x-4">
-          <Ontax width={30} />
+        <div className="grid grid-flow-col gap-5">
+          <Link href="/dash" className="flex items-center space-x-4">
+            <Ontax width={30} />
+          </Link>
+          <BusinessSelect />
+          <TopNavMenu />
         </div>
         <div className="flex items-center space-x-4">
           <Input
@@ -36,7 +42,7 @@ const InternalTopNav: FC = () => {
               <Avatar className="cursor-pointer">
                 <AvatarImage
                   src="https://api.dicebear.com/7.x/lorelei/svg?hair=variant41&mouth=happy02"
-                  className="bg-gray-200 border"
+                  className="bg-gray-200 dark:bg-gray-800 border"
                 />
                 <AvatarFallback>EB</AvatarFallback>
               </Avatar>
