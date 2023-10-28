@@ -23,10 +23,7 @@ const LogIn: FC = () => {
     setTimeout(() => {
       setIsFormSubmitting(false);
       if (has2FA) setShow2FA(true);
-<<<<<<< HEAD
       else router.push('/home');
-=======
->>>>>>> main
     }, 2000);
   };
 
