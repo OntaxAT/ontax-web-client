@@ -9,14 +9,6 @@ import { useRouter } from 'next/navigation';
 const TwoFactorAuth: FC = () => {
   const [hasExpired, setHasExpired] = useState(false);
   const router = useRouter();
-  //   const onSubmit: SubmitHandler<SignInFormFields> = async data => {
-  //     return new Promise(resolve => {
-  //       console.log('form data', data);
-  //       setTimeout(() => {
-  //         resolve(true);
-  //       }, 2000);
-  //     });
-  //   };
 
   const onSubmit = async (code: string[]): Promise<boolean> => {
     return new Promise(resolve => {
