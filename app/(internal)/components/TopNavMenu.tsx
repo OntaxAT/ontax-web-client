@@ -105,6 +105,15 @@ const navItems: NavLink[] = [
         description: 'Monitor and manage your financial payments'
       }
     ]
+  },
+  {
+    label: 'Inventory',
+    summary: {
+      title: 'Inventory',
+      desription: 'Manage your company inventory.',
+      icon: TbFileInvoice,
+      classNames: 'row-span-3'
+    }
   }
 ];
 
@@ -117,7 +126,7 @@ const TopNavMenu: FC = () => {
     <NavigationMenu>
       <NavigationMenuList>
         {navItems.map((navItem, i) => {
-          const isActive = navItem.href === pathname;
+          const isActive = navItem.href && navItem.href === pathname;
 
           if (!navItem.items || navItem.items?.length === 0) {
             return (
@@ -128,7 +137,13 @@ const TopNavMenu: FC = () => {
                     legacyBehavior
                     passHref
                   >
-                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    <NavigationMenuLink
+                      className={cn(
+                        navigationMenuTriggerStyle(),
+                        'text-gray-500',
+                        isActive && 'text-foreground'
+                      )}
+                    >
                       {navItem.label}
                     </NavigationMenuLink>
                   </Link>
