@@ -20,6 +20,7 @@ import MobileTobNavMenuItem from './MobileTopNavMenuItem';
 type NavLink = {
   label: string;
   labelClassName?: string;
+  activeLabelClassName?: string;
   href?: string;
   items?: NavItem[];
   itemsClassName?: {
@@ -54,6 +55,8 @@ export const navItems: NavLink[] = [
   {
     label: 'Employees',
     labelClassName: 'hover:text-blue-500',
+    activeLabelClassName: 'text-blue-500',
+    href: '/employees',
     summary: {
       title: 'Employees',
       titleClassName: 'text-blue-500',
@@ -66,37 +69,37 @@ export const navItems: NavLink[] = [
     items: [
       {
         title: 'Overview',
-        href: '/dash/employees/',
+        href: '/employees/',
         description: "Get an at-a-glance view of your team's details."
       },
       {
         title: 'Payroll',
-        href: '/dash/payroll',
+        href: '/employees/payroll',
         description: 'Manage salaries and compensation efficiently'
       },
       {
         title: 'Timetracking',
-        href: '/dash/timetracking',
+        href: '/employees/timetracking',
         description: 'Keep track of work hours and productivity.'
       },
       {
         title: 'Schedules',
-        href: '/dash/schedules',
+        href: '/employees/schedules',
         description: 'Manage your team schedules and shifts.'
       },
       {
         title: 'Surveys',
-        href: '/dash/surveys',
+        href: '/employees/surveys',
         description: 'Create and manage employee surveys and polls.'
       },
       {
         title: 'Analytics',
-        href: '/dash/analytics',
+        href: '/employees/analytics',
         description: 'Get insights into your company workforce.'
       },
       {
         title: 'Performance',
-        href: '/dash/performance',
+        href: '/employees/performance',
         description: 'Manage employee performance and reviews.'
       }
     ],
@@ -107,6 +110,8 @@ export const navItems: NavLink[] = [
   {
     label: 'Clients',
     labelClassName: 'hover:text-emerald-500',
+    activeLabelClassName: 'text-emerald-500',
+    href: '/clients',
     summary: {
       title: 'Clients',
       titleClassName: 'text-emerald-500',
@@ -118,22 +123,22 @@ export const navItems: NavLink[] = [
     items: [
       {
         title: 'Overview',
-        href: '/dash/clients',
+        href: '/clients',
         description: 'See an overview of your client base'
       },
       {
         title: 'Invoices',
-        href: '/dash/clients/invoices',
+        href: '/clients/invoices',
         description: 'Handle client billing and invoices seamlessly.'
       },
       {
         title: 'Contracts',
-        href: '/dash/clients/contracts',
+        href: '/clients/contracts',
         description: 'Manage your client contracts and agreements.'
       },
       {
         title: 'Projects',
-        href: '/dash/clients/projects',
+        href: '/clients/projects',
         description: 'Manage your client projects and tasks.'
       }
     ],
@@ -143,6 +148,8 @@ export const navItems: NavLink[] = [
   {
     label: 'Accounting',
     labelClassName: 'hover:text-amber-500',
+    activeLabelClassName: 'text-amber-500',
+    href: '/accounting',
     summary: {
       title: 'Accounting',
       titleClassName: 'text-amber-500',
@@ -154,37 +161,37 @@ export const navItems: NavLink[] = [
     items: [
       {
         title: 'Invoices',
-        href: '/dash/accounting/invoices',
+        href: '/accounting/invoices',
         description: "Manage and track your company's invoices"
       },
       {
         title: 'Vouchers',
-        href: '/dash/accounting/vouchers',
+        href: '/accounting/vouchers',
         description: 'Keep organized records of financial transactions.'
       },
       {
         title: 'Payments',
-        href: '/dash/accounting/payments',
+        href: '/accounting/payments',
         description: 'Monitor and manage your financial payments'
       },
       {
         title: 'Reports',
-        href: '/dash/accounting/reports',
+        href: '/accounting/reports',
         description: 'Generate financial reports and statements.'
       },
       {
         title: 'Taxes',
-        href: '/dash/accounting/taxes',
+        href: '/accounting/taxes',
         description: 'Manage your company taxes and deductions.'
       },
       {
         title: 'Analytics',
-        href: '/dash/accounting/analytics',
+        href: '/accounting/analytics',
         description: 'Get insights into your company finances.'
       },
       {
         title: 'Exports',
-        href: '/dash/accounting/exports',
+        href: '/accounting/exports',
         description: 'Export your company financial data.'
       }
     ],
@@ -195,6 +202,7 @@ export const navItems: NavLink[] = [
   {
     label: 'Inventory',
     labelClassName: 'hover:text-rose-500',
+    activeLabelClassName: 'text-rose-500',
     href: '/inventory',
     summary: {
       title: 'Inventory',
@@ -207,22 +215,22 @@ export const navItems: NavLink[] = [
     items: [
       {
         title: 'Overview',
-        href: '/dash/inventory',
+        href: '/inventory',
         description: 'Get an overview of your company inventory.'
       },
       {
         title: 'Stock',
-        href: '/dash/inventory/stock',
+        href: '/inventory/stock',
         description: 'Manage your company stock and inventory.'
       },
       {
         title: 'Orders',
-        href: '/dash/inventory/orders',
+        href: '/inventory/orders',
         description: 'Manage your company orders and shipping.'
       },
       {
         title: 'Suppliers',
-        href: '/dash/inventory/suppliers',
+        href: '/inventory/suppliers',
         description: 'Manage your company suppliers and vendors.'
       }
     ],
@@ -255,7 +263,8 @@ const TopNavMenu: FC = () => {
                       className={cn(
                         navigationMenuTriggerStyle(),
                         'text-gray-500',
-                        isActive && 'text-foreground'
+                        isActive && 'text-foreground',
+                        isActive && navItem.activeLabelClassName
                       )}
                     >
                       {navItem.label}
@@ -272,7 +281,8 @@ const TopNavMenu: FC = () => {
                 className={cn(
                   'text-gray-500 transition-colors duration-200',
                   navItem.labelClassName,
-                  isActive && 'text-foreground'
+                  isActive && 'text-foreground',
+                  isActive && navItem.activeLabelClassName
                 )}
               >
                 {navItem.label}
