@@ -1,3 +1,4 @@
+import TbBoxSeam from '@/components/icons/TbBoxSeam';
 import TbFileInvoice from '@/components/icons/TbFileInvoice';
 import TbHeartHandshake from '@/components/icons/TbHeartHandshake';
 import TbTie from '@/components/icons/TbTie';
@@ -19,7 +20,8 @@ type NavLink = {
   label: string;
   href?: string;
   items?: NavItem[];
-  summary?: { title: string; desription: string; icon: FC<IIconProps>; classNames?: string };
+  summary?: { title: string; desription: string; icon: FC<IIconProps>; className?: string };
+  containerClassName?: string;
 };
 
 type NavItem = {
@@ -39,7 +41,7 @@ const navItems: NavLink[] = [
       title: 'Employees',
       desription: 'Manage your employees and their payroll.',
       icon: TbTie,
-      classNames: 'row-span-3'
+      className: 'row-span-2'
     },
     items: [
       {
@@ -56,8 +58,29 @@ const navItems: NavLink[] = [
         title: 'Timetracking',
         href: '/dash/timetracking',
         description: 'Keep track of work hours and productivity.'
+      },
+      {
+        title: 'Schedules',
+        href: '/dash/schedules',
+        description: 'Manage your team schedules and shifts.'
+      },
+      {
+        title: 'Surveys',
+        href: '/dash/surveys',
+        description: 'Create and manage employee surveys and polls.'
+      },
+      {
+        title: 'Analytics',
+        href: '/dash/analytics',
+        description: 'Get insights into your company workforce.'
+      },
+      {
+        title: 'Performance',
+        href: '/dash/performance',
+        description: 'Manage employee performance and reviews.'
       }
-    ]
+    ],
+    containerClassName: 'grid-cols-3 md:w-[600px] lg:w-[700px]'
   },
   {
     label: 'Clients',
@@ -65,7 +88,7 @@ const navItems: NavLink[] = [
       title: 'Clients',
       desription: 'Manage your clients and their billing.',
       icon: TbHeartHandshake,
-      classNames: 'row-span-2'
+      className: 'row-span-2'
     },
     items: [
       {
@@ -77,6 +100,16 @@ const navItems: NavLink[] = [
         title: 'Invoices',
         href: '/dash/clients/invoices',
         description: 'Handle client billing and invoices seamlessly.'
+      },
+      {
+        title: 'Contracts',
+        href: '/dash/clients/contracts',
+        description: 'Manage your client contracts and agreements.'
+      },
+      {
+        title: 'Projects',
+        href: '/dash/clients/projects',
+        description: 'Manage your client projects and tasks.'
       }
     ]
   },
@@ -86,7 +119,7 @@ const navItems: NavLink[] = [
       title: 'Accounting',
       desription: 'Manage your company finances.',
       icon: TbFileInvoice,
-      classNames: 'row-span-3'
+      className: 'row-span-2'
     },
     items: [
       {
@@ -103,17 +136,61 @@ const navItems: NavLink[] = [
         title: 'Payments',
         href: '/dash/accounting/payments',
         description: 'Monitor and manage your financial payments'
+      },
+      {
+        title: 'Reports',
+        href: '/dash/accounting/reports',
+        description: 'Generate financial reports and statements.'
+      },
+      {
+        title: 'Taxes',
+        href: '/dash/accounting/taxes',
+        description: 'Manage your company taxes and deductions.'
+      },
+      {
+        title: 'Analytics',
+        href: '/dash/accounting/analytics',
+        description: 'Get insights into your company finances.'
+      },
+      {
+        title: 'Exports',
+        href: '/dash/accounting/exports',
+        description: 'Export your company financial data.'
       }
-    ]
+    ],
+    containerClassName: 'grid-cols-3 md:w-[600px] lg:w-[700px]'
   },
   {
     label: 'Inventory',
+    href: '/inventory',
     summary: {
       title: 'Inventory',
       desription: 'Manage your company inventory.',
-      icon: TbFileInvoice,
-      classNames: 'row-span-3'
-    }
+      icon: TbBoxSeam,
+      className: 'row-span-2'
+    },
+    items: [
+      {
+        title: 'Overview',
+        href: '/dash/inventory',
+        description: 'Get an overview of your company inventory.'
+      },
+      {
+        title: 'Stock',
+        href: '/dash/inventory/stock',
+        description: 'Manage your company stock and inventory.'
+      },
+      {
+        title: 'Orders',
+        href: '/dash/inventory/orders',
+        description: 'Manage your company orders and shipping.'
+      },
+      {
+        title: 'Suppliers',
+        href: '/dash/inventory/suppliers',
+        description: 'Manage your company suppliers and vendors.'
+      }
+    ]
   }
 ];
 
@@ -158,9 +235,14 @@ const TopNavMenu: FC = () => {
                 {navItem.label}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                <ul
+                  className={cn(
+                    'grid w-[400px] gap-3 p-4 md:w-[500px] grid-cols-2 lg:w-[600px]',
+                    navItem.containerClassName
+                  )}
+                >
                   {navItem.summary && (
-                    <li className={cn(navItem.summary.classNames)}>
+                    <li className={cn(navItem.summary.className)}>
                       <div className="flex items-center h-full w-full rounded-md bg-gradient-to-b from-muted/50 to-muted p-6">
                         <div>
                           <navItem.summary.icon className="w-6 h-6" />
