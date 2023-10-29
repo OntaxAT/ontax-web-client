@@ -14,14 +14,29 @@ import {
 } from '@/components/ui/navigation-menu';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
-import { FC } from 'react';
+import { FC, HTMLAttributes } from 'react';
+import MobileTobNavMenuItem from './MobileTopNavMenuItem';
 
 type NavLink = {
   label: string;
+  labelClassName?: string;
   href?: string;
   items?: NavItem[];
-  summary?: { title: string; desription: string; icon: FC<IIconProps>; className?: string };
+  itemsClassName?: {
+    title?: HTMLAttributes<HTMLDivElement>['className'];
+    description?: HTMLAttributes<HTMLParagraphElement>['className'];
+  };
+  summary?: {
+    title: string;
+    titleClassName?: string;
+    desription: string;
+    icon: FC<IIconProps>;
+    iconClassName?: string;
+    className?: string;
+    backgroundClassName?: string;
+  };
   containerClassName?: string;
+  menuClassName?: string;
 };
 
 type NavItem = {
@@ -30,18 +45,23 @@ type NavItem = {
   description?: string;
 };
 
-const navItems: NavLink[] = [
+export const navItems: NavLink[] = [
   {
     label: 'Dashboard',
-    href: '/dash'
+    href: '/dash',
+    menuClassName: 'hidden md:block'
   },
   {
     label: 'Employees',
+    labelClassName: 'hover:text-blue-500',
     summary: {
       title: 'Employees',
+      titleClassName: 'text-blue-500',
       desription: 'Manage your employees and their payroll.',
       icon: TbTie,
+      iconClassName: 'text-blue-500',
       className: 'row-span-2'
+      // backgroundClassName: 'bg-blue-500 to-gray-900'
     },
     items: [
       {
@@ -80,14 +100,19 @@ const navItems: NavLink[] = [
         description: 'Manage employee performance and reviews.'
       }
     ],
-    containerClassName: 'grid-cols-3 md:w-[600px] lg:w-[700px]'
+    itemsClassName: { title: 'group-hover:text-blue-500 transition-colors' },
+    containerClassName: 'grid-cols-3 md:w-[600px] lg:w-[700px]',
+    menuClassName: 'hidden md:block'
   },
   {
     label: 'Clients',
+    labelClassName: 'hover:text-emerald-500',
     summary: {
       title: 'Clients',
+      titleClassName: 'text-emerald-500',
       desription: 'Manage your clients and their billing.',
       icon: TbHeartHandshake,
+      iconClassName: 'text-emerald-500',
       className: 'row-span-2'
     },
     items: [
@@ -111,15 +136,20 @@ const navItems: NavLink[] = [
         href: '/dash/clients/projects',
         description: 'Manage your client projects and tasks.'
       }
-    ]
+    ],
+    menuClassName: 'hidden md:block',
+    itemsClassName: { title: 'group-hover:text-emerald-500 transition-colors' }
   },
   {
     label: 'Accounting',
+    labelClassName: 'hover:text-amber-500',
     summary: {
       title: 'Accounting',
+      titleClassName: 'text-amber-500',
       desription: 'Manage your company finances.',
       icon: TbFileInvoice,
-      className: 'row-span-2'
+      className: 'row-span-2',
+      iconClassName: 'text-amber-500'
     },
     items: [
       {
@@ -158,16 +188,21 @@ const navItems: NavLink[] = [
         description: 'Export your company financial data.'
       }
     ],
-    containerClassName: 'grid-cols-3 md:w-[600px] lg:w-[700px]'
+    itemsClassName: { title: 'group-hover:text-amber-500 transition-colors' },
+    containerClassName: 'grid-cols-3 md:w-[600px] lg:w-[700px]',
+    menuClassName: 'hidden lg:block'
   },
   {
     label: 'Inventory',
+    labelClassName: 'hover:text-rose-500',
     href: '/inventory',
     summary: {
       title: 'Inventory',
+      titleClassName: 'text-rose-500',
       desription: 'Manage your company inventory.',
       icon: TbBoxSeam,
-      className: 'row-span-2'
+      className: 'row-span-2',
+      iconClassName: 'text-rose-500'
     },
     items: [
       {
@@ -190,7 +225,9 @@ const navItems: NavLink[] = [
         href: '/dash/inventory/suppliers',
         description: 'Manage your company suppliers and vendors.'
       }
-    ]
+    ],
+    itemsClassName: { title: 'group-hover:text-rose-500 transition-colors' },
+    menuClassName: 'hidden lg:block'
   }
 ];
 
@@ -207,7 +244,7 @@ const TopNavMenu: FC = () => {
 
           if (!navItem.items || navItem.items?.length === 0) {
             return (
-              <NavigationMenuItem key={i}>
+              <NavigationMenuItem key={i} className={navItem.menuClassName}>
                 <NavigationMenuLink>
                   <Link
                     href={isActive || !navItem.href ? '#' : navItem.href}
@@ -230,8 +267,14 @@ const TopNavMenu: FC = () => {
           }
 
           return (
-            <NavigationMenuItem key={i}>
-              <NavigationMenuTrigger className={cn('text-gray-500', isActive && 'text-foreground')}>
+            <NavigationMenuItem key={i} className={navItem.menuClassName}>
+              <NavigationMenuTrigger
+                className={cn(
+                  'text-gray-500 transition-colors duration-200',
+                  navItem.labelClassName,
+                  isActive && 'text-foreground'
+                )}
+              >
                 {navItem.label}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
@@ -243,13 +286,25 @@ const TopNavMenu: FC = () => {
                 >
                   {navItem.summary && (
                     <li className={cn(navItem.summary.className)}>
-                      <div className="flex items-center h-full w-full rounded-md bg-gradient-to-b from-muted/50 to-muted p-6">
+                      <div
+                        className={cn(
+                          'flex items-center h-full w-full rounded-md bg-gradient-to-b from-muted/50 to-muted p-6',
+                          navItem.summary.backgroundClassName
+                        )}
+                      >
                         <div>
-                          <navItem.summary.icon className="w-6 h-6" />
-                          <h3 className="text-lg mb-2 mt-4 font-semibold leading-none">
+                          <navItem.summary.icon
+                            className={cn('w-6 h-6', navItem.summary.iconClassName)}
+                          />
+                          <h3
+                            className={cn(
+                              'text-lg mb-2 mt-4 font-semibold leading-none transition-colors',
+                              navItem.summary.titleClassName
+                            )}
+                          >
                             {navItem.summary.title}
                           </h3>
-                          <p className="text-sm leading-snug text-muted-foreground">
+                          <p className="text-sm leading-snug text-muted-foreground transition-colors">
                             {navItem.summary.desription}
                           </p>
                         </div>
@@ -260,11 +315,23 @@ const TopNavMenu: FC = () => {
                     <NavigationMenuLink asChild key={i}>
                       <Link
                         href={item.href}
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        className="group block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                       >
-                        <div className="text-sm font-medium leading-none">{item.title}</div>
+                        <div
+                          className={cn(
+                            'text-sm font-medium leading-none transition-colors',
+                            navItem.itemsClassName?.title
+                          )}
+                        >
+                          {item.title}
+                        </div>
                         {item.description && (
-                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                          <p
+                            className={cn(
+                              'line-clamp-2 text-sm leading-snug text-muted-foreground transition-colors',
+                              navItem.itemsClassName?.description
+                            )}
+                          >
                             {item.description}
                           </p>
                         )}
@@ -276,6 +343,7 @@ const TopNavMenu: FC = () => {
             </NavigationMenuItem>
           );
         })}
+        <MobileTobNavMenuItem />
       </NavigationMenuList>
     </NavigationMenu>
   );
