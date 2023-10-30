@@ -8,7 +8,7 @@ const Dashboard: FC = () => {
   return (
     <>
       <h1 className="text-3xl font-bold tracking-tight">Overview</h1>
-      <Tabs defaultValue="overview" className="w-[400px] mt-10">
+      <Tabs defaultValue="overview" className="mt-10">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger

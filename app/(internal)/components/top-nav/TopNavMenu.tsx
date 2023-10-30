@@ -16,6 +16,7 @@ import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
 import { FC, HTMLAttributes } from 'react';
 import MobileTobNavMenuItem from './MobileTopNavMenuItem';
+import { IIconProps } from '@/components/icons/types/icons';
 
 type NavLink = {
   label: string;
