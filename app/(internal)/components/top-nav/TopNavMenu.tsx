@@ -146,6 +146,44 @@ export const navItems: NavLink[] = [
     itemsClassName: { title: 'group-hover:text-emerald-500 transition-colors' }
   },
   {
+    label: 'Projects',
+    labelClassName: 'hover:text-cyan-500',
+    activeLabelClassName: 'text-cyan-500',
+    href: '/projects',
+    summary: {
+      title: 'Projects',
+      titleClassName: 'text-cyan-500',
+      desription: 'Manage your company projects and tasks.',
+      icon: TbBoxSeam,
+      iconClassName: 'text-cyan-500',
+      className: 'row-span-2'
+    },
+    items: [
+      {
+        title: 'Overview',
+        href: '/projects',
+        description: 'Get an overview of your company projects.'
+      },
+      {
+        title: 'Budgets',
+        href: '/projects/budgets',
+        description: 'Manage your company project budgets.'
+      },
+      {
+        title: 'Reports',
+        href: '/projects/reports',
+        description: 'Generate project reports and statements.'
+      },
+      {
+        title: 'Analytics',
+        href: '/projects/analytics',
+        description: 'Get insights into your company projects.'
+      }
+    ],
+    itemsClassName: { title: 'group-hover:text-cyan-500 transition-colors' },
+    menuClassName: 'hidden md:block'
+  },
+  {
     label: 'Accounting',
     labelClassName: 'hover:text-amber-500',
     activeLabelClassName: 'text-amber-500',
