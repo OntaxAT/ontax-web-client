@@ -31,10 +31,18 @@ const businesses: Array<{ id: string; label: string; avatarUrl?: string }> = [
  */
 const BusinessSelect: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedBusiness, setSelectedBusiness] = useState(businesses[0]);
+
+  const handleBusinessSelect = (id: (typeof businesses)[0]['id']) => {
+    const business = businesses.find(business => business.id === id);
+    if (!business) return;
+    setSelectedBusiness(business);
+    if (isOpen) setIsOpen(false);
+  };
 
   const businessItems = useMemo(() => {
     return businesses.map(business => (
-      <CommandItem key={business.id}>
+      <CommandItem key={business.id} onSelect={() => handleBusinessSelect(business.id)}>
         <div className="flex items-center space-x-2">
           <Avatar className="h-5 w-5">
             <AvatarImage src={business.avatarUrl} />
@@ -44,6 +52,7 @@ const BusinessSelect: FC = () => {
         </div>
       </CommandItem>
     ));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -57,11 +66,13 @@ const BusinessSelect: FC = () => {
           className="w-[150px] lg:w-[200px] justify-between"
         >
           <div className="grid grid-flow-col gap-0 lg:gap-2">
-            <Avatar className="h-5 w-5">
-              <AvatarImage src="/finvo_logo.png" />
-              <AvatarFallback>F</AvatarFallback>
-            </Avatar>
-            <span className="hidden lg:block">Finvo</span>
+            {selectedBusiness.avatarUrl && (
+              <Avatar className="h-5 w-5">
+                <AvatarImage src={selectedBusiness.avatarUrl} />
+                <AvatarFallback>F</AvatarFallback>
+              </Avatar>
+            )}
+            <span className="hidden lg:block">{selectedBusiness.label}</span>
           </div>
           <ChevronsUpDown className="h-4 w-4 shrink-0 opacity-50" />
         </Button>
