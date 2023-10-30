@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { IIconProps } from './types/icons';
 
 /**
  * Tabler icon for "loader-2"
