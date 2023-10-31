@@ -329,7 +329,7 @@ const TopNavMenu: FC = () => {
               <NavigationMenuContent>
                 <ul
                   className={cn(
-                    'grid w-[400px] gap-3 p-4 md:w-[500px] grid-cols-2 lg:w-[600px]',
+                    'grid w-[400px] gap-3 p-4 md:w-[500px] grid-cols-2 lg:w-[700px]',
                     navItem.containerClassName
                   )}
                 >

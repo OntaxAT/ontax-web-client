@@ -1,3 +1,4 @@
+import { TUser } from '@/app/types/features/user';
 import {
   Branding1,
   Branding2,
@@ -11,6 +12,7 @@ import TbCash from '@/components/icons/TbCash';
 import TbMoodUp from '@/components/icons/TbMoodUp';
 import { IIconProps } from '@/components/icons/types/icons';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { cn } from '@/lib/utils';
 import { useTheme } from 'next-themes';
 import { FC } from 'react';
@@ -148,37 +150,67 @@ const cashFlowData: Array<{ name: string; ocf: number; icf: number; fcf: number 
 
 const projects: Array<{
   title: string;
-  manager: string;
+  manager: TUser;
   avatarUrl: FC<IIconProps>;
   progess: number;
 }> = [
   {
     avatarUrl: Branding1,
-    manager: 'Josh Torno',
+    manager: {
+      id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
+      name: 'Josh Torno',
+      email: 'josh.torno@ontax.com',
+      role: 'manager',
+      avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant04&mouth=happy02'
+    },
     title: 'Olympia',
     progess: Math.random() * 100
   },
   {
     avatarUrl: Branding2,
-    manager: 'Madison Price',
+    manager: {
+      id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
+      name: 'Madison Price',
+      email: 'madison.price@ontax.com',
+      role: 'manager',
+      avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant13&mouth=happy02'
+    },
     title: 'Mirage',
     progess: Math.random() * 100
   },
   {
     avatarUrl: Branding3,
-    manager: 'Jack Lorey',
+    manager: {
+      id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
+      name: 'Jack Lorey',
+      email: 'jack.lorey@ontax.com',
+      role: 'manager',
+      avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant12&mouth=happy02'
+    },
     title: 'Spectrum',
     progess: Math.random() * 100
   },
   {
     avatarUrl: Branding4,
-    manager: 'Megan Jones',
+    manager: {
+      id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
+      name: 'Megan Jones',
+      email: 'mega.joney@ontax.com',
+      role: 'manager',
+      avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant29&mouth=happy02'
+    },
     title: 'Aurora',
     progess: Math.random() * 100
   },
   {
     avatarUrl: Branding5,
-    manager: 'Tate Keller',
+    manager: {
+      id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
+      name: 'Tate Keller',
+      email: 'tate.keller@ontax.com',
+      role: 'manager',
+      avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant45&mouth=happy02'
+    },
     title: 'Interstellar',
     progess: Math.random() * 100
   }
@@ -197,7 +229,7 @@ const OverviewTab: FC = () => {
 
   return (
     <div className="flex flex-col h-full gap-5">
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mt-7">
+      <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 mt-7">
         {cardItems.map((item, index) => {
           const trendColor =
             item.content.comparison.value > 0
@@ -272,9 +304,17 @@ const OverviewTab: FC = () => {
                     <project.avatarUrl className="w-5 h-5" />
                     <div className="flex flex-col ml-3">
                       <p className="font-semibold">{project.title}</p>
-                      <p className="text-sm text-muted-foreground">
-                        Project Manager: {project.manager}
-                      </p>
+                      <HoverCard>
+                        <p className="text-sm text-muted-foreground">
+                          Project Manager:
+                          <HoverCardTrigger>
+                            {project.manager.name}
+                            <HoverCardContent align="center" className="text-sm">
+                              {project.manager.email}
+                            </HoverCardContent>
+                          </HoverCardTrigger>
+                        </p>
+                      </HoverCard>
                     </div>
                   </div>
                   <p className="font-semibold">+{project.progess.toFixed(2)}%</p>
