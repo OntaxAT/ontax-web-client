@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { IIconProps } from './types/icons';
 
 const ChevronUpDown: FC<IIconProps> = props => {
   return (
