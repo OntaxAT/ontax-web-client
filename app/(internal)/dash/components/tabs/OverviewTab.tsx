@@ -1,4 +1,5 @@
 import { TUser } from '@/app/types/features/user';
+import UserHoverCard from '@/components/features/user/UserHoverCard';
 import {
   Branding1,
   Branding2,
@@ -12,8 +13,14 @@ import TbCash from '@/components/icons/TbCash';
 import TbMoodUp from '@/components/icons/TbMoodUp';
 import { IIconProps } from '@/components/icons/types/icons';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { cn } from '@/lib/utils';
+import {
+  HoverCard,
+  HoverCardArrow,
+  HoverCardContent,
+  HoverCardTrigger
+} from '@/components/ui/hover-card';
+import { cn } from '@/lib/utils/misc';
+import { getDisplayName } from '@/lib/utils/user';
 import { useTheme } from 'next-themes';
 import { FC } from 'react';
 import { Bar, BarChart, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts';
@@ -158,10 +165,29 @@ const projects: Array<{
     avatarUrl: Branding1,
     manager: {
       id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
-      name: 'Josh Torno',
+      username: 'joto',
+      details: {
+        avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant04&mouth=happy02',
+        firstName: 'Josh',
+        lastName: 'Torno',
+        badges: [
+          {
+            label: 'New York',
+            category: {
+              type: 'location'
+            }
+          },
+          {
+            label: 'Project Manager',
+            category: {
+              type: 'role',
+              className: 'bg-blue-500 dark:bg-blue-600'
+            }
+          }
+        ]
+      },
       email: 'josh.torno@ontax.com',
-      role: 'manager',
-      avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant04&mouth=happy02'
+      role: 'manager'
     },
     title: 'Olympia',
     progess: Math.random() * 100
@@ -170,48 +196,124 @@ const projects: Array<{
     avatarUrl: Branding2,
     manager: {
       id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
-      name: 'Madison Price',
+      username: 'madprice',
+      details: {
+        avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant13&mouth=happy02',
+        firstName: 'Madison',
+        lastName: 'Price',
+        badges: [
+          {
+            label: 'London',
+            category: {
+              type: 'location'
+            }
+          },
+          {
+            label: 'Project Manager',
+            category: {
+              type: 'role',
+              className: 'bg-blue-500 dark:bg-blue-600'
+            }
+          }
+        ]
+      },
       email: 'madison.price@ontax.com',
-      role: 'manager',
-      avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant13&mouth=happy02'
+      role: 'manager'
     },
     title: 'Mirage',
-    progess: Math.random() * 100
-  },
-  {
-    avatarUrl: Branding3,
-    manager: {
-      id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
-      name: 'Jack Lorey',
-      email: 'jack.lorey@ontax.com',
-      role: 'manager',
-      avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant12&mouth=happy02'
-    },
-    title: 'Spectrum',
-    progess: Math.random() * 100
-  },
-  {
-    avatarUrl: Branding4,
-    manager: {
-      id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
-      name: 'Megan Jones',
-      email: 'mega.joney@ontax.com',
-      role: 'manager',
-      avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant29&mouth=happy02'
-    },
-    title: 'Aurora',
     progess: Math.random() * 100
   },
   {
     avatarUrl: Branding5,
     manager: {
       id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
-      name: 'Tate Keller',
+      username: 'takeller',
+      details: {
+        avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant45&mouth=happy02',
+        firstName: 'Tate',
+        lastName: 'Keller',
+        badges: [
+          {
+            label: 'Los Angeles',
+            category: {
+              type: 'location'
+            }
+          },
+          {
+            label: 'Project Manager',
+            category: {
+              type: 'role',
+              className: 'bg-blue-500 dark:bg-blue-600'
+            }
+          }
+        ]
+      },
       email: 'tate.keller@ontax.com',
-      role: 'manager',
-      avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant45&mouth=happy02'
+      role: 'manager'
     },
     title: 'Interstellar',
+    progess: Math.random() * 100
+  },
+  {
+    avatarUrl: Branding4,
+    manager: {
+      id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
+      username: 'megjoney',
+      details: {
+        avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant29&mouth=happy02',
+        firstName: 'Megan',
+        lastName: 'Jones',
+        badges: [
+          {
+            label: 'New York',
+            category: {
+              type: 'location'
+            }
+          },
+          {
+            label: 'Project Manager',
+            category: {
+              type: 'role',
+              className: 'bg-blue-500 dark:bg-blue-600'
+            }
+          }
+        ]
+      },
+      email: 'mega.joney@ontax.com',
+      role: 'manager'
+    },
+    title: 'Aurora',
+    progess: Math.random() * 100
+  },
+  {
+    avatarUrl: Branding3,
+    manager: {
+      id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
+      username: 'jarey',
+      details: {
+        avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant12&mouth=happy02',
+        firstName: 'Jack',
+        lastName: 'Lorey',
+        badges: [
+          {
+            label: 'New York',
+            category: {
+              type: 'location'
+            }
+          },
+          {
+            label: 'Project Manager',
+            category: {
+              type: 'role',
+              className: 'bg-blue-500 dark:bg-blue-600'
+            }
+          }
+        ]
+      },
+      email: 'jack.lorey@ontax.com',
+      role: 'manager'
+    },
+    title: 'Spectrum',
     progess: Math.random() * 100
   }
 ];
@@ -306,13 +408,15 @@ const OverviewTab: FC = () => {
                       <p className="font-semibold">{project.title}</p>
                       <HoverCard>
                         <p className="text-sm text-muted-foreground">
-                          Project Manager:
-                          <HoverCardTrigger>
-                            {project.manager.name}
-                            <HoverCardContent align="center" className="text-sm">
-                              {project.manager.email}
-                            </HoverCardContent>
-                          </HoverCardTrigger>
+                          Project Manager:&nbsp;
+                          <UserHoverCard
+                            user={project.manager}
+                            triggerContent={
+                              <span className="hover:underline underline-offset-4 cursor-pointer">
+                                {getDisplayName(project.manager)}
+                              </span>
+                            }
+                          />
                         </p>
                       </HoverCard>
                     </div>

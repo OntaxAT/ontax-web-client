@@ -10,7 +10,7 @@ import { Button, ButtonProps, buttonVariants } from '../ui/button';
 import TbSun from '../icons/TbSun';
 import TbMoon from '../icons/TbMoon';
 import { VariantProps } from 'class-variance-authority';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/misc';
 
 interface IThemeMenuProps {
   className?: string;

@@ -12,7 +12,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/misc';
 import { usePathname } from 'next/navigation';
 import { FC, HTMLAttributes } from 'react';
 import MobileTobNavMenuItem from './MobileTopNavMenuItem';

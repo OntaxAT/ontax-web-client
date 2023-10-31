@@ -7,7 +7,7 @@ import TbLoader from '@/components/icons/TbLoader';
 import Jaen from '@/components/icons/snek';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { cn, validateEmail } from '@/lib/utils';
+import { cn, validateEmail } from '@/lib/utils/misc';
 import Link from '@/components/ui/link';
 
 const phrases = [

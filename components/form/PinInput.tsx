@@ -1,4 +1,4 @@
-import { cn, generateId } from '@/lib/utils';
+import { cn, generateId } from '@/lib/utils/misc';
 import { FC, HTMLAttributes, useEffect, useState } from 'react';
 import { Input } from '../ui/input';
 

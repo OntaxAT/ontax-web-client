@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/misc';
 import { Button } from '@/components/ui/button';
 import TbLoader from '@/components/icons/TbLoader';
 import { FC, useState } from 'react';

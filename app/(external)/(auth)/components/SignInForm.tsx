@@ -5,7 +5,7 @@ import Jaen from '@/components/icons/snek';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Link from '@/components/ui/link';
-import { cn, validateEmail } from '@/lib/utils';
+import { cn, validateEmail } from '@/lib/utils/misc';
 import { FC, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 

@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 
-import { cn, validateEmail } from '@/lib/utils';
+import { cn, validateEmail } from '@/lib/utils/misc';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import TbLoader from '@/components/icons/TbLoader';

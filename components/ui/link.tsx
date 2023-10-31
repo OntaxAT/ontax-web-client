@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/misc';
 import { VariantProps, cva } from 'class-variance-authority';
 import { default as NextLink } from 'next/link';
 import { ComponentProps, forwardRef } from 'react';
