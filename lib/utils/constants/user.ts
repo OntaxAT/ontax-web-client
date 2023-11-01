@@ -1,5 +1,6 @@
 import { TUser, TUserBadgeCategory } from "@/app/types/features/user";
 import TbBackpack from "@/components/icons/TbBackpack";
+import TbIdBadge2 from "@/components/icons/TbIdBadge2";
 import TbMapPin from "@/components/icons/TbMapPin";
 
 /**
@@ -9,7 +10,7 @@ import TbMapPin from "@/components/icons/TbMapPin";
 export const userBadgeCategories: TUserBadgeCategory[] = [
     {
         type: 'role',
-        className: 'bg-blue-500 dark:bg-blue-600 text-white',
+        className: 'bg-blue-500 hover:bg-blue-400 dark:bg-blue-600 dark:hover:bg-blue-500 text-white',
         icon: TbBackpack
     },
     {
@@ -18,7 +19,12 @@ export const userBadgeCategories: TUserBadgeCategory[] = [
     {
         type: 'location',
         icon: TbMapPin,
-        iconClassName: "text-primary/75"
+        iconClassName: "text-primary-foreground/75"
+    },
+    {
+        type: 'internal-id',
+        icon: TbIdBadge2,
+        className: "bg-yellow-500 hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-500 text-white"
     }
 ]
 
@@ -127,10 +133,7 @@ export const users: TUser[] = [
                 },
                 {
                     label: 'Project Manager',
-                    category: {
-                        type: 'role',
-                        className: 'bg-blue-500 dark:bg-blue-600'
-                    }
+                    category: 'role',
                 },
                 {
                     label: 'RD-901',
@@ -156,9 +159,7 @@ export const users: TUser[] = [
             badges: [
                 {
                     label: 'New York',
-                    category: {
-                        type: 'location'
-                    }
+                    category: 'location'
                 },
                 {
                     label: 'Project Manager',

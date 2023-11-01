@@ -1,6 +1,7 @@
 'use client';
 
 import { TUser, TUserBadgeCategory } from '@/app/types/features/user';
+import TbMail from '@/components/icons/TbMail';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
@@ -55,7 +56,7 @@ const UserHoverCard: FC<IUserHoverCardProps> = ({ user, triggerContent }) => {
                 </div>
                 {user.details.bio && <p>{user.details.bio}</p>}
                 {user.details.badges && user.details.badges.length > 0 && (
-                  <div className="flex items-center gap-x-2">
+                  <div className="flex items-center gap-x-2 gap-y-3 flex-wrap">
                     {user.details.badges.map((badge, i) => {
                       let predefinedCategory: TUserBadgeCategory | undefined;
                       let badgeCategory: TUserBadgeCategory | undefined;
@@ -95,6 +96,10 @@ const UserHoverCard: FC<IUserHoverCardProps> = ({ user, triggerContent }) => {
                     })}
                   </div>
                 )}
+                {/* <div className="flex items-center space-x-2">
+                  <TbMail className="h-4 w-4 text-muted-foreground" />
+                  <span>{user.email}</span>
+                </div> */}
               </HoverCardContent>,
               document.body
             )
