@@ -30,7 +30,7 @@ export type TUserBadge = Omit<TBadge, 'id'> & {
  * The category of a user badge (e.g. role, department, etc.)
  */
 export type TUserBadgeCategory = {
-    type: 'role' | 'department' | 'location';
+    type: 'role' | 'department' | 'location' | 'internal-id';
     className?: string;
     icon?: FC<IIconProps>;
     iconClassName?: HTMLAttributes<SVGElement>['className'];

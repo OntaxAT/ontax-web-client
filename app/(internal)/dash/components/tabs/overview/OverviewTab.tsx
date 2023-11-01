@@ -1,29 +1,14 @@
-import { TUser } from '@/app/types/features/user';
-import UserHoverCard from '@/components/features/user/UserHoverCard';
-import {
-  Branding1,
-  Branding2,
-  Branding3,
-  Branding4,
-  Branding5
-} from '@/components/icons/BrandingPlaceholders';
 import TbArrowBarBoth from '@/components/icons/TbArrowBarBoth';
 import TbAsset from '@/components/icons/TbAsset';
 import TbCash from '@/components/icons/TbCash';
 import TbMoodUp from '@/components/icons/TbMoodUp';
 import { IIconProps } from '@/components/icons/types/icons';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  HoverCard,
-  HoverCardArrow,
-  HoverCardContent,
-  HoverCardTrigger
-} from '@/components/ui/hover-card';
 import { cn } from '@/lib/utils/misc';
-import { getDisplayName } from '@/lib/utils/user';
 import { useTheme } from 'next-themes';
 import { FC } from 'react';
 import { Bar, BarChart, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import ProjectsOverviewCard from './ProjectsOverviewCard';
 
 const cardItems: Array<{
   title: string;
@@ -155,154 +140,6 @@ const cashFlowData: Array<{ name: string; ocf: number; icf: number; fcf: number 
   }
 ];
 
-const projects: Array<{
-  title: string;
-  manager: TUser;
-  avatarUrl: FC<IIconProps>;
-  progess: number;
-}> = [
-  {
-    avatarUrl: Branding1,
-    manager: {
-      id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
-      username: 'joto',
-      details: {
-        avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant04&mouth=happy02',
-        firstName: 'Josh',
-        lastName: 'Torno',
-        bio: 'Balancing precision and innovation to lead projects to excellence, one milestone at a time.',
-        badges: [
-          {
-            label: 'New York',
-            category: 'location'
-          },
-          {
-            label: 'Project Manager',
-            category: 'role'
-          }
-        ]
-      },
-      email: 'josh.torno@ontax.com',
-      role: 'manager'
-    },
-    title: 'Olympia',
-    progess: Math.random() * 100
-  },
-  {
-    avatarUrl: Branding2,
-    manager: {
-      id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
-      username: 'madprice',
-      details: {
-        avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant13&mouth=happy02',
-        firstName: 'Madison',
-        lastName: 'Price',
-        badges: [
-          {
-            label: 'London',
-            category: 'location'
-          },
-          {
-            label: 'Project Manager',
-            category: 'role'
-          }
-        ],
-        bio: 'Mixing creativity with strategy to turn project challenges into opportunities for growth.'
-      },
-      email: 'madison.price@ontax.com',
-      role: 'manager'
-    },
-    title: 'Mirage',
-    progess: Math.random() * 100
-  },
-  {
-    avatarUrl: Branding5,
-    manager: {
-      id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
-      username: 'takeller',
-      details: {
-        avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant45&mouth=happy02',
-        firstName: 'Tate',
-        lastName: 'Keller',
-        badges: [
-          {
-            label: 'Los Angeles',
-            category: 'location'
-          },
-          {
-            label: 'Project Manager',
-            category: 'role'
-          }
-        ],
-        bio: 'Passionate about project success, empowering teams, and the occasional spontaneous dance break.'
-      },
-      email: 'tate.keller@ontax.com',
-      role: 'manager'
-    },
-    title: 'Interstellar',
-    progess: Math.random() * 100
-  },
-  {
-    avatarUrl: Branding4,
-    manager: {
-      id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
-      username: 'megjoney',
-      details: {
-        avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant29&mouth=happy02',
-        firstName: 'Megan',
-        lastName: 'Jones',
-        badges: [
-          {
-            label: 'New York',
-            category: 'location'
-          },
-          {
-            label: 'Project Manager',
-            category: {
-              type: 'role',
-              className: 'bg-blue-500 dark:bg-blue-600'
-            }
-          }
-        ],
-        bio: 'Driven by results, coffee, and the belief that every project is a chance to make a positive impact.'
-      },
-      email: 'mega.joney@ontax.com',
-      role: 'manager'
-    },
-    title: 'Aurora',
-    progess: Math.random() * 100
-  },
-  {
-    avatarUrl: Branding3,
-    manager: {
-      id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
-      username: 'jarey',
-      details: {
-        avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant12&mouth=happy02',
-        firstName: 'Jack',
-        lastName: 'Lorey',
-        badges: [
-          {
-            label: 'New York',
-            category: {
-              type: 'location'
-            }
-          },
-          {
-            label: 'Project Manager',
-            category: 'role'
-          }
-        ],
-        bio: "Striving for project excellence while embracing the motto 'work hard, play hard' to achieve remarkable outcomes."
-      },
-      email: 'jack.lorey@ontax.com',
-      role: 'manager'
-    },
-    title: 'Spectrum',
-    progess: Math.random() * 100
-  }
-];
-
 /**
  * Overview tab for the dashboard
  */
@@ -376,42 +213,7 @@ const OverviewTab: FC = () => {
             </ResponsiveContainer>
           </CardContent>
         </Card>
-        <Card className="h-full">
-          <CardHeader>
-            <h3 className="font-semibold leading-none tracking-tight">Projects Status</h3>
-            <p className="text-sm text-muted-foreground">
-              All projects got {(Math.random() * 100).toFixed(2)}% closer to completion
-            </p>
-          </CardHeader>
-          {projects.map((project, i) => (
-            <CardContent key={i}>
-              <div className="space-y-8">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center">
-                    <project.avatarUrl className="w-5 h-5" />
-                    <div className="flex flex-col ml-3">
-                      <p className="font-semibold">{project.title}</p>
-                      <HoverCard>
-                        <p className="text-sm text-muted-foreground">
-                          Project Manager:&nbsp;
-                          <UserHoverCard
-                            user={project.manager}
-                            triggerContent={
-                              <span className="hover:underline underline-offset-4 cursor-pointer">
-                                {getDisplayName(project.manager)}
-                              </span>
-                            }
-                          />
-                        </p>
-                      </HoverCard>
-                    </div>
-                  </div>
-                  <p className="font-semibold">+{project.progess.toFixed(2)}%</p>
-                </div>
-              </div>
-            </CardContent>
-          ))}
-        </Card>
+        <ProjectsOverviewCard />
       </div>
     </div>
   );

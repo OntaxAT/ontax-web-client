@@ -2,7 +2,7 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { FC } from 'react';
-import OverviewTab from './components/tabs/OverviewTab';
+import OverviewTab from './components/tabs/overview/OverviewTab';
 
 const Dashboard: FC = () => {
   return (
