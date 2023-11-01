@@ -37,7 +37,7 @@ const BusinessSelect: FC = () => {
     const business = businesses.find(business => business.id === id);
     if (!business) return;
     setSelectedBusiness(business);
-    if (isOpen) setIsOpen(false);
+    setIsOpen(false);
   };
 
   const businessItems = useMemo(() => {
