@@ -170,19 +170,15 @@ const projects: Array<{
         avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant04&mouth=happy02',
         firstName: 'Josh',
         lastName: 'Torno',
+        bio: 'Balancing precision and innovation to lead projects to excellence, one milestone at a time.',
         badges: [
           {
             label: 'New York',
-            category: {
-              type: 'location'
-            }
+            category: 'location'
           },
           {
             label: 'Project Manager',
-            category: {
-              type: 'role',
-              className: 'bg-blue-500 dark:bg-blue-600'
-            }
+            category: 'role'
           }
         ]
       },
@@ -204,18 +200,14 @@ const projects: Array<{
         badges: [
           {
             label: 'London',
-            category: {
-              type: 'location'
-            }
+            category: 'location'
           },
           {
             label: 'Project Manager',
-            category: {
-              type: 'role',
-              className: 'bg-blue-500 dark:bg-blue-600'
-            }
+            category: 'role'
           }
-        ]
+        ],
+        bio: 'Mixing creativity with strategy to turn project challenges into opportunities for growth.'
       },
       email: 'madison.price@ontax.com',
       role: 'manager'
@@ -235,18 +227,14 @@ const projects: Array<{
         badges: [
           {
             label: 'Los Angeles',
-            category: {
-              type: 'location'
-            }
+            category: 'location'
           },
           {
             label: 'Project Manager',
-            category: {
-              type: 'role',
-              className: 'bg-blue-500 dark:bg-blue-600'
-            }
+            category: 'role'
           }
-        ]
+        ],
+        bio: 'Passionate about project success, empowering teams, and the occasional spontaneous dance break.'
       },
       email: 'tate.keller@ontax.com',
       role: 'manager'
@@ -266,9 +254,7 @@ const projects: Array<{
         badges: [
           {
             label: 'New York',
-            category: {
-              type: 'location'
-            }
+            category: 'location'
           },
           {
             label: 'Project Manager',
@@ -277,7 +263,8 @@ const projects: Array<{
               className: 'bg-blue-500 dark:bg-blue-600'
             }
           }
-        ]
+        ],
+        bio: 'Driven by results, coffee, and the belief that every project is a chance to make a positive impact.'
       },
       email: 'mega.joney@ontax.com',
       role: 'manager'
@@ -303,12 +290,10 @@ const projects: Array<{
           },
           {
             label: 'Project Manager',
-            category: {
-              type: 'role',
-              className: 'bg-blue-500 dark:bg-blue-600'
-            }
+            category: 'role'
           }
-        ]
+        ],
+        bio: "Striving for project excellence while embracing the motto 'work hard, play hard' to achieve remarkable outcomes."
       },
       email: 'jack.lorey@ontax.com',
       role: 'manager'
