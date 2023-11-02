@@ -6,6 +6,8 @@ import { IIconProps } from '@/components/icons/types/icons';
 import TbCalendarStats from '@/components/icons/TbCalendarStats';
 import TbArrowsExchange2 from '@/components/icons/TbArrowsExchange2';
 import TbHeartHandshake from '@/components/icons/TbHeartHandshake';
+import ActivityGrid from '@/components/ui/activity-grid';
+import { Card } from '@/components/ui/card';
 
 const emptyCardItems: Array<{
   title: string;
@@ -116,6 +118,22 @@ const EmployeesTab: FC = () => {
   return (
     <div className="flex flex-col h-full gap-5">
       <TrendCards data={trendData} />
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 mb-10 h-auto overflow-hidden">
+        <Card className="h-[220px]">
+          <ActivityGrid
+            data={{
+              items: Array.from({ length: 30 }, (_, i) => ({
+                date: new Date(new Date().setDate(i + 1)),
+                value: Math.floor(Math.random() * 100)
+              })),
+              endDate: new Date('2023-11-14'),
+              max: 9999,
+              min: 0,
+              startDate: new Date('2023-11-01')
+            }}
+          />
+        </Card>
+      </div>
     </div>
   );
 };

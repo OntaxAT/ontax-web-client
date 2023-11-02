@@ -1,10 +1,6 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 
-import TbArrowBarBoth from '@/components/icons/TbArrowBarBoth';
-import TbAsset from '@/components/icons/TbAsset';
 import TbCash from '@/components/icons/TbCash';
-import TbMoodUp from '@/components/icons/TbMoodUp';
-import { IIconProps } from '@/components/icons/types/icons';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils/misc';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -49,14 +45,6 @@ interface ITrendCardProps {
  * Trend cards for the overview tab
  */
 const TrendCards: FC<ITrendCardProps> = ({ data }) => {
-  // const [data, setData] = useState(emptyCardItems);
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setData(loadedCardItems);
-  //   }, 2000);
-  // }, []);
-
   return (
     <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 mt-7">
       {data.map((item, index) => {
