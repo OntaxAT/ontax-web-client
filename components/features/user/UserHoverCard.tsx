@@ -57,43 +57,57 @@ const UserHoverCard: FC<IUserHoverCardProps> = ({ user, triggerContent }) => {
                 {user.details.bio && <p>{user.details.bio}</p>}
                 {user.details.badges && user.details.badges.length > 0 && (
                   <div className="flex items-center gap-x-2 gap-y-3 flex-wrap">
-                    {user.details.badges.map((badge, i) => {
-                      let predefinedCategory: TUserBadgeCategory | undefined;
-                      let badgeCategory: TUserBadgeCategory | undefined;
-                      if (badge.category instanceof Object) {
-                        badgeCategory = badge.category;
-                        predefinedCategory = badge.category
-                          ? userBadgeCategories.find(c => c.type === badgeCategory!.type)
-                          : undefined;
-                      } else if (typeof badge.category === 'string') {
-                        badgeCategory = userBadgeCategories.find(c => c.type === badge.category);
-                      }
+                    {user.details.badges
+                      .sort((b1, b2) => {
+                        if (b1.category instanceof Object && b2.category instanceof Object) {
+                          return b1.category.order - b2.category.order;
+                        } else if (
+                          typeof b1.category === 'string' &&
+                          typeof b2.category === 'string'
+                        ) {
+                          const category1 = userBadgeCategories.find(c => c.type === b1.category);
+                          const category2 = userBadgeCategories.find(c => c.type === b2.category);
+                          return category1 && category2 ? category1.order - category2.order : 0;
+                        }
+                        return 0;
+                      })
+                      .map((badge, i) => {
+                        let predefinedCategory: TUserBadgeCategory | undefined;
+                        let badgeCategory: TUserBadgeCategory | undefined;
+                        if (badge.category instanceof Object) {
+                          badgeCategory = badge.category;
+                          predefinedCategory = badge.category
+                            ? userBadgeCategories.find(c => c.type === badgeCategory!.type)
+                            : undefined;
+                        } else if (typeof badge.category === 'string') {
+                          badgeCategory = userBadgeCategories.find(c => c.type === badge.category);
+                        }
 
-                      const BadgeIcon = predefinedCategory?.icon || badgeCategory?.icon;
+                        const BadgeIcon = predefinedCategory?.icon || badgeCategory?.icon;
 
-                      return (
-                        <Badge
-                          key={i}
-                          className={cn(
-                            'flex item-center space-x-1',
-                            badge.className,
-                            badgeCategory?.className,
-                            predefinedCategory?.className
-                          )}
-                        >
-                          {BadgeIcon && (
-                            <BadgeIcon
-                              className={cn(
-                                'w-3 h-3',
-                                predefinedCategory?.iconClassName,
-                                badgeCategory?.iconClassName
-                              )}
-                            />
-                          )}
-                          <span>{badge.label}</span>
-                        </Badge>
-                      );
-                    })}
+                        return (
+                          <Badge
+                            key={i}
+                            className={cn(
+                              'flex item-center space-x-1',
+                              badge.className,
+                              badgeCategory?.className,
+                              predefinedCategory?.className
+                            )}
+                          >
+                            {BadgeIcon && (
+                              <BadgeIcon
+                                className={cn(
+                                  'w-3 h-3',
+                                  predefinedCategory?.iconClassName,
+                                  badgeCategory?.iconClassName
+                                )}
+                              />
+                            )}
+                            <span>{badge.label}</span>
+                          </Badge>
+                        );
+                      })}
                   </div>
                 )}
                 {/* <div className="flex items-center space-x-2">

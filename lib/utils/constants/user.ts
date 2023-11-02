@@ -9,19 +9,23 @@ import TbMapPin from "@/components/icons/TbMapPin";
  */
 export const userBadgeCategories: TUserBadgeCategory[] = [
     {
+        order: 2,
         type: 'role',
         // className: 'bg-blue-500 hover:bg-blue-400 dark:bg-blue-600 dark:hover:bg-blue-500 text-white',
         icon: TbBackpack
     },
     {
+        order: 3,
         type: 'department',
     },
     {
+        order: 1,
         type: 'location',
         icon: TbMapPin,
         iconClassName: "text-primary-foreground/75"
     },
     {
+        order: 0,
         type: 'internal-id',
         icon: TbIdBadge2,
         // className: "bg-yellow-500 hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-500 text-white"

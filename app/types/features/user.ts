@@ -30,6 +30,7 @@ export type TUserBadge = Omit<TBadge, 'id'> & {
  * The category of a user badge (e.g. role, department, etc.)
  */
 export type TUserBadgeCategory = {
+    order: number;
     type: 'role' | 'department' | 'location' | 'internal-id';
     className?: string;
     icon?: FC<IIconProps>;
