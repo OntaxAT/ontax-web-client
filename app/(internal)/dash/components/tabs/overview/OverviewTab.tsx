@@ -9,7 +9,7 @@ import { useTheme } from 'next-themes';
 import { FC } from 'react';
 import { Bar, BarChart, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import ProjectsOverviewCard from './ProjectsOverviewCard';
-import TrendCards from './TrendCards';
+import TrendCards from '../TrendCards';
 
 const cashFlowData: Array<{ name: string; ocf: number; icf: number; fcf: number }> = [
   {
