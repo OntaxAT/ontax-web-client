@@ -10,7 +10,7 @@ import TbMapPin from "@/components/icons/TbMapPin";
 export const userBadgeCategories: TUserBadgeCategory[] = [
     {
         type: 'role',
-        className: 'bg-blue-500 hover:bg-blue-400 dark:bg-blue-600 dark:hover:bg-blue-500 text-white',
+        // className: 'bg-blue-500 hover:bg-blue-400 dark:bg-blue-600 dark:hover:bg-blue-500 text-white',
         icon: TbBackpack
     },
     {
@@ -24,7 +24,7 @@ export const userBadgeCategories: TUserBadgeCategory[] = [
     {
         type: 'internal-id',
         icon: TbIdBadge2,
-        className: "bg-yellow-500 hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-500 text-white"
+        // className: "bg-yellow-500 hover:bg-yellow-400 dark:bg-yellow-600 dark:hover:bg-yellow-500 text-white"
     }
 ]
 
