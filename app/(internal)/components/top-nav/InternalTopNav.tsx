@@ -22,7 +22,7 @@ import TopNavMenu from './TopNavMenu';
  */
 const InternalTopNav: FC = () => {
   return (
-    <div className="fixed flex justify-center h-16 w-full mx-auto px-5 xl:px-0 border-b">
+    <div className="fixed flex justify-center h-16 w-full mx-auto px-5 xl:px-0 border-b bg-white dark:bg-black">
       <div className="flex items-center justify-between w-full px-10">
         <div className="grid grid-flow-col gap-5 shrink-0">
           <Link href="/dash" className="flex items-center space-x-4">
