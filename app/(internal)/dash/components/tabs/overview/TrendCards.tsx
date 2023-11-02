@@ -131,9 +131,7 @@ const TrendCardSkeleton: FC<ITrendCardSkeletonProps> = ({ title, icon }) => {
         )}
       </CardHeader>
       <CardContent>
-        <p className="text-2xl font-bold">
-          <Skeleton className="w-3/4 h-6" />
-        </p>
+        <Skeleton className="w-3/4 h-6" />
         <Skeleton className="w-1/2 h-3 mt-2" />
       </CardContent>
     </Card>

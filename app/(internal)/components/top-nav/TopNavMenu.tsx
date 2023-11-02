@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/navigation-menu';
 import { cn } from '@/lib/utils/misc';
 import { usePathname } from 'next/navigation';
-import { FC, HTMLAttributes } from 'react';
+import { FC, HTMLAttributes, useEffect, useState } from 'react';
 import MobileTobNavMenuItem from './MobileTopNavMenuItem';
 import { IIconProps } from '@/components/icons/types/icons';
 
@@ -282,11 +282,17 @@ export const navItems: NavLink[] = [
  * Main navigation menu for the top of the page
  */
 const TopNavMenu: FC = () => {
+  const [items, setItems] = useState<NavLink[]>();
+
+  useEffect(() => {
+    setItems(navItems);
+  }, []);
+
   const pathname = usePathname();
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        {navItems.map((navItem, i) => {
+        {items?.map((navItem, i) => {
           const isActive = navItem.href && navItem.href === pathname;
 
           if (!navItem.items || navItem.items?.length === 0) {
