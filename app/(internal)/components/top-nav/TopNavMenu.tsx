@@ -318,7 +318,7 @@ const TopNavMenu: FC = () => {
             <NavigationMenuItem key={i} className={navItem.menuClassName}>
               <NavigationMenuTrigger
                 className={cn(
-                  'text-gray-500 transition-colors duration-200',
+                  'text-gray-500 transition-colors duration-200 bg-white hover:bg-gray-100 dark:bg-black dark:hover:bg-foreground',
                   navItem.labelClassName,
                   isActive && 'text-foreground',
                   isActive && navItem.activeLabelClassName
