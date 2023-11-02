@@ -50,6 +50,12 @@ const projects: Array<{
     manager: users[4],
     title: 'Spectrum',
     progess: Math.random() * 100
+  },
+  {
+    avatarUrl: Branding1,
+    manager: users[4],
+    title: 'Zephyr',
+    progess: Math.random() * 100
   }
 ];
 
@@ -58,8 +64,8 @@ const projects: Array<{
  */
 const ProjectsOverviewCard: FC = () => {
   return (
-    <Card className="h-full">
-      <CardHeader>
+    <Card className="h-full overflow-hidden">
+      <CardHeader className="mb-1">
         <h3 className="font-semibold leading-none tracking-tight">Projects Status</h3>
         <p className="text-sm text-muted-foreground">
           All projects got {(Math.random() * 100).toFixed(2)}% closer to completion

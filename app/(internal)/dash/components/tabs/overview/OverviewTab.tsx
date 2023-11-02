@@ -176,7 +176,7 @@ const OverviewTab: FC = () => {
           );
         })}
       </div>
-      <div className="h-max grid gap-4 grid-cols-1 md:grid-cols-2 mb-10">
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 mb-10 h-[440px] overflow-hidden">
         <Card className="h-fit">
           <CardHeader className="flex flex-col space-y-1.5 p-6">
             <h3 className="font-semibold leading-none tracking-tight">Cash Flow</h3>
