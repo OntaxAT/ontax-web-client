@@ -1,15 +1,16 @@
+import { useTheme } from 'next-themes';
+import { FC, useEffect, useState } from 'react';
+import { Bar, BarChart, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import ProjectsOverviewCard from './ProjectsOverviewCard';
+import TrendCards from '../TrendCards';
 import TbArrowBarBoth from '@/components/icons/TbArrowBarBoth';
 import TbAsset from '@/components/icons/TbAsset';
 import TbCash from '@/components/icons/TbCash';
 import TbMoodUp from '@/components/icons/TbMoodUp';
 import { IIconProps } from '@/components/icons/types/icons';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { cn } from '@/lib/utils/misc';
-import { useTheme } from 'next-themes';
-import { FC } from 'react';
-import { Bar, BarChart, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts';
-import ProjectsOverviewCard from './ProjectsOverviewCard';
-import TrendCards from '../TrendCards';
+import { TTrendCard } from '../../../types/trends-card';
 
 const cashFlowData: Array<{ name: string; ocf: number; icf: number; fcf: number }> = [
   {
@@ -86,11 +87,116 @@ const cashFlowData: Array<{ name: string; ocf: number; icf: number; fcf: number 
   }
 ];
 
+const emptyCardItems: Array<{
+  title: string;
+  icon: FC<IIconProps>;
+  content: { amount?: string; comparison: { value?: number; label: string } };
+}> = [
+  {
+    title: 'Total Revenue',
+    icon: TbCash,
+    content: {
+      comparison: {
+        label: '% from last month'
+      }
+    }
+  },
+  {
+    title: 'Profit Margins',
+    icon: TbArrowBarBoth,
+    content: {
+      comparison: {
+        label: '% from last month'
+      }
+    }
+  },
+  {
+    title: 'Customer Retention Rate',
+    icon: TbMoodUp,
+    content: {
+      comparison: {
+        label: '% from last month'
+      }
+    }
+  },
+  {
+    title: 'Work Efficiency',
+    icon: TbAsset,
+    content: {
+      comparison: {
+        label: '% from last month'
+      }
+    }
+  }
+];
+
+const loadedCardItems: Array<{
+  title: string;
+  icon: FC<IIconProps>;
+  content: { amount?: string; comparison: { value?: number; label: string } };
+}> = [
+  {
+    title: 'Total Revenue',
+    icon: TbCash,
+    content: {
+      amount: `$${(Math.random() * 100000).toLocaleString('en-US', {
+        style: 'decimal',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      })}`,
+      comparison: {
+        value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
+        label: '% from last month'
+      }
+    }
+  },
+  {
+    title: 'Profit Margins',
+    icon: TbArrowBarBoth,
+    content: {
+      amount: `${(Math.random() * 100).toFixed(2)}%`,
+      comparison: {
+        value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
+        label: '% from last month'
+      }
+    }
+  },
+  {
+    title: 'Customer Retention Rate',
+    icon: TbMoodUp,
+    content: {
+      amount: `${(Math.random() * 100).toFixed(2)}%`,
+      comparison: {
+        value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
+        label: '% from last month'
+      }
+    }
+  },
+  {
+    title: 'Work Efficiency',
+    icon: TbAsset,
+    content: {
+      amount: `${(30 + Math.random() * 70).toFixed(2)}%`,
+      comparison: {
+        value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
+        label: '% from last month'
+      }
+    }
+  }
+];
+
 /**
  * Overview tab for the dashboard
  */
 const OverviewTab: FC = () => {
+  const [trendData, setTrendData] = useState<TTrendCard[]>(emptyCardItems);
   const { theme } = useTheme();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTrendData(loadedCardItems);
+    }, 2000);
+  }, []);
 
   const chartFcfColor =
     theme === 'dark'
@@ -99,7 +205,7 @@ const OverviewTab: FC = () => {
 
   return (
     <div className="flex flex-col h-full gap-5">
-      <TrendCards />
+      <TrendCards data={trendData} />
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 mb-10 h-auto overflow-hidden">
         <Card className="h-[440px]">
           <CardHeader className="flex flex-col space-y-1.5 p-6">
