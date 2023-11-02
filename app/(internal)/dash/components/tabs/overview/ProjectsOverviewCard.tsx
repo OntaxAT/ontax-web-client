@@ -64,7 +64,7 @@ const projects: Array<{
  */
 const ProjectsOverviewCard: FC = () => {
   return (
-    <Card className="h-full overflow-hidden">
+    <Card className="h-[440px] overflow-hidden">
       <CardHeader className="mb-1">
         <h3 className="font-semibold leading-none tracking-tight">Projects Status</h3>
         <p className="text-sm text-muted-foreground">
