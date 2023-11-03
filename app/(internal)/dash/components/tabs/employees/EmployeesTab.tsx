@@ -9,6 +9,7 @@ import TbHeartHandshake from '@/components/icons/TbHeartHandshake';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Area, AreaChart, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Skeleton } from '@/components/ui/skeleton';
+import PerformanceOverviewCard from './PerformanceOverviewCard';
 
 type TChartData = {
   name: string;
@@ -244,6 +245,7 @@ const EmployeesTab: FC = () => {
           </CardHeader>
           <CardContent className="flex-1 p-6 pt-0">{chart}</CardContent>
         </Card>
+        <PerformanceOverviewCard />
       </div>
     </div>
   );
