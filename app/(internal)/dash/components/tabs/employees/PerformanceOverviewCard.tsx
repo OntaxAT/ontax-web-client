@@ -1,5 +1,6 @@
 import { TTeam } from '@/app/types/features/team';
 import { TUser } from '@/app/types/features/user';
+import TeamHoverCard from '@/components/features/team/TeamHoverCard';
 import UserHoverCard from '@/components/features/user/UserHoverCard';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -8,7 +9,7 @@ import { teams } from '@/lib/utils/constants/team';
 import { users } from '@/lib/utils/constants/user';
 import { getDisplayName } from '@/lib/utils/user';
 import { HoverCard } from '@radix-ui/react-hover-card';
-import { FC, ReactNode, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 type TPerformanceItem = {
   entity: TUser | TTeam;
@@ -82,7 +83,11 @@ const PerformanceOverviewCard: FC = () => {
         <h3 className="text-sm font-medium">Top Performers</h3>
         {data?.avg ? (
           <p className="text-sm text-muted-foreground">
-            All projects got {(Math.random() * 100).toFixed(2)}% closer to completion
+            The average performance score is{' '}
+            <span className="font-semibold">
+              {data?.avg.toFixed(2)}
+              <span className="text-muted-foreground text-xs">PS</span>.
+            </span>
           </p>
         ) : (
           <Skeleton className="h-3.5 w-1/2" />
@@ -98,10 +103,10 @@ const PerformanceOverviewCard: FC = () => {
           }
 
           let displayData: { name: string; avatar?: string; progess: number };
-          const isUser = 'details' in performer.entity;
+          const isUser = !('members' in performer.entity);
           if ('members' in performer.entity) {
             displayData = {
-              avatar: performer.entity.avatarUrl,
+              avatar: performer.entity.details?.avatarUrl,
               name: performer.entity.name,
               progess: performer.score
             };
@@ -118,15 +123,14 @@ const PerformanceOverviewCard: FC = () => {
               <div className="space-y-8">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center">
-                    <Avatar className="hover:scale-105 transition-transform">
+                    <Avatar className="hover:scale-105 transition-transform bg-gray-200 dark:bg-gray-800">
                       <AvatarImage src={displayData.avatar} />
                       <AvatarFallback>{displayData!.name}</AvatarFallback>
                     </Avatar>
-                    <div className="flex flex-col ml-3">
-                      <p className="font-semibold">{displayData!.name}</p>
-                      <HoverCard>
-                        <p className="text-sm text-muted-foreground">
-                          {isUser && (
+                    <div className="flex flex-col ml-3 font-semibold">
+                      {isUser ? (
+                        <HoverCard>
+                          <p>
                             <UserHoverCard
                               user={performer.entity as TUser}
                               triggerContent={
@@ -135,9 +139,22 @@ const PerformanceOverviewCard: FC = () => {
                                 </span>
                               }
                             />
-                          )}
-                        </p>
-                      </HoverCard>
+                          </p>
+                        </HoverCard>
+                      ) : (
+                        <HoverCard>
+                          <p>
+                            <TeamHoverCard
+                              team={performer.entity as TTeam}
+                              triggerContent={
+                                <span className="hover:underline underline-offset-4 cursor-pointer">
+                                  {displayData.name}
+                                </span>
+                              }
+                            />
+                          </p>
+                        </HoverCard>
+                      )}
                     </div>
                   </div>
                   <p className="font-semibold">

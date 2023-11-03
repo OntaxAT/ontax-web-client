@@ -1,19 +1,16 @@
-import { FC, HTMLAttributes } from "react";
-import { TBadge } from "./badge";
-import { IIconProps } from "@/components/icons/types/icons";
+import { TAdressableEntity } from "../entity";
+import { TBadge, TBadgeCategory } from "./badge";
 
 /**
  * The basic user type for the application.
  */
-export type TUser = {
-    id: string;
-    username: string;
+export type TUser = TAdressableEntity & {
     details: {
         avatarUrl?: string;
         firstName: string;
         lastName: string;
-        badges?: TUserBadge[];
         bio?: string;
+        badges?: TUserBadge[];
     }
     email: string;
     role: string;
@@ -23,16 +20,8 @@ export type TUser = {
  * Badges related to a user
  * They may represent certain roles, departments, or other essential information
  */
-export type TUserBadge = Omit<TBadge, 'id'> & {
-    category?: TUserBadgeCategory['type'] | TUserBadgeCategory;
-};
+export type TUserBadge = Omit<TBadge<TUserBadgeCategory['type'] | TUserBadgeCategory>, 'id'>;
 /**
  * The category of a user badge (e.g. role, department, etc.)
  */
-export type TUserBadgeCategory = {
-    order: number;
-    type: 'role' | 'department' | 'location' | 'internal-id';
-    className?: string;
-    icon?: FC<IIconProps>;
-    iconClassName?: HTMLAttributes<SVGElement>['className'];
-}
+export type TUserBadgeCategory = TBadgeCategory<'role' | 'department' | 'location' | 'internal-id'>;

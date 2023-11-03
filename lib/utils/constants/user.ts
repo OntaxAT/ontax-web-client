@@ -1,13 +1,19 @@
-import { TUser, TUserBadgeCategory } from "@/app/types/features/user";
+import { TUser, TUserBadge, TUserBadgeCategory } from "@/app/types/features/user";
 import TbBackpack from "@/components/icons/TbBackpack";
 import TbIdBadge2 from "@/components/icons/TbIdBadge2";
 import TbMapPin from "@/components/icons/TbMapPin";
+import TbUser from "@/components/icons/TbUser";
 
 /**
  * Categories for user badges
  * They are temporary until we fetch them from the server
  */
 export const userBadgeCategories: TUserBadgeCategory[] = [
+    {
+        order: -1,
+        type: 'type',
+        icon: TbUser
+    },
     {
         order: 2,
         type: 'role',
@@ -182,5 +188,12 @@ export const users: TUser[] = [
         },
         email: 'jack.lorey@ontax.com',
         role: 'manager'
+    }
+]
+
+export const defaultUserBadges: TUserBadge[] = [
+    {
+        label: 'User',
+        category: 'type'
     }
 ]
