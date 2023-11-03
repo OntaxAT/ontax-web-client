@@ -39,12 +39,13 @@ const TrendCardSkeleton: FC<ITrendCardSkeletonProps> = ({ title, icon }) => {
 
 interface ITrendCardProps {
   data: TTrendCard[];
+  iconClassName?: string;
 }
 
 /**
  * Trend cards for the overview tab
  */
-const TrendCards: FC<ITrendCardProps> = ({ data }) => {
+const TrendCards: FC<ITrendCardProps> = ({ data, iconClassName }) => {
   return (
     <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 mt-7">
       {data.map((item, index) => {
@@ -59,7 +60,11 @@ const TrendCards: FC<ITrendCardProps> = ({ data }) => {
           <Card key={index} className="group hover:scale-[1.02] transition-transform">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">{item.title}</CardTitle>
-              {item.icon && <item.icon className="w-4 h-4 text-muted-foreground" />}
+              {item.icon && (
+                <item.icon
+                  className={cn('w-4 h-4 text-muted-foreground transition-colors', iconClassName)}
+                />
+              )}
             </CardHeader>
             <CardContent>
               <p className="text-2xl font-bold">{item.content.amount}</p>

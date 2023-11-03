@@ -259,7 +259,7 @@ const OverviewTab: FC = () => {
 
   return (
     <div className="flex flex-col h-full gap-5">
-      <TrendCards data={trendData} />
+      <TrendCards data={trendData} iconClassName="group-hover:text-white" />
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 mb-10 h-auto overflow-hidden">
         <Card className="flex flex-col h-[440px]">
           <CardHeader>
