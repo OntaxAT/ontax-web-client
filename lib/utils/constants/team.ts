@@ -4,6 +4,7 @@ import TbUsers from "@/components/icons/TbUsers";
 import TbMapPin from "@/components/icons/TbMapPin";
 import TbUsersGroup from "@/components/icons/TbUsersGroup";
 import TbIdBadge2 from "@/components/icons/TbIdBadge2";
+import TbFolder from "@/components/icons/TbFolder";
 
 /**
  * Placeholder teams until we fetch them from the server
@@ -16,6 +17,7 @@ export const teams: TTeam[] = [
         username: 'marketing-team-1',
         description: 'This is a team',
         members: [users[0], users[1]],
+        leader: users[0],
         details: {
             avatarUrl: 'https://api.dicebear.com/7.x/shapes/svg?seed=MT1',
             badges: [
@@ -49,6 +51,7 @@ export const teams: TTeam[] = [
         username: 'rd-team-1',
         description: 'This is a team',
         members: [users[2], users[3]],
+        leader: users[2],
         details: {
             avatarUrl: 'https://api.dicebear.com/7.x/shapes/svg?seed=RDT1',
             badges: [
@@ -82,6 +85,7 @@ export const teams: TTeam[] = [
         username: 'sales-team-1',
         description: 'This is a team',
         members: [users[4], users[5]],
+        leader: users[4],
         details: {
             avatarUrl: 'https://api.dicebear.com/7.x/shapes/svg?seed=ST1',
             badges: [
@@ -128,6 +132,7 @@ export const teamBadgeCategories: TTeamBadgeCategory[] = [
     {
         order: 1,
         type: 'department',
+        icon: TbFolder
     },
     {
         order: 2,

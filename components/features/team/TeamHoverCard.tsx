@@ -4,12 +4,14 @@ import { TTeam, TTeamBadgeCategory } from '@/app/types/features/team';
 import { TUserBadgeCategory } from '@/app/types/features/user';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { defaultTeamBadges, teamBadgeCategories } from '@/lib/utils/constants/team';
 import { userBadgeCategories } from '@/lib/utils/constants/user';
 import { cn } from '@/lib/utils/misc';
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import UserHoverCard from '../user/UserHoverCard';
+import { getDisplayName } from '@/lib/utils/user';
 
 export interface ITeamHoverCardProps {
   team: TTeam;
@@ -53,6 +55,15 @@ const TeamHoverCard: FC<ITeamHoverCardProps> = ({ team, triggerContent }) => {
                     <p className="font-bold">{team.name}</p>
                     <p className="text-sm text-muted-foreground">@{team.username}</p>
                   </div>
+                </div>
+                <div className="flex gap-x-2">
+                  <span className="text-muted-foreground">Team Leader:</span>
+                  <HoverCard>
+                    <UserHoverCard
+                      user={team.leader}
+                      triggerContent={<span>{getDisplayName(team.leader)}</span>}
+                    />
+                  </HoverCard>
                 </div>
                 {team.details?.badges && team.details.badges.length > 0 && (
                   <div className="flex items-center gap-x-2 gap-y-3 flex-wrap">

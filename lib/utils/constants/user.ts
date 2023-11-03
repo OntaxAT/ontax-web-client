@@ -1,5 +1,6 @@
 import { TUser, TUserBadge, TUserBadgeCategory } from "@/app/types/features/user";
 import TbBackpack from "@/components/icons/TbBackpack";
+import TbFolder from "@/components/icons/TbFolder";
 import TbIdBadge2 from "@/components/icons/TbIdBadge2";
 import TbMapPin from "@/components/icons/TbMapPin";
 import TbUser from "@/components/icons/TbUser";
@@ -23,6 +24,7 @@ export const userBadgeCategories: TUserBadgeCategory[] = [
     {
         order: 3,
         type: 'department',
+        icon: TbFolder
     },
     {
         order: 1,

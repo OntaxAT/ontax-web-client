@@ -11,6 +11,7 @@ export type TTeam = TAdressableEntity & {
     };
     description: string;
     members: TUser[];
+    leader: TUser;
     department: string; //TODO: This will be dynamic in the future
 }
 
