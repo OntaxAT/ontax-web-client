@@ -39,7 +39,11 @@ const Dashboard: FC = () => {
 
   return (
     <>
-      <h1 className="text-3xl font-bold tracking-tight">Overview</h1>
+      <div className="grid gap-y-5">
+        <h1 className="text-3xl font-bold tracking-tight">Overview</h1>
+        <p className="text-muted-foreground">Lorem ispum!</p>
+      </div>
+
       <Tabs
         value={activeTab}
         className="flex flex-col flex-1 mt-10"

@@ -214,6 +214,41 @@ export const users: TUser[] = [
 ]
 
 /**
+ * Placeholder for the currently logged in user
+ */
+export const currentUser: TUser = {
+    id: 'c8726224-4e04-45fe-a14a-014b070725e9',
+    username: 'emily',
+    details: {
+        firstName: 'Emily',
+        lastName: 'Brooks',
+        avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant41&mouth=happy02',
+        badges: [
+            {
+                label: 'San Francisco',
+                category: 'location'
+            },
+            {
+                label: 'CEO',
+                category: 'role'
+            },
+            {
+                label: 'C-001',
+                category: 'internal-id',
+            },
+            {
+                category: 'department',
+                label: 'Executive',
+                referenceId: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c',
+                className: 'bg-blue-500 hover:bg-blue-400 dark:bg-blue-600 dark:hover:bg-blue-500 text-white'
+            },
+        ]
+    },
+    email: 'emily.brooks@ontax.com',
+    role: 'owner',
+}
+
+/**
  * Default badges for users.
  * They can't be removed or edited.
  */

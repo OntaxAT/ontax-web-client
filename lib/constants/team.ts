@@ -1,5 +1,5 @@
 import { TTeam, TTeamBadge, TTeamBadgeCategory } from "@/app/types/features/team";
-import { users } from "./user";
+import { currentUser, users } from "./user";
 import TbUsers from "@/components/icons/TbUsers";
 import TbMapPin from "@/components/icons/TbMapPin";
 import TbUsersGroup from "@/components/icons/TbUsersGroup";
@@ -112,6 +112,40 @@ export const teams: TTeam[] = [
                 {
                     id: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c',
                     label: 'S-12',
+                    category: 'internal-id'
+                }
+            ]
+        }
+    },
+    {
+        id: '6f668a10-944f-4398-b638-0b9ae3b9e4eb',
+        department: 'Executive',
+        name: 'Executive Team',
+        username: 'exec-team-1',
+        description: 'This is a team',
+        members: [currentUser],
+        leader: currentUser,
+        details: {
+            avatarUrl: 'https://api.dicebear.com/7.x/shapes/svg?seed=ST1',
+            badges: [
+                {
+                    id: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c',
+                    label: 'Executive',
+                    category: 'department'
+                },
+                {
+                    id: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c',
+                    label: (Math.random() * 20).toFixed(0),
+                    category: 'member-count'
+                },
+                {
+                    id: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c',
+                    label: 'San Francisco',
+                    category: 'location'
+                },
+                {
+                    id: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c',
+                    label: 'E-001',
                     category: 'internal-id'
                 }
             ]

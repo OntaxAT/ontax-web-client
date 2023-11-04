@@ -16,6 +16,8 @@ import Link from 'next/link';
 import { FC } from 'react';
 import BusinessSelect from './BusinessSelect';
 import TopNavMenu from './TopNavMenu';
+import { currentUser } from '@/lib/constants/user';
+import { getDisplayName, getInitials } from '@/lib/utils/user';
 
 /**
  * Top navigation bar for internal pages
@@ -41,19 +43,17 @@ const InternalTopNav: FC = () => {
             <DropdownMenuTrigger asChild>
               <Avatar className="cursor-pointer">
                 <AvatarImage
-                  src="https://api.dicebear.com/7.x/lorelei/svg?hair=variant41&mouth=happy02"
+                  src={currentUser.details.avatarUrl}
                   className="bg-gray-200 dark:bg-gray-800 border"
                 />
-                <AvatarFallback>EB</AvatarFallback>
+                <AvatarFallback>{getInitials(currentUser)}</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">Emily Brooks</p>
-                  <p className="text-xs leading-none text-muted-foreground">
-                    emily.brooks@ontax.com
-                  </p>
+                  <p className="text-sm font-medium leading-none">{getDisplayName(currentUser)}</p>
+                  <p className="text-xs leading-none text-muted-foreground">{currentUser.email}</p>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
