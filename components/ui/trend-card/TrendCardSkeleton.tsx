@@ -1,10 +1,9 @@
 import { FC } from 'react';
 
+import { TTrendCard } from '@/app/(internal)/dash/types/trends-card';
 import TbCash from '@/components/icons/TbCash';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Skeleton } from '@/components/ui/skeleton';
-import { TTrendCard } from '../../types/trends-card';
-import TrendCard from '@/components/ui/trend-card/TrendCard';
+import { Card, CardHeader, CardTitle, CardContent } from '../card';
+import { Skeleton } from '../skeleton';
 
 interface ITrendCardSkeletonProps {
   title?: TTrendCard['title'];
@@ -12,7 +11,7 @@ interface ITrendCardSkeletonProps {
 }
 
 /**
- * A skeleton for the trend cards
+ * Skeleton for a trend card
  */
 const TrendCardSkeleton: FC<ITrendCardSkeletonProps> = ({ title, icon }) => {
   return (
@@ -37,22 +36,4 @@ const TrendCardSkeleton: FC<ITrendCardSkeletonProps> = ({ title, icon }) => {
   );
 };
 
-interface ITrendCardProps {
-  data: TTrendCard[];
-  iconClassName?: string;
-}
-
-/**
- * Trend cards for the overview tab
- */
-const TrendCards: FC<ITrendCardProps> = ({ data, iconClassName }) => {
-  return (
-    <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 mt-7">
-      {data.map((item, index) => (
-        <TrendCard key={index} data={item} iconClassName={iconClassName} />
-      ))}
-    </div>
-  );
-};
-
-export default TrendCards;
+export default TrendCardSkeleton;

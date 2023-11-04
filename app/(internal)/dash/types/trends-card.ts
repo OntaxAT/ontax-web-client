@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 import { IIconProps } from "@/components/icons/types/icons";
 
@@ -7,6 +7,6 @@ import { IIconProps } from "@/components/icons/types/icons";
  */
 export type TTrendCard = {
     title: string;
-    icon?: FC<IIconProps>;
+    icon?: FC<IIconProps> | ReactNode;
     content: { amount?: string; comparison: { value?: number; label: string } };
 }
