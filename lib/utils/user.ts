@@ -15,5 +15,5 @@ export const getDisplayName = (user: TUser) => {
  * @returns The URL of the user
  */
 export const getUserUrl = (user: TUser) => {
-    return `/user/${user.id}`;
+    return `/user/${user.username}`;
 }

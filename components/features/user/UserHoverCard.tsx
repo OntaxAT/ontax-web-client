@@ -5,9 +5,10 @@ import TbMail from '@/components/icons/TbMail';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import Link from '@/components/ui/link';
 import { defaultUserBadges, userBadgeCategories } from '@/lib/constants/user';
 import { cn } from '@/lib/utils/misc';
-import { getDisplayName } from '@/lib/utils/user';
+import { getDisplayName, getUserUrl } from '@/lib/utils/user';
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
@@ -51,7 +52,13 @@ const UserHoverCard: FC<IUserHoverCardProps> = ({ user, triggerContent }) => {
                   </Avatar>
                   <div className="grid gap-y-0">
                     <p className="font-bold">{displayName}</p>
-                    <p className="text-sm text-muted-foreground">@{user.username}</p>
+                    <Link
+                      variant="hoverUnderline"
+                      href={getUserUrl(user)}
+                      className="text-sm text-muted-foreground"
+                    >
+                      @{user.username}
+                    </Link>
                   </div>
                 </div>
                 {user.details.bio && <p>{user.details.bio}</p>}

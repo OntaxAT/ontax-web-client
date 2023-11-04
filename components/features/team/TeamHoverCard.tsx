@@ -12,6 +12,8 @@ import { FC, ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import UserHoverCard from '../user/UserHoverCard';
 import { getDisplayName } from '@/lib/utils/user';
+import Link from '@/components/ui/link';
+import { getTeamUrl } from '@/lib/utils/team';
 
 export interface ITeamHoverCardProps {
   team: TTeam;
@@ -53,7 +55,13 @@ const TeamHoverCard: FC<ITeamHoverCardProps> = ({ team, triggerContent }) => {
                   </Avatar>
                   <div className="grid gap-y-0">
                     <p className="font-bold">{team.name}</p>
-                    <p className="text-sm text-muted-foreground">@{team.username}</p>
+                    <Link
+                      variant="hoverUnderline"
+                      href={getTeamUrl(team)}
+                      className="text-sm text-muted-foreground"
+                    >
+                      @{team.username}
+                    </Link>
                   </div>
                 </div>
                 <div className="flex gap-x-2">
