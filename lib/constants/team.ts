@@ -38,7 +38,7 @@ export const teams: TTeam[] = [
                 },
                 {
                     id: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c',
-                    label: 'M-43',
+                    label: 'MT-43',
                     category: 'internal-id'
                 },
                 {

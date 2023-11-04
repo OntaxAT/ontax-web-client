@@ -109,6 +109,11 @@ export const users: TUser[] = [
                 {
                     category: 'department',
                     label: 'Sales'
+                },
+                {
+                    category: 'team',
+                    label: 'Sales',
+                    referenceId: '28480ede-5bab-4610-a422-85a78318cc66'
                 }
             ],
             bio: 'Mixing creativity with strategy to turn project challenges into opportunities for growth.'

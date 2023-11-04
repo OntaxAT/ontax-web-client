@@ -17,12 +17,17 @@ import TeamHoverCard from '../team/TeamHoverCard';
 export interface IUserHoverCardProps {
   user: TUser;
   triggerContent: ReactNode;
+  showTeamHoverCard?: boolean;
 }
 
 /**
  * A hover card that displays some user information when hovering over the trigger.
  */
-const UserHoverCard: FC<IUserHoverCardProps> = ({ user, triggerContent }) => {
+const UserHoverCard: FC<IUserHoverCardProps> = ({
+  user,
+  triggerContent,
+  showTeamHoverCard = true
+}) => {
   const [isMounted, setIsMounted] = useState(false);
   const displayName = getDisplayName(user);
 
@@ -97,20 +102,23 @@ const UserHoverCard: FC<IUserHoverCardProps> = ({ user, triggerContent }) => {
                         let label: ReactNode = badge.label;
 
                         if (
-                          (badgeCategory?.type === 'team' || predefinedCategory?.type === 'team') &&
-                          badge.referenceId
+                          showTeamHoverCard &&
+                          badge.referenceId &&
+                          (badgeCategory?.type === 'team' || predefinedCategory?.type === 'team')
                         ) {
-                          const team = await fetchTeam(badge.referenceId);
-                          console.log('team', team);
-                          if (team) {
-                            label = (
-                              <HoverCard>
-                                <TeamHoverCard
-                                  team={team}
-                                  triggerContent={<span>{badge.label}</span>}
-                                />
-                              </HoverCard>
-                            );
+                          if (showTeamHoverCard && badge.referenceId) {
+                            const team = await fetchTeam(badge.referenceId);
+                            if (team) {
+                              label = (
+                                <HoverCard>
+                                  <TeamHoverCard
+                                    team={team}
+                                    triggerContent={<span>{badge.label}</span>}
+                                    showUserHoverCard={false}
+                                  />
+                                </HoverCard>
+                              );
+                            }
                           }
                         }
 

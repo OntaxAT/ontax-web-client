@@ -16,18 +16,25 @@ import { getTeamUrl } from '@/lib/utils/team';
 export interface ITeamHoverCardProps {
   team: TTeam;
   triggerContent: ReactNode;
+  showUserHoverCard?: boolean;
 }
 
 /**
  * A hover card that displays some information about a team when hovering over the trigger content.
  */
-const TeamHoverCard: FC<ITeamHoverCardProps> = ({ team, triggerContent }) => {
+const TeamHoverCard: FC<ITeamHoverCardProps> = ({ team, triggerContent, showUserHoverCard }) => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     // Since we're using a portal, we cant render the content server-side.
     setIsMounted(true);
   }, []);
+
+  const leaderLink = (
+    <Link variant="hoverUnderline" href={getUserUrl(team.leader)}>
+      {getDisplayName(team.leader)}
+    </Link>
+  );
 
   return (
     <HoverCardTrigger>
@@ -64,16 +71,17 @@ const TeamHoverCard: FC<ITeamHoverCardProps> = ({ team, triggerContent }) => {
                 </div>
                 <div className="flex gap-x-2">
                   <span className="text-muted-foreground">Team Leader:</span>
-                  <HoverCard>
-                    <UserHoverCard
-                      user={team.leader}
-                      triggerContent={
-                        <Link variant="hoverUnderline" href={getUserUrl(team.leader)}>
-                          {getDisplayName(team.leader)}
-                        </Link>
-                      }
-                    />
-                  </HoverCard>
+                  {showUserHoverCard ? (
+                    <HoverCard>
+                      <UserHoverCard
+                        user={team.leader}
+                        triggerContent={leaderLink}
+                        showTeamHoverCard={false}
+                      />
+                    </HoverCard>
+                  ) : (
+                    leaderLink
+                  )}
                 </div>
                 {team.details?.badges && team.details.badges.length > 0 && (
                   <div className="flex items-center gap-x-2 gap-y-3 flex-wrap">
