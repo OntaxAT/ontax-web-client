@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import { TTrendCard } from '@/app/(internal)/dash/types/trends-card';
+import { TTrendCard } from '@/app/(internal)/dash/types/trendCard';
 import { Card, CardContent, CardHeader, CardTitle } from '../card';
 import { cn } from '@/lib/utils/misc';
 import TrendCardSkeleton from './TrendCardSkeleton';

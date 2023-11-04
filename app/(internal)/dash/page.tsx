@@ -5,28 +5,41 @@ import { FC, useEffect, useState } from 'react';
 import OverviewTab from './components/tabs/overview/OverviewTab';
 import EmployeesTab from './components/tabs/employees/EmployeesTab';
 import DashboardWelcome from './components/DashboardWelcome';
+import { useAppStore } from '@/app/store/store';
 
 type TTab = 'overview' | 'employees' | 'projects' | 'notifications';
 
 const Dashboard: FC = () => {
   const [activeTab, setActiveTab] = useState<TTab>('overview');
+  const fetchOverviewData = useAppStore(state => state.dash.fetchOverviewData);
+  const fetchEmployeesData = useAppStore(state => state.dash.fetchEmployeesData);
+  const fetchProjectsData = useAppStore(state => state.dash.fetchProjectsData);
+  const fetchNotificationsData = useAppStore(state => state.dash.fetchNotificationsData);
 
   useEffect(() => {
     const hash = window.location.hash.slice(1);
-    switch (hash) {
+    handleTabChange(hash);
+  }, []);
+
+  useEffect(() => {
+    switch (activeTab) {
       case 'employees':
+        fetchEmployeesData();
         setActiveTab('employees');
         break;
       case 'projects':
+        fetchProjectsData();
         setActiveTab('projects');
         break;
       case 'notifications':
+        fetchNotificationsData();
         setActiveTab('notifications');
         break;
       default:
+        fetchOverviewData();
         setActiveTab('overview');
     }
-  }, []);
+  }, [activeTab]);
 
   /**
    * Handles tab change by updating the active tab and the hash in the URL

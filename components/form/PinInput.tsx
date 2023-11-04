@@ -42,14 +42,12 @@ const PinInput: FC<IPinInputProps> = ({
       };
       handleComplete();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code]);
 
   useEffect(() => {
     if (status !== 'incomplete' && code.some(c => c !== undefined)) {
       setStatus('incomplete');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code]);
 
   useEffect(() => {
@@ -62,7 +60,6 @@ const PinInput: FC<IPinInputProps> = ({
         lastInputField.focus();
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
   return (

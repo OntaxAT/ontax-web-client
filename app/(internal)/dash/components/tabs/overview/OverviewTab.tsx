@@ -10,7 +10,7 @@ import TbAsset from '@/components/icons/TbAsset';
 import TbCash from '@/components/icons/TbCash';
 import TbMoodUp from '@/components/icons/TbMoodUp';
 import { IIconProps } from '@/components/icons/types/icons';
-import { TTrendCard } from '../../../types/trends-card';
+import { TTrendCard } from '../../../types/trendCard';
 import { Skeleton } from '@/components/ui/skeleton';
 
 type TChartData = {

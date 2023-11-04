@@ -3,7 +3,7 @@ import { FC } from 'react';
 import TbCash from '@/components/icons/TbCash';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { TTrendCard } from '../../types/trends-card';
+import { TTrendCard } from '../../types/trendCard';
 import TrendCard from '@/components/ui/trend-card/TrendCard';
 
 interface ITrendCardSkeletonProps {

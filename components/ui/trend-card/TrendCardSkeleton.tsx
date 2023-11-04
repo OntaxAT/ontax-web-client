@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { TTrendCard } from '@/app/(internal)/dash/types/trends-card';
+import { TTrendCard } from '@/app/(internal)/dash/types/trendCard';
 import TbCash from '@/components/icons/TbCash';
 import { Card, CardHeader, CardTitle, CardContent } from '../card';
 import { Skeleton } from '../skeleton';
