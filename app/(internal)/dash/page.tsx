@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { FC, useEffect, useState } from 'react';
 import OverviewTab from './components/tabs/overview/OverviewTab';
 import EmployeesTab from './components/tabs/employees/EmployeesTab';
+import DashboardWelcome from './components/DashboardWelcome';
 
 type TTab = 'overview' | 'employees' | 'projects' | 'notifications';
 
@@ -39,11 +40,7 @@ const Dashboard: FC = () => {
 
   return (
     <>
-      <div className="grid gap-y-5">
-        <h1 className="text-3xl font-bold tracking-tight">Overview</h1>
-        <p className="text-muted-foreground">Lorem ispum!</p>
-      </div>
-
+      <DashboardWelcome />
       <Tabs
         value={activeTab}
         className="flex flex-col flex-1 mt-10"
