@@ -10,6 +10,7 @@ export type TBadge<T = undefined> = {
     label: string | number;
     className?: string;
     category?: T;
+    referenceId?: string;
 }
 /**
  * A badge that can be ordered

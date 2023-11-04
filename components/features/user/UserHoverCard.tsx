@@ -4,13 +4,15 @@ import { TUser, TUserBadgeCategory } from '@/app/types/features/user';
 import TbMail from '@/components/icons/TbMail';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import Link from '@/components/ui/link';
 import { defaultUserBadges, userBadgeCategories } from '@/lib/constants/user';
 import { cn } from '@/lib/utils/misc';
+import { fetchTeam } from '@/lib/utils/team';
 import { getDisplayName, getUserUrl } from '@/lib/utils/user';
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import TeamHoverCard from '../team/TeamHoverCard';
 
 export interface IUserHoverCardProps {
   user: TUser;
@@ -78,7 +80,7 @@ const UserHoverCard: FC<IUserHoverCardProps> = ({ user, triggerContent }) => {
                         }
                         return 0;
                       })
-                      .map((badge, i) => {
+                      .map(async (badge, i) => {
                         let predefinedCategory: TUserBadgeCategory | undefined;
                         let badgeCategory: TUserBadgeCategory | undefined;
                         if (badge.category instanceof Object) {
@@ -91,6 +93,26 @@ const UserHoverCard: FC<IUserHoverCardProps> = ({ user, triggerContent }) => {
                         }
 
                         const BadgeIcon = predefinedCategory?.icon || badgeCategory?.icon;
+
+                        let label: ReactNode = badge.label;
+
+                        if (
+                          (badgeCategory?.type === 'team' || predefinedCategory?.type === 'team') &&
+                          badge.referenceId
+                        ) {
+                          const team = await fetchTeam(badge.referenceId);
+                          console.log('team', team);
+                          if (team) {
+                            label = (
+                              <HoverCard>
+                                <TeamHoverCard
+                                  team={team}
+                                  triggerContent={<span>{badge.label}</span>}
+                                />
+                              </HoverCard>
+                            );
+                          }
+                        }
 
                         return (
                           <Badge
@@ -111,7 +133,8 @@ const UserHoverCard: FC<IUserHoverCardProps> = ({ user, triggerContent }) => {
                                 )}
                               />
                             )}
-                            <span>{badge.label}</span>
+                            {label}
+                            {/* <span>{badge.label}</span> */}
                           </Badge>
                         );
                       })}

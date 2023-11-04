@@ -40,12 +40,17 @@ export const teams: TTeam[] = [
                     id: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c',
                     label: 'M-43',
                     category: 'internal-id'
-                }
+                },
+                {
+                    id: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c',
+                    label: 'Marketing',
+                    category: 'type'
+                },
             ]
         }
     },
     {
-        id: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c',
+        id: 'b556f679-9d22-4d36-a972-3e8df6eaa535',
         department: 'Research and Development',
         name: 'Research and Development Team 1',
         username: 'rd-team-1',
@@ -79,7 +84,7 @@ export const teams: TTeam[] = [
         }
     },
     {
-        id: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c',
+        id: '28480ede-5bab-4610-a422-85a78318cc66',
         department: 'Sales',
         name: 'Sales Team 1',
         username: 'sales-team-1',

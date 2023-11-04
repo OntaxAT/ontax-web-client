@@ -4,6 +4,7 @@ import TbFolder from "@/components/icons/TbFolder";
 import TbIdBadge2 from "@/components/icons/TbIdBadge2";
 import TbMapPin from "@/components/icons/TbMapPin";
 import TbUser from "@/components/icons/TbUser";
+import TbUsers from "@/components/icons/TbUsers";
 
 /**
  * Categories for user badges
@@ -25,6 +26,11 @@ export const userBadgeCategories: TUserBadgeCategory[] = [
         order: 3,
         type: 'department',
         icon: TbFolder
+    },
+    {
+        order: 4,
+        type: 'team',
+        icon: TbUsers
     },
     {
         order: 1,
@@ -67,7 +73,13 @@ export const users: TUser[] = [
                 },
                 {
                     category: 'department',
-                    label: 'Marketing'
+                    label: 'Marketing',
+                    referenceId: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c'
+                },
+                {
+                    category: 'team',
+                    label: 'Sales',
+                    referenceId: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c'
                 }
             ]
         },
@@ -75,7 +87,7 @@ export const users: TUser[] = [
         role: 'manager'
     },
     {
-        id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
+        id: '1ec496b0-7111-48df-8077-9a79b756ec9c',
         username: 'madprice',
         details: {
             avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant13&mouth=happy02',
@@ -105,7 +117,7 @@ export const users: TUser[] = [
         role: 'manager'
     },
     {
-        id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
+        id: '022c1d0d-aa89-4047-990e-41bb897399ac',
         username: 'takeller',
         details: {
             avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant45&mouth=happy02',
@@ -135,7 +147,7 @@ export const users: TUser[] = [
         role: 'manager'
     },
     {
-        id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
+        id: 'e4c037a7-5986-4878-ba2e-086a012482bb',
         username: 'megjoney',
         details: {
             avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant29&mouth=happy02',
@@ -165,7 +177,7 @@ export const users: TUser[] = [
         role: 'manager'
     },
     {
-        id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
+        id: 'f49871e4-47c4-40b6-a99b-9c4297e9b5e2',
         username: 'jarey',
         details: {
             avatarUrl: 'https://api.dicebear.com/7.x/lorelei/svg?hair=variant12&mouth=happy02',

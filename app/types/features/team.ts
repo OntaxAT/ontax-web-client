@@ -17,4 +17,4 @@ export type TTeam = TAdressableEntity & {
 
 export type TTeamBadge = TBadge<TTeamBadgeCategory['type'] | TTeamBadgeCategory>;
 
-export type TTeamBadgeCategory = TBadgeCategory<'department' | 'member-count' | 'location' | 'internal-id'>;
+export type TTeamBadgeCategory = TBadgeCategory<'department' | 'member-count' | 'location' | 'internal-id' | 'team'>;

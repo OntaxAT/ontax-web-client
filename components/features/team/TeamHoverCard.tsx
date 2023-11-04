@@ -1,17 +1,15 @@
 'use client';
 
 import { TTeam, TTeamBadgeCategory } from '@/app/types/features/team';
-import { TUserBadgeCategory } from '@/app/types/features/user';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { defaultTeamBadges, teamBadgeCategories } from '@/lib/constants/team';
-import { userBadgeCategories } from '@/lib/constants/user';
 import { cn } from '@/lib/utils/misc';
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import UserHoverCard from '../user/UserHoverCard';
-import { getDisplayName } from '@/lib/utils/user';
+import { getDisplayName, getUserUrl } from '@/lib/utils/user';
 import Link from '@/components/ui/link';
 import { getTeamUrl } from '@/lib/utils/team';
 
@@ -69,7 +67,11 @@ const TeamHoverCard: FC<ITeamHoverCardProps> = ({ team, triggerContent }) => {
                   <HoverCard>
                     <UserHoverCard
                       user={team.leader}
-                      triggerContent={<span>{getDisplayName(team.leader)}</span>}
+                      triggerContent={
+                        <Link variant="hoverUnderline" href={getUserUrl(team.leader)}>
+                          {getDisplayName(team.leader)}
+                        </Link>
+                      }
                     />
                   </HoverCard>
                 </div>

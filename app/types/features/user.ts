@@ -24,4 +24,4 @@ export type TUserBadge = Omit<TBadge<TUserBadgeCategory['type'] | TUserBadgeCate
 /**
  * The category of a user badge (e.g. role, department, etc.)
  */
-export type TUserBadgeCategory = TBadgeCategory<'role' | 'department' | 'location' | 'internal-id'>;
+export type TUserBadgeCategory = TBadgeCategory<'role' | 'department' | 'location' | 'internal-id' | 'team'>;
