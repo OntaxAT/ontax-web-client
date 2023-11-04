@@ -40,6 +40,9 @@ export const userBadgeCategories: TUserBadgeCategory[] = [
     }
 ]
 
+/**
+ * Placeholder users
+ */
 export const users: TUser[] = [
     {
         id: 'b460970b-f512-4585-a3fa-f6c0161de80c',
@@ -193,6 +196,10 @@ export const users: TUser[] = [
     }
 ]
 
+/**
+ * Default badges for users.
+ * They can't be removed or edited.
+ */
 export const defaultUserBadges: TUserBadge[] = [
     {
         label: 'User',

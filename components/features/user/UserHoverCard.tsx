@@ -5,7 +5,7 @@ import TbMail from '@/components/icons/TbMail';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { defaultUserBadges, userBadgeCategories } from '@/lib/utils/constants/user';
+import { defaultUserBadges, userBadgeCategories } from '@/lib/constants/user';
 import { cn } from '@/lib/utils/misc';
 import { getDisplayName } from '@/lib/utils/user';
 import { FC, ReactNode, useEffect, useState } from 'react';

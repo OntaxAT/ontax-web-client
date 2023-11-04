@@ -12,7 +12,7 @@ import {
 import { IIconProps } from '@/components/icons/types/icons';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { HoverCard } from '@/components/ui/hover-card';
-import { users } from '@/lib/utils/constants/user';
+import { users } from '@/lib/constants/user';
 import { getDisplayName } from '@/lib/utils/user';
 import { Skeleton } from '@/components/ui/skeleton';
 

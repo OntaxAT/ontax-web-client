@@ -8,3 +8,12 @@ import { TUser } from "@/app/types/features/user";
 export const getDisplayName = (user: TUser) => {
     return `${user.details.firstName} ${user.details.lastName}`;
 };
+
+/**
+ * Get the URL of a user
+ * @param user The user to get the URL of
+ * @returns The URL of the user
+ */
+export const getUserUrl = (user: TUser) => {
+    return `/user/${user.id}`;
+}
