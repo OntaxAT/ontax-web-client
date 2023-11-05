@@ -130,7 +130,10 @@ const ProjectsOverviewCard: FC = () => {
                     </HoverCard>
                   </div>
                 </div>
-                <p className="font-semibold">+{project.progess.toFixed(2)}%</p>
+                <p className="font-semibold">
+                  +{project.progess.toFixed(2)}
+                  <span className="text-xs text-muted-foreground"> %</span>
+                </p>
               </div>
             </div>
           </CardContent>
