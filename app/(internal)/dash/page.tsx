@@ -61,7 +61,12 @@ const Dashboard: FC = () => {
       >
         <div>
           <TabsList>
-            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger
+              value="overview"
+              className="data-[state=active]:text-primary hover:text-primary"
+            >
+              Overview
+            </TabsTrigger>
             <TabsTrigger
               value="employees"
               className="data-[state=active]:text-blue-500 hover:text-blue-500"
