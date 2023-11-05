@@ -44,7 +44,8 @@ const TrendCard: FC<ITrendCardProps> = ({ data, iconClassName }) => {
         <p className="text-2xl font-bold">{data.content.amount}</p>
         <p className={cn('text-xs text-muted-foreground transition-colors', trendColor)}>
           {data.content.comparison.value > 0 ? '+' : ''}
-          {data.content.comparison.value.toFixed(2)} {data.content.comparison.label}
+          {data.content.comparison.value.toFixed(2)}
+          {data.content.comparison.label}
         </p>
       </CardContent>
     </Card>
