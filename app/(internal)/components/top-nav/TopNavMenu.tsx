@@ -298,22 +298,19 @@ const TopNavMenu: FC = () => {
           if (!navItem.items || navItem.items?.length === 0) {
             return (
               <NavigationMenuItem key={i} className={navItem.menuClassName}>
-                <NavigationMenuLink asChild>
+                <NavigationMenuLink href={isActive || !navItem.href ? '#' : navItem.href} asChild>
                   <Link
+                    variant="hoverButton"
                     href={isActive || !navItem.href ? '#' : navItem.href}
-                    legacyBehavior
                     passHref
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      'text-gray-500',
+                      isActive && 'text-foreground',
+                      isActive && navItem.activeLabelClassName
+                    )}
                   >
-                    <NavigationMenuLink
-                      className={cn(
-                        navigationMenuTriggerStyle(),
-                        'text-gray-500',
-                        isActive && 'text-foreground',
-                        isActive && navItem.activeLabelClassName
-                      )}
-                    >
-                      {navItem.label}
-                    </NavigationMenuLink>
+                    {navItem.label}
                   </Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
