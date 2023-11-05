@@ -298,7 +298,7 @@ const TopNavMenu: FC = () => {
           if (!navItem.items || navItem.items?.length === 0) {
             return (
               <NavigationMenuItem key={i} className={navItem.menuClassName}>
-                <NavigationMenuLink>
+                <NavigationMenuLink asChild>
                   <Link
                     href={isActive || !navItem.href ? '#' : navItem.href}
                     legacyBehavior
