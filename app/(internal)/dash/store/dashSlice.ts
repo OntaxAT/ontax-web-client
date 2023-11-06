@@ -427,51 +427,51 @@ export const createDashSlice: TStoreSlice<TDashSlice> = (set, get) => ({
                     data: [
                         {
                             department: 'Marketing',
-                            amountProjects: Math.random() * 100
+                            amountProjects: Math.floor(Math.random() * 100),
                         },
                         {
                             department: 'Sales',
-                            amountProjects: Math.random() * 100
+                            amountProjects: Math.floor(Math.random() * 100),
                         },
                         {
                             department: 'IT',
-                            amountProjects: Math.random() * 100
+                            amountProjects: Math.floor(Math.random() * 100),
                         },
                         {
                             department: 'HR',
-                            amountProjects: Math.random() * 100
+                            amountProjects: Math.floor(Math.random() * 100),
                         },
                         {
                             department: 'Finance',
-                            amountProjects: Math.random() * 100
+                            amountProjects: Math.floor(Math.random() * 100),
                         },
                         {
                             department: 'Legal',
-                            amountProjects: Math.random() * 100
+                            amountProjects: Math.floor(Math.random() * 100),
                         },
                         {
                             department: 'Operations',
-                            amountProjects: Math.random() * 100
+                            amountProjects: Math.floor(Math.random() * 100),
                         },
                         {
                             department: 'R&D',
-                            amountProjects: Math.random() * 100
+                            amountProjects: Math.floor(Math.random() * 100),
                         },
                         {
                             department: 'Customer Support',
-                            amountProjects: Math.random() * 100
+                            amountProjects: Math.floor(Math.random() * 100),
                         },
                         {
                             department: 'Product',
-                            amountProjects: Math.random() * 100
+                            amountProjects: Math.floor(Math.random() * 100),
                         },
                         {
                             department: 'Design',
-                            amountProjects: Math.random() * 100
+                            amountProjects: Math.floor(Math.random() * 100),
                         },
                         {
                             department: 'Other',
-                            amountProjects: Math.random() * 100
+                            amountProjects: Math.floor(Math.random() * 100),
                         }
                     ],
                     state: 'success',

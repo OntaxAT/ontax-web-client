@@ -3,7 +3,17 @@ import { FC, ReactNode } from 'react';
 import TrendCards from '../TrendCards';
 import { useAppStore } from '@/app/store/store';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Bar, BarChart, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts';
+import {
+  Bar,
+  BarChart,
+  Label,
+  LabelList,
+  Legend,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
+} from 'recharts';
 
 /**
  * Projects tab for the dashboard
@@ -31,6 +41,7 @@ const ProjectsTab: FC = () => {
                 axisLine={false}
                 tickLine={false}
                 fontSize={12}
+                domain={[0, 'dataMax + 5']}
               />
               <YAxis
                 dataKey="department"
@@ -47,7 +58,14 @@ const ProjectsTab: FC = () => {
                 fill="url(#colorOffice)"
                 radius={[0, 5, 5, 0]}
                 name="Number of Projects"
-              />
+              >
+                <LabelList
+                  dataKey="amountProjects"
+                  position="right"
+                  className="fill-muted-foreground/50"
+                  offset={8}
+                />
+              </Bar>
               <Legend />
             </BarChart>
           </ResponsiveContainer>
