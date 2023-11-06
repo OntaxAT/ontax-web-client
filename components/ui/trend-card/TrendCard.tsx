@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils/misc';
 import TrendCardSkeleton from './TrendCardSkeleton';
 
 interface ITrendCardProps {
-  data: TTrendCard;
+  data?: TTrendCard;
   iconClassName?: string;
 }
 
@@ -14,7 +14,7 @@ interface ITrendCardProps {
  * A card that displays some information about a trend.
  */
 const TrendCard: FC<ITrendCardProps> = ({ data, iconClassName }) => {
-  if (!data.content.amount || !data.content.comparison.value) {
+  if (!data || !data.content.amount || !data.content.comparison.value) {
     return <TrendCardSkeleton />;
   }
   const trendColor =

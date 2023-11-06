@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 import TbCash from '@/components/icons/TbCash';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { TTrendCard } from '../../types/trendCard';
 import TrendCard from '@/components/ui/trend-card/TrendCard';
+import { TAsyncData } from '@/app/types/data/data';
 
 interface ITrendCardSkeletonProps {
   title?: TTrendCard['title'];
@@ -38,7 +39,7 @@ const TrendCardSkeleton: FC<ITrendCardSkeletonProps> = ({ title, icon }) => {
 };
 
 interface ITrendCardProps {
-  data: TTrendCard[];
+  data: TAsyncData<TTrendCard[]> | TTrendCard[];
   iconClassName?: string;
 }
 
@@ -46,11 +47,25 @@ interface ITrendCardProps {
  * Trend cards for the overview tab
  */
 const TrendCards: FC<ITrendCardProps> = ({ data, iconClassName }) => {
+  let cards: ReactNode = null;
+
+  let cardData: TTrendCard[] = [];
+  if ('state' in data) {
+    if (data.state !== 'success') {
+      cards = Array.from({ length: 4 }).map((_, i) => <TrendCard key={i} data={undefined} />);
+    } else if (data.data) {
+      cardData = data.data;
+    }
+  } else {
+    cardData = data;
+  }
+
   return (
     <div className="grid gap-4 grid-cols-2 lg:grid-cols-4 mt-7">
-      {data.map((item, index) => (
-        <TrendCard key={index} data={item} iconClassName={iconClassName} />
-      ))}
+      {cards ??
+        cardData.map((item, index) => (
+          <TrendCard key={index} data={item} iconClassName={iconClassName} />
+        ))}
     </div>
   );
 };

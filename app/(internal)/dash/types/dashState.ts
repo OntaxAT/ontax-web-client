@@ -1,6 +1,8 @@
+import { TAsyncData } from "@/app/types/data/data";
+import { TOverviewData } from "./overview";
 
 export interface IDashStateDefinitions {
-    overview: string | undefined;
+    overview: TOverviewData;
     employees: string | undefined;
     projects: string | undefined;
     notifications: string | undefined;

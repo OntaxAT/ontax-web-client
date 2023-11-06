@@ -12,6 +12,7 @@ import TbMoodUp from '@/components/icons/TbMoodUp';
 import { IIconProps } from '@/components/icons/types/icons';
 import { TTrendCard } from '../../../types/trendCard';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useAppStore } from '@/app/store/store';
 
 type TChartData = {
   name: string;
@@ -122,93 +123,14 @@ const loadedCardItems: Array<{
  * Overview tab for the dashboard
  */
 const OverviewTab: FC = () => {
-  const [trendData, setTrendData] = useState<TTrendCard[]>(emptyCardItems);
-  const [chartData, setChartData] = useState<TChartData[]>();
+  const trendData = useAppStore(state => state.dash.overview.trendCards);
+  const chartData = useAppStore(state => state.dash.overview.chart);
+  const projectsData = useAppStore(state => state.dash.overview.projects);
   const { theme } = useTheme();
 
-  useEffect(() => {
-    setTimeout(() => {
-      setTrendData(loadedCardItems);
-      setChartData([
-        {
-          name: 'Jan',
-          ocf: Math.random() * 10000,
-          icf: Math.random() * 10000,
-          fcf: Math.random() * 10000
-        },
-        {
-          name: 'Feb',
-          ocf: Math.random() * 10000,
-          icf: Math.random() * 10000,
-          fcf: Math.random() * 10000
-        },
-        {
-          name: 'Mar',
-          ocf: Math.random() * 10000,
-          icf: Math.random() * 10000,
-          fcf: Math.random() * 10000
-        },
-        {
-          name: 'Apr',
-          ocf: Math.random() * 10000,
-          icf: Math.random() * 10000,
-          fcf: Math.random() * 10000
-        },
-        {
-          name: 'May',
-          ocf: Math.random() * 10000,
-          icf: Math.random() * 10000,
-          fcf: Math.random() * 10000
-        },
-        {
-          name: 'Jun',
-          ocf: Math.random() * 10000,
-          icf: Math.random() * 10000,
-          fcf: Math.random() * 10000
-        },
-        {
-          name: 'Jul',
-          ocf: Math.random() * 10000,
-          icf: Math.random() * 10000,
-          fcf: Math.random() * 10000
-        },
-        {
-          name: 'Aug',
-          ocf: Math.random() * 10000,
-          icf: Math.random() * 10000,
-          fcf: Math.random() * 10000
-        },
-        {
-          name: 'Sep',
-          ocf: Math.random() * 10000,
-          icf: Math.random() * 10000,
-          fcf: Math.random() * 10000
-        },
-        {
-          name: 'Oct',
-          ocf: Math.random() * 10000,
-          icf: Math.random() * 10000,
-          fcf: Math.random() * 10000
-        },
-        {
-          name: 'Nov',
-          ocf: Math.random() * 10000,
-          icf: Math.random() * 10000,
-          fcf: Math.random() * 10000
-        },
-        {
-          name: 'Dec',
-          ocf: Math.random() * 10000,
-          icf: Math.random() * 10000,
-          fcf: Math.random() * 10000
-        }
-      ]);
-    }, 2000);
-  }, []);
-
   let chart: ReactNode = null;
-  if (chartData) {
-    if (chartData.length > 0) {
+  if (chartData?.state === 'success') {
+    if (chartData.data && chartData.data.length > 0) {
       const chartFcfColor =
         theme === 'dark'
           ? { ocf: '#1d4ed8', icf: '#3b82f6', fcf: '#93c5fd' }
@@ -216,7 +138,7 @@ const OverviewTab: FC = () => {
       chart = (
         <div className="-ml-2">
           <ResponsiveContainer width="100%" height={350}>
-            <BarChart data={chartData}>
+            <BarChart data={chartData.data}>
               <XAxis dataKey="name" axisLine={false} tickLine={false} fontSize={12} />
               <YAxis axisLine={false} tickLine={false} fontSize={12} unit="$" />
               <Legend />
@@ -267,7 +189,7 @@ const OverviewTab: FC = () => {
           </CardHeader>
           <CardContent className="flex-1 p-6 pt-0">{chart}</CardContent>
         </Card>
-        <ProjectsOverviewCard />
+        <ProjectsOverviewCard data={projectsData} />
       </div>
     </div>
   );

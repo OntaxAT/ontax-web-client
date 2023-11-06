@@ -28,3 +28,10 @@ export const generateId = (length: number) => {
   }
   return result;
 }
+
+/**
+ * Wait for a given amount of time
+ * @param ms Time to wait in milliseconds
+ * @returns Promise that resolves after the given amount of time
+ */
+export const wait = async (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

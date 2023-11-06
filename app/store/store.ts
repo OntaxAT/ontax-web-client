@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware'
 import { TStoreState } from '../types/store';
-import { createDashSlice } from '../(internal)/dash/dashSlice';
+import { createDashSlice } from '../(internal)/dash/store/dashSlice';
 
 export const useAppStore = create<TStoreState>()(
     devtools((...a) => ({
