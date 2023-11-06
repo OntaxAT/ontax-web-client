@@ -13,6 +13,7 @@ import TbCalendarStats from "@/components/icons/TbCalendarStats";
 import TbHeartHandshake from "@/components/icons/TbHeartHandshake";
 import { teams } from "@/lib/constants/team";
 import TbBooks from "@/components/icons/TbBooks";
+import { projects } from "@/lib/constants/project";
 
 const initState: IDashStateDefinitions = {
     overview: {
@@ -201,62 +202,7 @@ export const createDashSlice: TStoreSlice<TDashSlice> = (set, get) => ({
                 projects: {
                     data: {
                         avg: Math.random() * 100,
-                        items: [
-                            {
-                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c72',
-                                manager: users[0],
-                                title: 'Olympia',
-                                details: {
-                                    avatarUrl: Branding1,
-                                    progress: Math.random() * 100
-                                }
-                            },
-                            {
-                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c73',
-                                manager: users[1],
-                                title: 'Mirage',
-                                details: {
-                                    avatarUrl: Branding2,
-                                    progress: Math.random() * 100
-                                }
-                            },
-                            {
-                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c74',
-                                manager: users[2],
-                                title: 'Interstellar',
-                                details: {
-                                    avatarUrl: Branding5,
-                                    progress: Math.random() * 100
-                                }
-                            },
-                            {
-                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c72',
-                                manager: users[3],
-                                title: 'Aurora',
-                                details: {
-                                    avatarUrl: Branding4,
-                                    progress: Math.random() * 100
-                                }
-                            },
-                            {
-                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c72',
-                                manager: users[4],
-                                title: 'Spectrum',
-                                details: {
-                                    avatarUrl: Branding3,
-                                    progress: Math.random() * 100
-                                }
-                            },
-                            {
-                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c72',
-                                manager: users[4],
-                                title: 'Zephyr',
-                                details: {
-                                    avatarUrl: Branding1,
-                                    progress: Math.random() * 100
-                                },
-                            },
-                        ]
+                        items: projects.slice(0, 5)
                     },
                     state: 'success',
                 },
@@ -478,64 +424,9 @@ export const createDashSlice: TStoreSlice<TDashSlice> = (set, get) => ({
                 },
                 projects: {
                     data: {
-                        amountProjects: Math.random() * 100,
-                        delayedProjects: Math.random() * 100,
-                        items: [
-                            {
-                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c72',
-                                manager: users[0],
-                                title: 'Olympia',
-                                details: {
-                                    avatarUrl: Branding1,
-                                    progress: Math.random() * 100
-                                }
-                            },
-                            {
-                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c73',
-                                manager: users[1],
-                                title: 'Mirage',
-                                details: {
-                                    avatarUrl: Branding2,
-                                    progress: Math.random() * 100
-                                }
-                            },
-                            {
-                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c74',
-                                manager: users[2],
-                                title: 'Interstellar',
-                                details: {
-                                    avatarUrl: Branding5,
-                                    progress: Math.random() * 100
-                                }
-                            },
-                            {
-                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c72',
-                                manager: users[3],
-                                title: 'Aurora',
-                                details: {
-                                    avatarUrl: Branding4,
-                                    progress: Math.random() * 100
-                                }
-                            },
-                            {
-                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c72',
-                                manager: users[4],
-                                title: 'Spectrum',
-                                details: {
-                                    avatarUrl: Branding3,
-                                    progress: Math.random() * 100
-                                }
-                            },
-                            {
-                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c72',
-                                manager: users[4],
-                                title: 'Zephyr',
-                                details: {
-                                    avatarUrl: Branding1,
-                                    progress: Math.random() * 100
-                                },
-                            },
-                        ],
+                        amountProjects: 5 + Math.floor(Math.random() * 100),
+                        delayedProjects: 1 + Math.floor(Math.random() * 100),
+                        items: projects.slice(0, 5)
                     },
                     state: 'success',
                 },

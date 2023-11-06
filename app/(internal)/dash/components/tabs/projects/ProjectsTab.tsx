@@ -14,6 +14,7 @@ import {
   XAxis,
   YAxis
 } from 'recharts';
+import ProjectsStatusCard from './ProjectsStatusCard';
 
 /**
  * Projects tab for the dashboard
@@ -21,6 +22,7 @@ import {
 const ProjectsTab: FC = () => {
   const trendData = useAppStore(state => state.dash.projects.trendCards);
   const chartData = useAppStore(state => state.dash.projects.chart);
+  const statusData = useAppStore(state => state.dash.projects.projects);
 
   let chart: ReactNode = null;
   if (chartData?.data && chartData.state === 'success') {
@@ -90,7 +92,7 @@ const ProjectsTab: FC = () => {
           </CardHeader>
           <CardContent className="flex-1 p-6 pt-0">{chart}</CardContent>
         </Card>
-        {/* <PerformanceOverviewCard data={performanceData} /> */}
+        <ProjectsStatusCard data={statusData} />
       </div>
     </div>
   );

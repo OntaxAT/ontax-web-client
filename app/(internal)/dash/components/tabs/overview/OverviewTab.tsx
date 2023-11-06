@@ -3,7 +3,7 @@ import { FC, ReactNode } from 'react';
 import { Bar, BarChart, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import ProjectsOverviewCard from './ProjectsOverviewCard';
+import ProjectsOverviewCard from './ProjectsProgressOverviewCard';
 import TrendCards from '../TrendCards';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useAppStore } from '@/app/store/store';

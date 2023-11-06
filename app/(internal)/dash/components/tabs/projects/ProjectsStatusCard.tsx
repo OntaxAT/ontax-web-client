@@ -1,23 +1,13 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 
-import { TUser } from '@/app/types/features/user';
 import UserHoverCard from '@/components/features/user/UserHoverCard';
-import {
-  Branding1,
-  Branding2,
-  Branding5,
-  Branding4,
-  Branding3
-} from '@/components/icons/BrandingPlaceholders';
-import { IIconProps } from '@/components/icons/types/icons';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { HoverCard } from '@/components/ui/hover-card';
-import { users } from '@/lib/constants/user';
-import { getDisplayName } from '@/lib/utils/user';
+import { Branding1 } from '@/components/icons/BrandingPlaceholders';
+import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
+import { TProjectsProjectList } from '../../../types/projects';
 import { TAsyncData } from '@/app/types/data/data';
-import { TProject } from '@/app/types/features/project';
-import { TOverviewProjectList } from '../../../types/overview';
+import { HoverCard } from '@/components/ui/hover-card';
+import { getDisplayName } from '@/lib/utils/user';
 
 const ProjectSkeleton: FC = () => {
   return (
@@ -38,22 +28,23 @@ const ProjectSkeleton: FC = () => {
   );
 };
 
-interface IProjectsOverviewCardProps {
-  data: TAsyncData<TOverviewProjectList>;
+interface IProjectsStatusCardProps {
+  data: TAsyncData<TProjectsProjectList>;
 }
 
 /**
- * A card that gives a quick overview of current projects and their status.
+ * Projects status card for the dashboard
  */
-const ProjectsOverviewCard: FC<IProjectsOverviewCardProps> = ({ data }) => {
+const ProjectsStatusCard: FC<IProjectsStatusCardProps> = ({ data }) => {
   const projectData = data.data;
   return (
     <Card className="h-[440px] overflow-hidden">
       <CardHeader className="mb-1">
         <h3 className="font-semibold leading-none tracking-tight">Projects Status</h3>
-        {projectData?.avg ? (
+        {projectData?.amountProjects !== undefined && projectData?.delayedProjects !== undefined ? (
           <p className="text-sm text-muted-foreground">
-            All projects got {(Math.random() * 100).toFixed(2)}% closer to completion
+            Currently, there are {projectData.amountProjects} projects in total, with{' '}
+            {projectData.delayedProjects} delayed projects.
           </p>
         ) : (
           <Skeleton className="h-3.5 w-1/2" />
@@ -106,4 +97,4 @@ const ProjectsOverviewCard: FC<IProjectsOverviewCardProps> = ({ data }) => {
   );
 };
 
-export default ProjectsOverviewCard;
+export default ProjectsStatusCard;
