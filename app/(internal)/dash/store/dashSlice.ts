@@ -8,6 +8,10 @@ import TbMoodUp from "@/components/icons/TbMoodUp";
 import { wait } from "@/lib/utils/misc";
 import { Branding1, Branding2, Branding5, Branding4, Branding3 } from "@/components/icons/BrandingPlaceholders";
 import { users } from "@/lib/constants/user";
+import TbArrowsExchange2 from "@/components/icons/TbArrowsExchange2";
+import TbCalendarStats from "@/components/icons/TbCalendarStats";
+import TbHeartHandshake from "@/components/icons/TbHeartHandshake";
+import { teams } from "@/lib/constants/team";
 
 const initState: IDashStateDefinitions = {
     overview: {
@@ -24,7 +28,20 @@ const initState: IDashStateDefinitions = {
             state: 'loading',
         }
     },
-    employees: undefined,
+    employees: {
+        chart: {
+            data: undefined,
+            state: 'loading',
+        },
+        trendCards: {
+            data: undefined,
+            state: 'loading',
+        },
+        performers: {
+            data: undefined,
+            state: 'loading',
+        }
+    },
     projects: undefined,
     notifications: undefined,
 }
@@ -233,9 +250,158 @@ export const createDashSlice: TStoreSlice<TDashSlice> = (set, get) => ({
         }));
     },
     fetchEmployeesData: () => {
-        if (get().dash.employees) return;
-        set(produce(state => {
-            state.dash.employees = 'employees';
+        const prevData = get().dash.employees;
+        if (Object.keys(prevData).every(k => prevData[k as keyof typeof prevData].state === "success")) return;
+        set(produce((state: TStoreState) => {
+            state.dash.employees = {
+                chart: {
+                    data: [
+                        {
+                            name: 'Jan',
+                            office: Math.random() * 500,
+                            remote: Math.random() * 500
+                        },
+                        {
+                            name: 'Feb',
+                            office: Math.random() * 500,
+                            remote: Math.random() * 500
+                        },
+                        {
+                            name: 'Mar',
+                            office: Math.random() * 500,
+                            remote: Math.random() * 500
+                        },
+                        {
+                            name: 'Apr',
+                            office: Math.random() * 500,
+                            remote: Math.random() * 500
+                        },
+                        {
+                            name: 'May',
+                            office: Math.random() * 500,
+                            remote: Math.random() * 500
+                        },
+                        {
+                            name: 'Jun',
+                            office: Math.random() * 500,
+                            remote: Math.random() * 500
+                        },
+                        {
+                            name: 'Jul',
+                            office: Math.random() * 500,
+                            remote: Math.random() * 500
+                        },
+                        {
+                            name: 'Aug',
+                            office: Math.random() * 500,
+                            remote: Math.random() * 500
+                        },
+                        {
+                            name: 'Sep',
+                            office: Math.random() * 500,
+                            remote: Math.random() * 500
+                        },
+                        {
+                            name: 'Oct',
+                            office: Math.random() * 500,
+                            remote: Math.random() * 500
+                        },
+                        {
+                            name: 'Nov',
+                            office: Math.random() * 500,
+                            remote: Math.random() * 500
+                        },
+                        {
+                            name: 'Dec',
+                            office: Math.random() * 500,
+                            remote: Math.random() * 500
+                        }
+                    ],
+                    state: 'success',
+                },
+                trendCards: {
+                    data: [
+                        {
+                            title: 'Total Employees',
+                            icon: TbHeartHandshake,
+                            content: {
+                                amount: (Math.random() * 7500).toFixed(0),
+                                comparison: {
+                                    value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
+                                    label: '% from last month'
+                                }
+                            }
+                        },
+                        {
+                            title: 'Attendance Rate',
+                            icon: TbCalendarStats,
+                            content: {
+                                amount: `${(Math.random() * 100).toFixed(2)}%`,
+                                comparison: {
+                                    value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
+                                    label: '% from last month'
+                                }
+                            }
+                        },
+                        {
+                            title: 'Workplace Satisfaction',
+                            icon: TbMoodUp,
+                            content: {
+                                amount: `${(Math.random() * 100).toFixed(2)}%`,
+                                comparison: {
+                                    value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
+                                    label: '% from last month'
+                                }
+                            }
+                        },
+                        {
+                            title: 'Turnover Rate',
+                            icon: TbArrowsExchange2,
+                            content: {
+                                amount: `${(30 + Math.random() * 70).toFixed(2)}%`,
+                                comparison: {
+                                    value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
+                                    label: '% from last month'
+                                }
+                            }
+                        }
+                    ],
+                    state: 'success',
+                },
+                performers: {
+                    data: {
+                        avg: Math.random() * 100,
+                        items: [
+                            {
+                                entity: users[0],
+                                score: Math.random() * 100,
+                                comparison: Math.random() * 100
+                            },
+                            {
+                                entity: teams[0],
+                                score: Math.random() * 100,
+                                comparison: Math.random() * 100
+                            },
+                            {
+                                entity: teams[1],
+                                score: Math.random() * 100,
+                                comparison: Math.random() * 100
+                            },
+                            {
+                                entity: teams[2],
+                                score: Math.random() * 100,
+                                comparison: Math.random() * 100
+                            },
+                            {
+                                entity: users[3],
+                                score: Math.random() * 100,
+                                comparison: Math.random() * 100
+                            }
+                        ]
+                    },
+                    state: 'success',
+                }
+            }
         }));
     },
     fetchProjectsData: () => {

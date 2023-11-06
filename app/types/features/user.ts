@@ -11,6 +11,7 @@ export type TUser = TAdressableEntity & {
         lastName: string;
         bio?: string;
         badges?: TUserBadge[];
+        performanceScore: number;
     }
     email: string;
     role: string;

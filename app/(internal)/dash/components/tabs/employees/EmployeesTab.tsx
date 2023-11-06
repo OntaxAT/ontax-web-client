@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Area, AreaChart, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Skeleton } from '@/components/ui/skeleton';
 import PerformanceOverviewCard from './PerformanceOverviewCard';
+import { useAppStore } from '@/app/store/store';
 
 type TChartData = {
   name: string;
@@ -17,182 +18,21 @@ type TChartData = {
   remote: number;
 };
 
-const emptyCardItems: Array<{
-  title: string;
-  icon: FC<IIconProps>;
-  content: { amount?: string; comparison: { value?: number; label: string } };
-}> = [
-  {
-    title: 'Total Employees',
-    icon: TbHeartHandshake,
-    content: {
-      comparison: {
-        label: '% from last month'
-      }
-    }
-  },
-  {
-    title: 'Attendance Rate',
-    icon: TbCalendarStats,
-    content: {
-      comparison: {
-        label: '% from last month'
-      }
-    }
-  },
-  {
-    title: 'Workplace Satisfaction',
-    icon: TbMoodUp,
-    content: {
-      comparison: {
-        label: '% from last month'
-      }
-    }
-  },
-  {
-    title: 'Turnover Rate',
-    icon: TbArrowsExchange2,
-    content: {
-      comparison: {
-        label: '% from last month'
-      }
-    }
-  }
-];
-
-const loadedCardItems: Array<{
-  title: string;
-  icon: FC<IIconProps>;
-  content: { amount?: string; comparison: { value?: number; label: string } };
-}> = [
-  {
-    title: 'Total Employees',
-    icon: TbHeartHandshake,
-    content: {
-      amount: (Math.random() * 7500).toFixed(0),
-      comparison: {
-        value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
-        label: '% from last month'
-      }
-    }
-  },
-  {
-    title: 'Attendance Rate',
-    icon: TbCalendarStats,
-    content: {
-      amount: `${(Math.random() * 100).toFixed(2)}%`,
-      comparison: {
-        value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
-        label: '% from last month'
-      }
-    }
-  },
-  {
-    title: 'Workplace Satisfaction',
-    icon: TbMoodUp,
-    content: {
-      amount: `${(Math.random() * 100).toFixed(2)}%`,
-      comparison: {
-        value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
-        label: '% from last month'
-      }
-    }
-  },
-  {
-    title: 'Turnover Rate',
-    icon: TbArrowsExchange2,
-    content: {
-      amount: `${(30 + Math.random() * 70).toFixed(2)}%`,
-      comparison: {
-        value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
-        label: '% from last month'
-      }
-    }
-  }
-];
-
 /**
  * Employees tab for the dashboard
  */
 const EmployeesTab: FC = () => {
-  const [trendData, setTrendData] = useState(emptyCardItems);
-  const [chartData, setChartData] = useState<TChartData[]>();
-
-  useEffect(() => {
-    setTimeout(() => {
-      setTrendData(loadedCardItems);
-      setChartData([
-        {
-          name: 'Jan',
-          office: Math.random() * 500,
-          remote: Math.random() * 500
-        },
-        {
-          name: 'Feb',
-          office: Math.random() * 500,
-          remote: Math.random() * 500
-        },
-        {
-          name: 'Mar',
-          office: Math.random() * 500,
-          remote: Math.random() * 500
-        },
-        {
-          name: 'Apr',
-          office: Math.random() * 500,
-          remote: Math.random() * 500
-        },
-        {
-          name: 'May',
-          office: Math.random() * 500,
-          remote: Math.random() * 500
-        },
-        {
-          name: 'Jun',
-          office: Math.random() * 500,
-          remote: Math.random() * 500
-        },
-        {
-          name: 'Jul',
-          office: Math.random() * 500,
-          remote: Math.random() * 500
-        },
-        {
-          name: 'Aug',
-          office: Math.random() * 500,
-          remote: Math.random() * 500
-        },
-        {
-          name: 'Sep',
-          office: Math.random() * 500,
-          remote: Math.random() * 500
-        },
-        {
-          name: 'Oct',
-          office: Math.random() * 500,
-          remote: Math.random() * 500
-        },
-        {
-          name: 'Nov',
-          office: Math.random() * 500,
-          remote: Math.random() * 500
-        },
-        {
-          name: 'Dec',
-          office: Math.random() * 500,
-          remote: Math.random() * 500
-        }
-      ]);
-    }, 2000);
-  }, []);
+  const trendData = useAppStore(state => state.dash.employees.trendCards);
+  const chartData = useAppStore(state => state.dash.employees.chart);
+  const performanceData = useAppStore(state => state.dash.employees.performers);
 
   let chart: ReactNode = null;
-  if (chartData) {
-    if (chartData.length > 0) {
+  if (chartData?.data && chartData.state === 'success') {
+    if (chartData.data.length > 0) {
       chart = (
         <div className="-ml-7">
           <ResponsiveContainer width="100%" height={350}>
-            <AreaChart data={chartData}>
+            <AreaChart data={chartData.data}>
               <defs>
                 <linearGradient id="colorOffice" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#1d4ed8" stopOpacity={0.8} />
@@ -245,7 +85,7 @@ const EmployeesTab: FC = () => {
           </CardHeader>
           <CardContent className="flex-1 p-6 pt-0">{chart}</CardContent>
         </Card>
-        <PerformanceOverviewCard />
+        <PerformanceOverviewCard data={performanceData} />
       </div>
     </div>
   );

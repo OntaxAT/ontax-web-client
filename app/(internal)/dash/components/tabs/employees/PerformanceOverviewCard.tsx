@@ -1,3 +1,4 @@
+import { TAsyncData } from '@/app/types/data/data';
 import { TTeam } from '@/app/types/features/team';
 import { TUser } from '@/app/types/features/user';
 import TeamHoverCard from '@/components/features/team/TeamHoverCard';
@@ -10,6 +11,7 @@ import { users } from '@/lib/constants/user';
 import { getDisplayName } from '@/lib/utils/user';
 import { HoverCard } from '@radix-ui/react-hover-card';
 import { FC, useEffect, useState } from 'react';
+import { TEmployeesPerformerList } from '../../../types/employees';
 
 type TPerformanceItem = {
   entity: TUser | TTeam;
@@ -36,56 +38,27 @@ const PerformanceItemSkeleton: FC = () => {
   );
 };
 
+interface IPerformanceOverviewCardProps {
+  data: TAsyncData<TEmployeesPerformerList>;
+}
+
 /**
  * A card that shows the best and worst performing employees/teams in the company based on their performance score
  */
-const PerformanceOverviewCard: FC = () => {
-  const [data, setData] = useState<{ avg: number; items: TPerformanceItem[] }>();
+const PerformanceOverviewCard: FC<IPerformanceOverviewCardProps> = ({ data }) => {
+  // const [data, setData] = useState<{ avg: number; items: TPerformanceItem[] }>();
 
-  useEffect(() => {
-    setTimeout(() => {
-      setData({
-        avg: Math.random() * 100,
-        items: [
-          {
-            entity: users[0],
-            score: Math.random() * 100,
-            comparison: Math.random() * 100
-          },
-          {
-            entity: teams[0],
-            score: Math.random() * 100,
-            comparison: Math.random() * 100
-          },
-          {
-            entity: teams[1],
-            score: Math.random() * 100,
-            comparison: Math.random() * 100
-          },
-          {
-            entity: teams[2],
-            score: Math.random() * 100,
-            comparison: Math.random() * 100
-          },
-          {
-            entity: users[3],
-            score: Math.random() * 100,
-            comparison: Math.random() * 100
-          }
-        ]
-      });
-    }, 2000);
-  }, []);
+  const performanceData = data.data;
 
   return (
     <Card className="h-full">
       <CardHeader className="mb-1">
         <h3 className="text-sm font-medium">Top Performers</h3>
-        {data?.avg ? (
+        {performanceData?.avg ? (
           <p className="text-sm text-muted-foreground">
             The average performance score is{' '}
             <span className="font-semibold">
-              {data?.avg.toFixed(2)}
+              {performanceData.avg.toFixed(2)}
               <span className="text-muted-foreground text-xs">PS</span>.
             </span>
           </p>
@@ -93,12 +66,12 @@ const PerformanceOverviewCard: FC = () => {
           <Skeleton className="h-3.5 w-1/2" />
         )}
       </CardHeader>
-      {(data?.items ?? Array.from({ length: 5 }))
+      {[...(performanceData?.items ?? Array.from({ length: 5 }))]
         .sort((a, b) => {
-          return b.score - a.score;
+          return b?.score - a?.score;
         })
         .map((performer, i) => {
-          if (!performer) {
+          if (!performer || data.state !== 'success') {
             return <PerformanceItemSkeleton key={i} />;
           }
 

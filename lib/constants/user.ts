@@ -81,7 +81,8 @@ export const users: TUser[] = [
                     label: 'Sales',
                     referenceId: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c'
                 }
-            ]
+            ],
+            performanceScore: 81
         },
         email: 'josh.torno@ontax.com',
         role: 'manager'
@@ -116,7 +117,8 @@ export const users: TUser[] = [
                     referenceId: '28480ede-5bab-4610-a422-85a78318cc66'
                 }
             ],
-            bio: 'Mixing creativity with strategy to turn project challenges into opportunities for growth.'
+            bio: 'Mixing creativity with strategy to turn project challenges into opportunities for growth.',
+            performanceScore: 92
         },
         email: 'madison.price@ontax.com',
         role: 'manager'
@@ -144,9 +146,10 @@ export const users: TUser[] = [
                 {
                     category: 'department',
                     label: 'Human Resources'
-                }
+                },
             ],
-            bio: 'Passionate about project success, empowering teams, and the occasional spontaneous dance break.'
+            bio: 'Passionate about project success, empowering teams, and the occasional spontaneous dance break.',
+            performanceScore: 73
         },
         email: 'tate.keller@ontax.com',
         role: 'manager'
@@ -176,7 +179,8 @@ export const users: TUser[] = [
                     label: 'Research and Development'
                 }
             ],
-            bio: 'Driven by results, coffee, and the belief that every project is a chance to make a positive impact.'
+            bio: 'Driven by results, coffee, and the belief that every project is a chance to make a positive impact.',
+            performanceScore: 87
         },
         email: 'mega.joney@ontax.com',
         role: 'manager'
@@ -206,7 +210,8 @@ export const users: TUser[] = [
                     label: 'Supply Chain and Logistics'
                 }
             ],
-            bio: "Striving for project excellence while embracing the motto 'work hard, play hard' to achieve remarkable outcomes."
+            bio: "Striving for project excellence while embracing the motto 'work hard, play hard' to achieve remarkable outcomes.",
+            performanceScore: 95
         },
         email: 'jack.lorey@ontax.com',
         role: 'manager'
@@ -242,7 +247,9 @@ export const currentUser: TUser = {
                 referenceId: '0bfc7a7c-a14b-4514-85b0-c7c7b857051c',
                 className: 'bg-blue-500 hover:bg-blue-400 dark:bg-blue-600 dark:hover:bg-blue-500 text-white'
             },
-        ]
+        ],
+        bio: 'Empowering teams to dream big and achieve bigger.',
+        performanceScore: 100
     },
     email: 'emily.brooks@ontax.com',
     role: 'owner',

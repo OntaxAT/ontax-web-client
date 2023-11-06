@@ -1,9 +1,10 @@
 import { TAsyncData } from "@/app/types/data/data";
 import { TOverviewData } from "./overview";
+import { TEmployeesData } from "./employees";
 
 export interface IDashStateDefinitions {
     overview: TOverviewData;
-    employees: string | undefined;
+    employees: TEmployeesData;
     projects: string | undefined;
     notifications: string | undefined;
 }
