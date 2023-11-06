@@ -25,19 +25,15 @@ const Dashboard: FC = () => {
     switch (activeTab) {
       case 'employees':
         fetchEmployeesData();
-        setActiveTab('employees');
         break;
       case 'projects':
         fetchProjectsData();
-        setActiveTab('projects');
         break;
       case 'notifications':
         fetchNotificationsData();
-        setActiveTab('notifications');
         break;
       default:
         fetchOverviewData();
-        setActiveTab('overview');
     }
   }, [activeTab]);
 
