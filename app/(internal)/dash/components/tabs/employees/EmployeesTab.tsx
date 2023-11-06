@@ -1,11 +1,6 @@
-import { FC, ReactNode, useEffect, useState } from 'react';
+import { FC, ReactNode } from 'react';
 
 import TrendCards from '../TrendCards';
-import TbMoodUp from '@/components/icons/TbMoodUp';
-import { IIconProps } from '@/components/icons/types/icons';
-import TbCalendarStats from '@/components/icons/TbCalendarStats';
-import TbArrowsExchange2 from '@/components/icons/TbArrowsExchange2';
-import TbHeartHandshake from '@/components/icons/TbHeartHandshake';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Area, AreaChart, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { Skeleton } from '@/components/ui/skeleton';

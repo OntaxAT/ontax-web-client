@@ -12,6 +12,7 @@ import TbArrowsExchange2 from "@/components/icons/TbArrowsExchange2";
 import TbCalendarStats from "@/components/icons/TbCalendarStats";
 import TbHeartHandshake from "@/components/icons/TbHeartHandshake";
 import { teams } from "@/lib/constants/team";
+import TbBooks from "@/components/icons/TbBooks";
 
 const initState: IDashStateDefinitions = {
     overview: {
@@ -42,7 +43,20 @@ const initState: IDashStateDefinitions = {
             state: 'loading',
         }
     },
-    projects: undefined,
+    projects: {
+        chart: {
+            data: undefined,
+            state: 'loading',
+        },
+        projects: {
+            data: undefined,
+            state: 'loading',
+        },
+        trendCards: {
+            data: undefined,
+            state: 'loading',
+        }
+    },
     notifications: undefined,
 }
 
@@ -405,9 +419,176 @@ export const createDashSlice: TStoreSlice<TDashSlice> = (set, get) => ({
         }));
     },
     fetchProjectsData: () => {
-        if (get().dash.projects) return;
-        set(produce(state => {
-            state.dash.projects = 'projects';
+        const prevData = get().dash.projects;
+        if (Object.keys(prevData).every(k => prevData[k as keyof typeof prevData].state === "success")) return;
+        set(produce((state: TStoreState) => {
+            state.dash.projects = {
+                chart: {
+                    data: [
+                        {
+                            department: 'Marketing',
+                            amountProjects: Math.random() * 100
+                        },
+                        {
+                            department: 'Sales',
+                            amountProjects: Math.random() * 100
+                        },
+                        {
+                            department: 'IT',
+                            amountProjects: Math.random() * 100
+                        },
+                        {
+                            department: 'HR',
+                            amountProjects: Math.random() * 100
+                        },
+                        {
+                            department: 'Finance',
+                            amountProjects: Math.random() * 100
+                        },
+                        {
+                            department: 'Legal',
+                            amountProjects: Math.random() * 100
+                        },
+                        {
+                            department: 'Operations',
+                            amountProjects: Math.random() * 100
+                        },
+                        {
+                            department: 'R&D',
+                            amountProjects: Math.random() * 100
+                        },
+                        {
+                            department: 'Customer Support',
+                            amountProjects: Math.random() * 100
+                        },
+                        {
+                            department: 'Product',
+                            amountProjects: Math.random() * 100
+                        },
+                        {
+                            department: 'Design',
+                            amountProjects: Math.random() * 100
+                        },
+                        {
+                            department: 'Other',
+                            amountProjects: Math.random() * 100
+                        }
+                    ],
+                    state: 'success',
+                },
+                projects: {
+                    data: {
+                        amountProjects: Math.random() * 100,
+                        delayedProjects: Math.random() * 100,
+                        items: [
+                            {
+                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c72',
+                                manager: users[0],
+                                title: 'Olympia',
+                                details: {
+                                    avatarUrl: Branding1,
+                                    progress: Math.random() * 100
+                                }
+                            },
+                            {
+                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c73',
+                                manager: users[1],
+                                title: 'Mirage',
+                                details: {
+                                    avatarUrl: Branding2,
+                                    progress: Math.random() * 100
+                                }
+                            },
+                            {
+                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c74',
+                                manager: users[2],
+                                title: 'Interstellar',
+                                details: {
+                                    avatarUrl: Branding5,
+                                    progress: Math.random() * 100
+                                }
+                            },
+                            {
+                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c72',
+                                manager: users[3],
+                                title: 'Aurora',
+                                details: {
+                                    avatarUrl: Branding4,
+                                    progress: Math.random() * 100
+                                }
+                            },
+                            {
+                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c72',
+                                manager: users[4],
+                                title: 'Spectrum',
+                                details: {
+                                    avatarUrl: Branding3,
+                                    progress: Math.random() * 100
+                                }
+                            },
+                            {
+                                id: 'bdf72ba3-11a3-4f1a-a160-bea807d50c72',
+                                manager: users[4],
+                                title: 'Zephyr',
+                                details: {
+                                    avatarUrl: Branding1,
+                                    progress: Math.random() * 100
+                                },
+                            },
+                        ],
+                    },
+                    state: 'success',
+                },
+                trendCards: {
+                    data: [
+                        {
+                            title: 'Total Projects',
+                            icon: TbBooks,
+                            content: {
+                                amount: (Math.random() * 7500).toFixed(0),
+                                comparison: {
+                                    value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
+                                    label: '% from last month'
+                                }
+                            }
+                        },
+                        {
+                            title: 'Completion Rate',
+                            icon: TbCalendarStats,
+                            content: {
+                                amount: `${(Math.random() * 100).toFixed(2)}%`,
+                                comparison: {
+                                    value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
+                                    label: '% from last month'
+                                }
+                            }
+                        },
+                        {
+                            title: 'Budget Efficiency',
+                            icon: TbMoodUp,
+                            content: {
+                                amount: `${(Math.random() * 100).toFixed(2)}%`,
+                                comparison: {
+                                    value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
+                                    label: '% from last month'
+                                }
+                            }
+                        },
+                        {
+                            title: 'Timeline Adherence',
+                            icon: TbArrowsExchange2,
+                            content: {
+                                amount: `${(30 + Math.random() * 70).toFixed(2)}%`,
+                                comparison: {
+                                    value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
+                                    label: '% from last month'
+                                }
+                            }
+                        }
+                    ],
+                    state: 'success',
+                }
+            }
         }));
     },
     fetchNotificationsData: () => {

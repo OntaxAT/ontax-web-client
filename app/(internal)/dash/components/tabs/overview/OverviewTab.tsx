@@ -1,123 +1,12 @@
 import { useTheme } from 'next-themes';
-import { FC, ReactNode, useEffect, useState } from 'react';
+import { FC, ReactNode } from 'react';
 import { Bar, BarChart, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import ProjectsOverviewCard from './ProjectsOverviewCard';
 import TrendCards from '../TrendCards';
-import TbArrowBarBoth from '@/components/icons/TbArrowBarBoth';
-import TbAsset from '@/components/icons/TbAsset';
-import TbCash from '@/components/icons/TbCash';
-import TbMoodUp from '@/components/icons/TbMoodUp';
-import { IIconProps } from '@/components/icons/types/icons';
-import { TTrendCard } from '../../../types/trendCard';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useAppStore } from '@/app/store/store';
-
-type TChartData = {
-  name: string;
-  ocf: number;
-  icf: number;
-  fcf: number;
-};
-
-const emptyCardItems: Array<{
-  title: string;
-  icon: FC<IIconProps>;
-  content: { amount?: string; comparison: { value?: number; label: string } };
-}> = [
-  {
-    title: 'Total Revenue',
-    icon: TbCash,
-    content: {
-      comparison: {
-        label: '% from last month'
-      }
-    }
-  },
-  {
-    title: 'Profit Margins',
-    icon: TbArrowBarBoth,
-    content: {
-      comparison: {
-        label: '% from last month'
-      }
-    }
-  },
-  {
-    title: 'Customer Retention Rate',
-    icon: TbMoodUp,
-    content: {
-      comparison: {
-        label: '% from last month'
-      }
-    }
-  },
-  {
-    title: 'Work Efficiency',
-    icon: TbAsset,
-    content: {
-      comparison: {
-        label: '% from last month'
-      }
-    }
-  }
-];
-
-const loadedCardItems: Array<{
-  title: string;
-  icon: FC<IIconProps>;
-  content: { amount?: string; comparison: { value?: number; label: string } };
-}> = [
-  {
-    title: 'Total Revenue',
-    icon: TbCash,
-    content: {
-      amount: `$${(Math.random() * 100000).toLocaleString('en-US', {
-        style: 'decimal',
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      })}`,
-      comparison: {
-        value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
-        label: '% from last month'
-      }
-    }
-  },
-  {
-    title: 'Profit Margins',
-    icon: TbArrowBarBoth,
-    content: {
-      amount: `${(Math.random() * 100).toFixed(2)}%`,
-      comparison: {
-        value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
-        label: '% from last month'
-      }
-    }
-  },
-  {
-    title: 'Customer Retention Rate',
-    icon: TbMoodUp,
-    content: {
-      amount: `${(Math.random() * 100).toFixed(2)}%`,
-      comparison: {
-        value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
-        label: '% from last month'
-      }
-    }
-  },
-  {
-    title: 'Work Efficiency',
-    icon: TbAsset,
-    content: {
-      amount: `${(30 + Math.random() * 70).toFixed(2)}%`,
-      comparison: {
-        value: Math.random() * 100 * (Math.random() > 0.2 ? 1 : -1),
-        label: '% from last month'
-      }
-    }
-  }
-];
 
 /**
  * Overview tab for the dashboard
