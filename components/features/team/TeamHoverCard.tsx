@@ -37,8 +37,8 @@ const TeamHoverCard: FC<ITeamHoverCardProps> = ({ team, triggerContent, showUser
   );
 
   return (
-    <HoverCardTrigger>
-      {triggerContent}
+    <>
+      <HoverCardTrigger>{triggerContent}</HoverCardTrigger>
       {
         // We need this portal because one of the parent elements is a paragraph, which is not allowed to have a div as a child.
         isMounted
@@ -143,7 +143,7 @@ const TeamHoverCard: FC<ITeamHoverCardProps> = ({ team, triggerContent, showUser
             )
           : null
       }
-    </HoverCardTrigger>
+    </>
   );
 };
 

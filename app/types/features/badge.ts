@@ -11,6 +11,7 @@ export type TBadge<T = undefined> = {
     className?: string;
     category?: T;
     referenceId?: string;
+    icon?: FC<IIconProps>;
 }
 /**
  * A badge that can be ordered
@@ -24,7 +25,7 @@ export type TOrderableBadge = TBadge & {
  */
 export type TBadgeCategory<T> = {
     order: number;
-    type: 'type' | T;
+    type: 'type' | 'internal-id' | T;
     className?: string;
     icon?: FC<IIconProps>;
     iconClassName?: HTMLAttributes<SVGElement>['className'];

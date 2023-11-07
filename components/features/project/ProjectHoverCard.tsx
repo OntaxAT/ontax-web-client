@@ -1,40 +1,41 @@
 'use client';
 
-import { TUser, TUserBadgeCategory } from '@/app/types/features/user';
-import TbMail from '@/components/icons/TbMail';
-import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import { TTeam, TTeamBadgeCategory } from '@/app/types/features/team';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import Link from '@/components/ui/link';
-import { defaultUserBadges, userBadgeCategories } from '@/lib/constants/user';
 import { cn } from '@/lib/utils/misc';
-import { fetchTeam } from '@/lib/utils/team';
-import { getDisplayName, getUserUrl } from '@/lib/utils/user';
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import TeamHoverCard from '../team/TeamHoverCard';
+import UserHoverCard from '../user/UserHoverCard';
+import { getDisplayName, getUserUrl } from '@/lib/utils/user';
+import Link from '@/components/ui/link';
+import { getTeamUrl } from '@/lib/utils/team';
+import { TProject, TProjectBadgeCategory } from '@/app/types/features/project';
+import { getProjectUrl } from '@/lib/utils/project';
+import { defaultProjectBadges, projectBadgeCategories } from '@/lib/constants/project';
 
-export interface IUserHoverCardProps {
-  user: TUser;
+export interface IProjectHoverCardProps {
+  project: TProject;
   triggerContent: ReactNode;
-  showTeamHoverCard?: boolean;
 }
 
 /**
- * A hover card that displays some user information when hovering over the trigger.
+ * A hover card that displays some information about a team when hovering over the trigger content.
  */
-const UserHoverCard: FC<IUserHoverCardProps> = ({
-  user,
-  triggerContent,
-  showTeamHoverCard = true
-}) => {
+const ProjectHoverCard: FC<IProjectHoverCardProps> = ({ project, triggerContent }) => {
   const [isMounted, setIsMounted] = useState(false);
-  const displayName = getDisplayName(user);
 
   useEffect(() => {
     // Since we're using a portal, we cant render the content server-side.
     setIsMounted(true);
   }, []);
+
+  const managerLink = (
+    <Link variant="hoverUnderline" href={getUserUrl(project.manager)}>
+      {getDisplayName(project.manager)}
+    </Link>
+  );
 
   return (
     <>
@@ -52,26 +53,31 @@ const UserHoverCard: FC<IUserHoverCardProps> = ({
                   <Avatar className="w-[60px] h-[60px]">
                     <AvatarImage
                       sizes=""
-                      src={user.details.avatarUrl}
-                      alt={displayName}
-                      className=" bg-gray-200 dark:bg-gray-800 border"
+                      src={project.details?.avatarUrl ?? 'https://api.dicebear.com/7.x/shapes/svg'}
+                      alt={project.title}
                     />
+                    <AvatarFallback>{project.title.slice(0, 2)}</AvatarFallback>
                   </Avatar>
                   <div className="grid gap-y-0">
-                    <p className="font-bold">{displayName}</p>
+                    <p className="font-bold">{project.title}</p>
                     <Link
                       variant="hoverUnderline"
-                      href={getUserUrl(user)}
+                      href={getProjectUrl(project)}
                       className="text-sm text-muted-foreground"
                     >
-                      @{user.username}
+                      @{project.username}
                     </Link>
                   </div>
                 </div>
-                {user.details.bio && <p>{user.details.bio}</p>}
-                {user.details.badges && user.details.badges.length > 0 && (
+                <div className="flex gap-x-2">
+                  <span className="text-muted-foreground">Project manager:</span>
+                  <HoverCard>
+                    <UserHoverCard user={project.manager} triggerContent={managerLink} />
+                  </HoverCard>
+                </div>
+                {project.details?.badges && project.details.badges.length > 0 && (
                   <div className="flex items-center gap-x-2 gap-y-3 flex-wrap">
-                    {[...defaultUserBadges, ...user.details.badges]
+                    {[...defaultProjectBadges, ...project.details.badges]
                       .sort((b1, b2) => {
                         if (b1.category instanceof Object && b2.category instanceof Object) {
                           return b1.category.order - b2.category.order;
@@ -79,54 +85,37 @@ const UserHoverCard: FC<IUserHoverCardProps> = ({
                           typeof b1.category === 'string' &&
                           typeof b2.category === 'string'
                         ) {
-                          const category1 = userBadgeCategories.find(c => c.type === b1.category);
-                          const category2 = userBadgeCategories.find(c => c.type === b2.category);
+                          const category1 = projectBadgeCategories.find(
+                            c => c.type === b1.category
+                          );
+                          const category2 = projectBadgeCategories.find(
+                            c => c.type === b2.category
+                          );
                           return category1 && category2 ? category1.order - category2.order : 0;
                         }
                         return 0;
                       })
-                      .map(async (badge, i) => {
-                        let predefinedCategory: TUserBadgeCategory | undefined;
-                        let badgeCategory: TUserBadgeCategory | undefined;
+                      .map((badge, i) => {
+                        let predefinedCategory: TProjectBadgeCategory | undefined;
+                        let badgeCategory: TProjectBadgeCategory | undefined;
                         if (badge.category instanceof Object) {
                           badgeCategory = badge.category;
                           predefinedCategory = badge.category
-                            ? userBadgeCategories.find(c => c.type === badgeCategory!.type)
+                            ? projectBadgeCategories.find(c => c.type === badgeCategory!.type)
                             : undefined;
                         } else if (typeof badge.category === 'string') {
-                          badgeCategory = userBadgeCategories.find(c => c.type === badge.category);
+                          badgeCategory = projectBadgeCategories.find(
+                            c => c.type === badge.category
+                          );
                         }
 
                         const BadgeIcon = predefinedCategory?.icon || badgeCategory?.icon;
-
-                        let label: ReactNode = badge.label;
-
-                        if (
-                          showTeamHoverCard &&
-                          badge.referenceId &&
-                          (badgeCategory?.type === 'team' || predefinedCategory?.type === 'team')
-                        ) {
-                          if (showTeamHoverCard && badge.referenceId) {
-                            const team = await fetchTeam(badge.referenceId);
-                            if (team) {
-                              label = (
-                                <HoverCard>
-                                  <TeamHoverCard
-                                    team={team}
-                                    triggerContent={<span>{badge.label}</span>}
-                                    showUserHoverCard={false}
-                                  />
-                                </HoverCard>
-                              );
-                            }
-                          }
-                        }
 
                         return (
                           <Badge
                             key={i}
                             className={cn(
-                              'flex item-center space-x-1',
+                              'flex item-center space-x-1 text-primary-foreground/75',
                               badge.className,
                               badgeCategory?.className,
                               predefinedCategory?.className
@@ -141,17 +130,12 @@ const UserHoverCard: FC<IUserHoverCardProps> = ({
                                 )}
                               />
                             )}
-                            {label}
-                            {/* <span>{badge.label}</span> */}
+                            <span>{badge.label}</span>
                           </Badge>
                         );
                       })}
                   </div>
                 )}
-                {/* <div className="flex items-center space-x-2">
-                  <TbMail className="h-4 w-4 text-muted-foreground" />
-                  <span>{user.email}</span>
-                </div> */}
               </HoverCardContent>,
               document.body
             )
@@ -161,4 +145,4 @@ const UserHoverCard: FC<IUserHoverCardProps> = ({
   );
 };
 
-export default UserHoverCard;
+export default ProjectHoverCard;

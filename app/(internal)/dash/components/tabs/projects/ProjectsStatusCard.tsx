@@ -1,13 +1,16 @@
 import { FC } from 'react';
 
 import UserHoverCard from '@/components/features/user/UserHoverCard';
-import { Branding1 } from '@/components/icons/BrandingPlaceholders';
 import { Card, CardHeader, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import { TProjectsProjectList } from '../../../types/projects';
 import { TAsyncData } from '@/app/types/data/data';
 import { HoverCard } from '@/components/ui/hover-card';
 import { getDisplayName } from '@/lib/utils/user';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import ProjectHoverCard from '@/components/features/project/ProjectHoverCard';
+import Link from '@/components/ui/link';
+import { getProjectUrl } from '@/lib/utils/project';
 
 const ProjectSkeleton: FC = () => {
   return (
@@ -43,8 +46,8 @@ const ProjectsStatusCard: FC<IProjectsStatusCardProps> = ({ data }) => {
         <h3 className="font-semibold leading-none tracking-tight">Projects Status</h3>
         {projectData?.amountProjects !== undefined && projectData?.delayedProjects !== undefined ? (
           <p className="text-sm text-muted-foreground">
-            Currently, there are {projectData.amountProjects} projects in total, with{' '}
-            {projectData.delayedProjects} delayed projects.
+            Currently, there are {projectData.amountProjects} projects in total,{' '}
+            {projectData.delayedProjects} of which are delayed.
           </p>
         ) : (
           <Skeleton className="h-3.5 w-1/2" />
@@ -60,13 +63,26 @@ const ProjectsStatusCard: FC<IProjectsStatusCardProps> = ({ data }) => {
             <div className="space-y-8">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  {project.details?.avatarUrl ? (
-                    <project.details.avatarUrl className="w-5 h-5" />
-                  ) : (
-                    <Branding1 className="w-5 h-5" />
-                  )}
+                  <Avatar className="w-5 h-5">
+                    <AvatarImage
+                      src={project.details?.avatarUrl ?? 'https://api.dicebear.com/7.x/shapes/svg'}
+                    />
+                  </Avatar>
                   <div className="flex flex-col ml-3">
-                    <p className="font-semibold">{project.title}</p>
+                    <HoverCard>
+                      <ProjectHoverCard
+                        project={project}
+                        triggerContent={
+                          <Link
+                            href={getProjectUrl(project)}
+                            variant="hoverUnderline"
+                            className="font-semibold"
+                          >
+                            {project.title}
+                          </Link>
+                        }
+                      />
+                    </HoverCard>
                     <HoverCard>
                       <p className="text-sm text-muted-foreground">
                         Project Manager:&nbsp;

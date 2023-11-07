@@ -1,12 +1,12 @@
-import { TStoreSlice, TStoreState } from "@/app/types/store";
 import { produce } from "immer";
+
+import { TStoreSlice, TStoreState } from "@/app/types/store";
 import { IDashStateDefinitions, TDashSlice } from "../types/dashState";
 import TbArrowBarBoth from "@/components/icons/TbArrowBarBoth";
 import TbAsset from "@/components/icons/TbAsset";
 import TbCash from "@/components/icons/TbCash";
 import TbMoodUp from "@/components/icons/TbMoodUp";
 import { wait } from "@/lib/utils/misc";
-import { Branding1, Branding2, Branding5, Branding4, Branding3 } from "@/components/icons/BrandingPlaceholders";
 import { users } from "@/lib/constants/user";
 import TbArrowsExchange2 from "@/components/icons/TbArrowsExchange2";
 import TbCalendarStats from "@/components/icons/TbCalendarStats";
@@ -14,6 +14,7 @@ import TbHeartHandshake from "@/components/icons/TbHeartHandshake";
 import { teams } from "@/lib/constants/team";
 import TbBooks from "@/components/icons/TbBooks";
 import { projects } from "@/lib/constants/project";
+import TbChecklist from "@/components/icons/TbChecklist";
 
 const initState: IDashStateDefinitions = {
     overview: {
@@ -209,9 +210,10 @@ export const createDashSlice: TStoreSlice<TDashSlice> = (set, get) => ({
             }
         }));
     },
-    fetchEmployeesData: () => {
+    fetchEmployeesData: async () => {
         const prevData = get().dash.employees;
         if (Object.keys(prevData).every(k => prevData[k as keyof typeof prevData].state === "success")) return;
+        await wait(2000);
         set(produce((state: TStoreState) => {
             state.dash.employees = {
                 chart: {
@@ -364,9 +366,10 @@ export const createDashSlice: TStoreSlice<TDashSlice> = (set, get) => ({
             }
         }));
     },
-    fetchProjectsData: () => {
+    fetchProjectsData: async () => {
         const prevData = get().dash.projects;
         if (Object.keys(prevData).every(k => prevData[k as keyof typeof prevData].state === "success")) return;
+        await wait(2000);
         set(produce((state: TStoreState) => {
             state.dash.projects = {
                 chart: {
@@ -445,7 +448,7 @@ export const createDashSlice: TStoreSlice<TDashSlice> = (set, get) => ({
                         },
                         {
                             title: 'Completion Rate',
-                            icon: TbCalendarStats,
+                            icon: TbChecklist,
                             content: {
                                 amount: `${(Math.random() * 100).toFixed(2)}%`,
                                 comparison: {
