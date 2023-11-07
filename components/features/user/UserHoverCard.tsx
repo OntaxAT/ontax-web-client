@@ -1,7 +1,6 @@
 'use client';
 
 import { TUser, TUserBadgeCategory } from '@/app/types/features/user';
-import TbMail from '@/components/icons/TbMail';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
@@ -141,17 +140,12 @@ const UserHoverCard: FC<IUserHoverCardProps> = ({
                                 )}
                               />
                             )}
-                            {label}
-                            {/* <span>{badge.label}</span> */}
+                            <span>{label}</span>
                           </Badge>
                         );
                       })}
                   </div>
                 )}
-                {/* <div className="flex items-center space-x-2">
-                  <TbMail className="h-4 w-4 text-muted-foreground" />
-                  <span>{user.email}</span>
-                </div> */}
               </HoverCardContent>,
               document.body
             )
