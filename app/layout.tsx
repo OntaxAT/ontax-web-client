@@ -4,6 +4,7 @@ import './globals.css';
 import { ThemeProvider } from '@/components/theme/theme-provider';
 import { cn } from '@/lib/utils/misc';
 import { FC, ReactNode } from 'react';
+import { Toaster } from '@/components/ui/toaster';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -28,6 +29,7 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => {
           disableTransitionOnChange
         >
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

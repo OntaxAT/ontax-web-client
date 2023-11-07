@@ -35,3 +35,17 @@ export const generateId = (length: number) => {
  * @returns Promise that resolves after the given amount of time
  */
 export const wait = async (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+/**
+ * Copy a string to the clipboard
+ * @param text Text to copy to the clipboard
+ * @returns Boolean indicating if the text was copied to the clipboard
+ */
+export const copyToClipboard = async (text: string): Promise<boolean> => {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    return false;
+  }
+  return true;
+}

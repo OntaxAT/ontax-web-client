@@ -13,16 +13,31 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import BusinessSelect from './BusinessSelect';
 import TopNavMenu from './TopNavMenu';
 import { currentUser } from '@/lib/constants/user';
 import { getDisplayName, getInitials } from '@/lib/utils/user';
+import TbCopy from '@/components/icons/TbCopy';
+import { cn, copyToClipboard } from '@/lib/utils/misc';
+import TbCheck from '@/components/icons/TbCheck';
 
 /**
  * Top navigation bar for internal pages
  */
 const InternalTopNav: FC = () => {
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const copyUsernameToClipboard = () => {
+    setIsDisabled(true);
+    copyToClipboard(currentUser.username);
+    setTimeout(() => {
+      setIsDisabled(false);
+    }, 2000);
+  };
+
+  const Icon = isDisabled ? TbCheck : TbCopy;
+
   return (
     <div className="fixed flex justify-center h-16 w-full mx-auto px-5 xl:px-0 border-b bg-white dark:bg-black">
       <div className="flex items-center justify-between w-full px-10">
@@ -51,9 +66,23 @@ const InternalTopNav: FC = () => {
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="end" forceMount>
               <DropdownMenuLabel className="font-normal">
-                <div className="flex flex-col space-y-1">
+                <div className="flex flex-col space-y-2">
                   <p className="text-sm font-medium leading-none">{getDisplayName(currentUser)}</p>
-                  <p className="text-xs leading-none text-muted-foreground">{currentUser.email}</p>
+                  <div
+                    className={'group flex items-center gap-x-1 cursor-pointer'}
+                    onClick={isDisabled ? undefined : copyUsernameToClipboard}
+                  >
+                    <p className="text-sm leading-none text-muted-foreground group-hover:text-primary transition-colors">
+                      @{currentUser.username}
+                    </p>
+                    <Icon
+                      className={cn(
+                        'w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity',
+                        isDisabled && 'text-green-500'
+                      )}
+                    />
+                  </div>
+                  {/* <p className="text-xs leading-none text-muted-foreground">{currentUser.email}</p> */}
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
