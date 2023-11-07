@@ -75,7 +75,7 @@ const ProjectsTab: FC = () => {
 
   return (
     <div className="flex flex-col h-full gap-5">
-      <TrendCards data={trendData} iconClassName="group-hover:text-blue-500" />
+      <TrendCards data={trendData} iconClassName="group-hover:text-cyan-500" />
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 mb-10 h-auto overflow-hidden">
         <Card className="flex flex-col h-[440px]">
           <CardHeader>
