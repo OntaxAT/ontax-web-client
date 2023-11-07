@@ -5,6 +5,7 @@ import { useAppStore } from '@/app/store/store';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Bar, BarChart, LabelList, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import ProjectsStatusCard from './ProjectsStatusCard';
+import ProjectsProgressOverviewCard from '../overview/ProjectsOverviewCard';
 
 /**
  * Projects tab for the dashboard

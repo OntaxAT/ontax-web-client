@@ -13,7 +13,12 @@ import Link from '@/components/ui/link';
 import { getTeamUrl } from '@/lib/utils/team';
 import { TProject, TProjectBadgeCategory } from '@/app/types/features/project';
 import { getProjectUrl } from '@/lib/utils/project';
-import { defaultProjectBadges, projectBadgeCategories } from '@/lib/constants/project';
+import {
+  ProjectStatusIcons,
+  defaultProjectBadges,
+  projectBadgeCategories
+} from '@/lib/constants/project';
+import { IIconProps } from '@/components/icons/types/icons';
 
 export interface IProjectHoverCardProps {
   project: TProject;
@@ -109,7 +114,13 @@ const ProjectHoverCard: FC<IProjectHoverCardProps> = ({ project, triggerContent 
                           );
                         }
 
-                        const BadgeIcon = predefinedCategory?.icon || badgeCategory?.icon;
+                        let BadgeIcon: FC<IIconProps> | undefined;
+                        if (badgeCategory?.type === 'status') {
+                          BadgeIcon =
+                            ProjectStatusIcons[badge.label as keyof typeof ProjectStatusIcons];
+                        } else {
+                          BadgeIcon = predefinedCategory?.icon || badgeCategory?.icon;
+                        }
 
                         return (
                           <Badge

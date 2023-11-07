@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
 import UserHoverCard from '@/components/features/user/UserHoverCard';
-import { Branding1 } from '@/components/icons/BrandingPlaceholders';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { HoverCard } from '@/components/ui/hover-card';
 import { getDisplayName } from '@/lib/utils/user';
@@ -9,6 +8,9 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { TAsyncData } from '@/app/types/data/data';
 import { TOverviewProjectList } from '../../../types/overview';
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
+import ProjectHoverCard from '@/components/features/project/ProjectHoverCard';
+import Link from '@/components/ui/link';
+import { getProjectUrl } from '@/lib/utils/project';
 
 const ProjectSkeleton: FC = () => {
   return (
@@ -64,7 +66,20 @@ const ProjectsOverviewCard: FC<IProjectsOverviewCardProps> = ({ data }) => {
                     <AvatarImage src={project.details?.avatarUrl} />
                   </Avatar>
                   <div className="flex flex-col ml-3">
-                    <p className="font-semibold">{project.title}</p>
+                    <HoverCard>
+                      <ProjectHoverCard
+                        project={project}
+                        triggerContent={
+                          <Link
+                            href={getProjectUrl(project)}
+                            variant="hoverUnderline"
+                            className="font-semibold"
+                          >
+                            {project.title}
+                          </Link>
+                        }
+                      />
+                    </HoverCard>
                     <HoverCard>
                       <p className="text-sm text-muted-foreground">
                         Project Manager:&nbsp;

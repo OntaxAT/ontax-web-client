@@ -1,6 +1,7 @@
-import { Branding1, Branding2, Branding5, Branding4, Branding3 } from "@/components/icons/BrandingPlaceholders";
+import { FC } from "react";
+
 import { users } from "./user";
-import { TProject, TProjectBadge, TProjectBadgeCategory } from "@/app/types/features/project";
+import { EProjectStatus, TProject, TProjectBadge, TProjectBadgeCategory } from "@/app/types/features/project";
 import TbPresentation from "@/components/icons/TbPresentation";
 import TbFolder from "@/components/icons/TbFolder";
 import { defaultBadgeCategories } from "./badge";
@@ -8,7 +9,23 @@ import TbMapPin from "@/components/icons/TbMapPin";
 import TbCalendar from "@/components/icons/TbCalendar";
 import TbUser from "@/components/icons/TbUser";
 import TbCalendarCheck from "@/components/icons/TbCalendarCheck";
+import { IIconProps } from "@/components/icons/types/icons";
+import TbCalendarUp from "@/components/icons/TbCalendarUp";
+import TbProgress from "@/components/icons/TbProgress";
+import TbCalendarPause from "@/components/icons/TbCalendarPause";
+import TbCalendarExclamation from "@/components/icons/TbCalendarExclamation";
+import TbCheck from "@/components/icons/TbCheck";
+import TbX from "@/components/icons/TbX";
+import TbScanEye from "@/components/icons/TbScanEye";
+import TbBellExclamation from "@/components/icons/TbBellExclamation";
+import TbEyeCheck from "@/components/icons/TbEyeCheck";
+import TbArchive from "@/components/icons/TbArchive";
+import TbCash from "@/components/icons/TbCash";
+import TbQuestionMark from "@/components/icons/TbQuestionMark";
 
+/**
+ * Categories for project badges
+ */
 export const projectBadgeCategories: TProjectBadgeCategory[] = [
     ...defaultBadgeCategories,
     {
@@ -51,7 +68,7 @@ export const projects: TProject[] = [
             department: 'Marketing',
             avatarUrl: '/branding_1.svg',
             progress: Math.random() * 100,
-            status: 'in-progress',
+            status: EProjectStatus.IN_PROGRESS,
             budget: Math.random() * 100000,
             startDate: new Date('2023-01-01'),
             badges: [
@@ -69,7 +86,7 @@ export const projects: TProject[] = [
                 },
                 {
                     category: 'status',
-                    label: 'in-progress',
+                    label: EProjectStatus.IN_PROGRESS,
                     icon: TbCalendarCheck,
                 }
             ]
@@ -84,7 +101,7 @@ export const projects: TProject[] = [
             department: 'Sales',
             avatarUrl: '/branding_2.svg',
             progress: Math.random() * 100,
-            status: 'delayed',
+            status: EProjectStatus.DELAYED,
             budget: Math.random() * 100000,
             startDate: new Date('2022-08-30'),
             badges: [
@@ -102,7 +119,7 @@ export const projects: TProject[] = [
                 },
                 {
                     category: 'status',
-                    label: 'delayed',
+                    label: EProjectStatus.DELAYED,
                     icon: TbCalendarCheck,
                 }
             ]
@@ -117,11 +134,27 @@ export const projects: TProject[] = [
             department: 'Research and Development',
             avatarUrl: '/branding_3.svg',
             progress: Math.random() * 100,
-            status: 'completed',
+            status: EProjectStatus.COMPLETED,
             budget: Math.random() * 100000,
             startDate: new Date('2023-11-14'),
             badges: [
-
+                {
+                    category: 'internal-id',
+                    label: 'MP-75'
+                },
+                {
+                    category: 'location',
+                    label: 'New York'
+                },
+                {
+                    category: 'department',
+                    label: 'Marketing'
+                },
+                {
+                    category: 'status',
+                    label: EProjectStatus.COMPLETED,
+                    icon: TbCalendarCheck,
+                }
             ]
         }
     },
@@ -134,9 +167,28 @@ export const projects: TProject[] = [
             department: 'IT',
             avatarUrl: '/branding_4.svg',
             progress: Math.random() * 100,
-            status: 'canceled',
+            status: EProjectStatus.CANCELED,
             budget: Math.random() * 100000,
-            startDate: new Date('2021-06-14')
+            startDate: new Date('2021-06-14'),
+            badges: [
+                {
+                    category: 'internal-id',
+                    label: 'MP-75'
+                },
+                {
+                    category: 'location',
+                    label: 'New York'
+                },
+                {
+                    category: 'department',
+                    label: 'Marketing'
+                },
+                {
+                    category: 'status',
+                    label: EProjectStatus.CANCELED,
+                    icon: TbCalendarCheck,
+                }
+            ]
         }
     },
     {
@@ -148,9 +200,28 @@ export const projects: TProject[] = [
             department: 'Human Resources',
             avatarUrl: '/branding_5.svg',
             progress: Math.random() * 100,
-            status: 'under-review',
+            status: EProjectStatus.UNDER_REVIEW,
             budget: Math.random() * 100000,
             startDate: new Date('2023-03-15'),
+            badges: [
+                {
+                    category: 'internal-id',
+                    label: 'MP-75'
+                },
+                {
+                    category: 'location',
+                    label: 'New York'
+                },
+                {
+                    category: 'department',
+                    label: 'Marketing'
+                },
+                {
+                    category: 'status',
+                    label: EProjectStatus.UNDER_REVIEW,
+                    icon: TbCalendarCheck,
+                }
+            ]
         }
     },
     {
@@ -162,9 +233,28 @@ export const projects: TProject[] = [
             department: 'Software Development',
             avatarUrl: '/branding_3.svg',
             progress: Math.random() * 100,
-            status: 'needs-attention',
+            status: EProjectStatus.NEEDS_ATTENTION,
             budget: Math.random() * 100000,
-            startDate: new Date('2022-12-23')
+            startDate: new Date('2022-12-23'),
+            badges: [
+                {
+                    category: 'internal-id',
+                    label: 'MP-75'
+                },
+                {
+                    category: 'location',
+                    label: 'New York'
+                },
+                {
+                    category: 'department',
+                    label: 'Marketing'
+                },
+                {
+                    category: 'status',
+                    label: EProjectStatus.NEEDS_ATTENTION,
+                    icon: TbCalendarCheck,
+                }
+            ]
         },
     },
 ]
@@ -179,3 +269,38 @@ export const defaultProjectBadges: TProjectBadge[] = [
         category: 'type'
     }
 ]
+
+/**
+ * Colors for project statuses  
+ */
+export const ProjectStatusColors: Record<EProjectStatus, HTMLElement['className']> = {
+    [EProjectStatus.UNKNOWN]: 'text-gray-500',
+    [EProjectStatus.NOT_STARTED]: 'text-gray-500',
+    [EProjectStatus.IN_PROGRESS]: 'text-blue-500',
+    [EProjectStatus.ON_HOLD]: 'text-gray-500',
+    [EProjectStatus.DELAYED]: 'text-orange-500',
+    [EProjectStatus.COMPLETED]: 'text-green-500',
+    [EProjectStatus.CANCELED]: 'text-gray-500',
+    [EProjectStatus.UNDER_REVIEW]: 'text-purple-500',
+    [EProjectStatus.NEEDS_ATTENTION]: 'text-yellow-500',
+    [EProjectStatus.PENDING_APPROVAL]: 'text-gray-500',
+    [EProjectStatus.ARCHIVED]: 'text-gray-500',
+    [EProjectStatus.OVER_BUDGET]: 'text-red-500',
+    [EProjectStatus.AT_RISK]: 'text-red-500',
+}
+
+export const ProjectStatusIcons: Record<EProjectStatus, FC<IIconProps>> = {
+    [EProjectStatus.UNKNOWN]: TbQuestionMark,
+    [EProjectStatus.NOT_STARTED]: TbCalendarUp,
+    [EProjectStatus.IN_PROGRESS]: TbProgress,
+    [EProjectStatus.ON_HOLD]: TbCalendarPause,
+    [EProjectStatus.DELAYED]: TbCalendarExclamation,
+    [EProjectStatus.COMPLETED]: TbCheck,
+    [EProjectStatus.CANCELED]: TbX,
+    [EProjectStatus.UNDER_REVIEW]: TbScanEye,
+    [EProjectStatus.NEEDS_ATTENTION]: TbBellExclamation,
+    [EProjectStatus.PENDING_APPROVAL]: TbEyeCheck,
+    [EProjectStatus.ARCHIVED]: TbArchive,
+    [EProjectStatus.OVER_BUDGET]: TbCash,
+    [EProjectStatus.AT_RISK]: TbCalendar,
+}

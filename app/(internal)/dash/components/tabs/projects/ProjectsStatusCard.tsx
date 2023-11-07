@@ -11,6 +11,10 @@ import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import ProjectHoverCard from '@/components/features/project/ProjectHoverCard';
 import Link from '@/components/ui/link';
 import { getProjectUrl } from '@/lib/utils/project';
+import { Badge } from '@/components/ui/badge';
+import { ProjectStatusColors, ProjectStatusIcons } from '@/lib/constants/project';
+import { cn } from '@/lib/utils/misc';
+import { EProjectStatus } from '@/app/types/features/project';
 
 const ProjectSkeleton: FC = () => {
   return (
@@ -58,6 +62,8 @@ const ProjectsStatusCard: FC<IProjectsStatusCardProps> = ({ data }) => {
           return <ProjectSkeleton key={i} />;
         }
 
+        const StatusIcon = ProjectStatusIcons[project.details?.status ?? EProjectStatus.UNKNOWN];
+
         return (
           <CardContent key={i}>
             <div className="space-y-8">
@@ -100,8 +106,16 @@ const ProjectsStatusCard: FC<IProjectsStatusCardProps> = ({ data }) => {
                 </div>
                 {project.details?.progress && (
                   <p className="font-semibold">
-                    +{project.details.progress.toFixed(2)}
-                    <span className="text-xs text-muted-foreground"> %</span>
+                    <Badge
+                      variant="outline"
+                      className={cn(
+                        'flex items-center space-x-1',
+                        ProjectStatusColors[project.details.status]
+                      )}
+                    >
+                      <StatusIcon className="w-3 h-3 opacity-70" />
+                      <span>{project.details.status}</span>
+                    </Badge>
                   </p>
                 )}
               </div>

@@ -14,7 +14,7 @@ export type TProject = TAdressableEntity & {
         department: string;
         progress: number;
         avatarUrl?: string;
-        status: TProjectStatus;
+        status: EProjectStatus;
         reviewers?: TUser[];
         budget: number;
         startDate: Date;
@@ -25,7 +25,21 @@ export type TProject = TAdressableEntity & {
 /**
  * Possible statuses for a project
  */
-export type TProjectStatus = "not-started" | 'in-progress' | 'on-hold' | 'delayed' | 'completed' | 'canceled' | 'under-review' | 'needs-attention' | 'pending-approval' | 'archived' | 'over-budget' | 'at-risk';
+export enum EProjectStatus {
+    UNKNOWN = 'Unknown',
+    NOT_STARTED = 'Not Started',
+    IN_PROGRESS = 'In Progress',
+    ON_HOLD = 'On Hold',
+    DELAYED = 'Delayed',
+    COMPLETED = 'Completed',
+    CANCELED = 'Canceled',
+    UNDER_REVIEW = 'Under Review',
+    NEEDS_ATTENTION = 'Needs Attention',
+    PENDING_APPROVAL = 'Pending Approval',
+    ARCHIVED = 'Archived',
+    OVER_BUDGET = 'Over Budget',
+    AT_RISK = 'At Risk',
+}
 
 /**
  * Badges related to a project
