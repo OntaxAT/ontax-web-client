@@ -1,6 +1,6 @@
 import { useTheme } from 'next-themes';
 import Image, { ImageProps } from 'next/image';
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 const Ontax: FC<Omit<ImageProps, 'src' | 'alt'> & { variant?: 'light' | 'dark' }> = ({
   variant,
@@ -8,9 +8,17 @@ const Ontax: FC<Omit<ImageProps, 'src' | 'alt'> & { variant?: 'light' | 'dark' }
   height = width,
   ...props
 }) => {
+  const [imgVariant, setImgVariant] = useState<'light' | 'dark'>('light');
   const { resolvedTheme: theme } = useTheme();
 
-  if (variant === 'light' || theme === 'dark') {
+  useEffect(() => {
+    // We need to set the actual variant later to prevent SSR issues
+    if (variant === 'light' || theme === 'dark') {
+      setImgVariant('dark');
+    }
+  }, []);
+
+  if (imgVariant === 'dark') {
     return (
       <Image
         src="/ontax_logo_transparent_white.svg"
