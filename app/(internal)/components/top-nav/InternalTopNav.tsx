@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import BusinessSelect from './BusinessSelect';
 import TopNavMenu from './TopNavMenu';
 import { currentUser } from '@/lib/constants/user';
@@ -21,6 +21,7 @@ import { getDisplayName, getInitials } from '@/lib/utils/user';
 import TbCopy from '@/components/icons/TbCopy';
 import { cn, copyToClipboard } from '@/lib/utils/misc';
 import TbCheck from '@/components/icons/TbCheck';
+import NotificationButton from '@/components/features/notification/NotificationButton';
 
 /**
  * Top navigation bar for internal pages
@@ -48,12 +49,15 @@ const InternalTopNav: FC = () => {
           <BusinessSelect />
         </div>
         <TopNavMenu />
-        <div className="flex items-center space-x-4">
-          <Input
-            type="search"
-            placeholder="Search..."
-            className="w-full md:w-[100px] lg:w-[150px] xl:w-[250px]"
-          />
+        <div className="flex items-center space-x-4 md:space-x-5 lg:space-x-6">
+          <div className="flex items-center space-x-2">
+            <Input
+              type="search"
+              placeholder="Search..."
+              className="w-full md:w-[100px] lg:w-[150px] xl:w-[250px]"
+            />
+            <NotificationButton />
+          </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar className="cursor-pointer">
