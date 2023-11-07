@@ -8,6 +8,7 @@ import { getDisplayName } from '@/lib/utils/user';
 import { Skeleton } from '@/components/ui/skeleton';
 import { TAsyncData } from '@/app/types/data/data';
 import { TOverviewProjectList } from '../../../types/overview';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 
 const ProjectSkeleton: FC = () => {
   return (
@@ -59,11 +60,9 @@ const ProjectsOverviewCard: FC<IProjectsOverviewCardProps> = ({ data }) => {
             <div className="space-y-8">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  {project.details?.avatarUrl ? (
-                    <project.details.avatarUrl className="w-5 h-5" />
-                  ) : (
-                    <Branding1 className="w-5 h-5" />
-                  )}
+                  <Avatar className="w-5 h-5">
+                    <AvatarImage src={project.details?.avatarUrl} />
+                  </Avatar>
                   <div className="flex flex-col ml-3">
                     <p className="font-semibold">{project.title}</p>
                     <HoverCard>
