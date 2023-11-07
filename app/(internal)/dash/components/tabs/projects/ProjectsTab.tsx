@@ -3,17 +3,7 @@ import { FC, ReactNode } from 'react';
 import TrendCards from '../TrendCards';
 import { useAppStore } from '@/app/store/store';
 import { Skeleton } from '@/components/ui/skeleton';
-import {
-  Bar,
-  BarChart,
-  Label,
-  LabelList,
-  Legend,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis
-} from 'recharts';
+import { Bar, BarChart, LabelList, Legend, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import ProjectsStatusCard from './ProjectsStatusCard';
 
 /**
@@ -64,7 +54,7 @@ const ProjectsTab: FC = () => {
                 <LabelList
                   dataKey="amountProjects"
                   position="right"
-                  className="fill-muted-foreground/50"
+                  className="fill-muted-foreground/50 text-xs"
                   offset={8}
                 />
               </Bar>
