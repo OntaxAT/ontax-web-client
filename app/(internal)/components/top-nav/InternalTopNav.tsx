@@ -73,7 +73,7 @@ const InternalTopNav: FC = () => {
                 <div className="flex flex-col space-y-2">
                   <p className="text-sm font-medium leading-none">{getDisplayName(currentUser)}</p>
                   <div
-                    className={'group flex items-center gap-x-1 cursor-pointer'}
+                    className="group flex items-center gap-x-1 cursor-pointer w-fit"
                     onClick={isDisabled ? undefined : copyUsernameToClipboard}
                   >
                     <p className="text-sm leading-none text-muted-foreground group-hover:text-primary transition-colors">
