@@ -7,6 +7,7 @@ import EmployeesTab from './components/tabs/employees/EmployeesTab';
 import DashboardWelcome from './components/DashboardWelcome';
 import { useAppStore } from '@/app/store/store';
 import ProjectsTab from './components/tabs/projects/ProjectsTab';
+import NotificationsTab from './components/tabs/notifications/NotificationsTab';
 
 type TTab = 'overview' | 'employees' | 'projects' | 'notifications';
 
@@ -92,6 +93,9 @@ const Dashboard: FC = () => {
         </TabsContent>
         <TabsContent value="projects" className="flex-1">
           <ProjectsTab />
+        </TabsContent>
+        <TabsContent value="notifications" className="flex-1">
+          <NotificationsTab />
         </TabsContent>
       </Tabs>
     </>
