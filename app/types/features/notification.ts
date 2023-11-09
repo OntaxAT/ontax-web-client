@@ -12,7 +12,7 @@ export type TNotification = {
         category: ENotificationCategory;
         sender?: TUser; // If not specified, then the sender is the system
         timestamp: Date;
-        read: boolean;
+        read?: boolean;
         icon?: FC<IIconProps>;
         link?: TLinkData;
     }
