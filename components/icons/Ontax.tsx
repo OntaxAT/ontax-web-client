@@ -21,7 +21,7 @@ const Ontax: FC<Omit<ImageProps, 'src' | 'alt'> & { variant?: 'light' | 'dark' }
   if (imgVariant === 'dark') {
     return (
       <Image
-        src="/ontax_logo_transparent_white.svg"
+        src="/ontax_logo_transparent.svg"
         alt="Ontax branding"
         width={width}
         height={height}
@@ -32,7 +32,7 @@ const Ontax: FC<Omit<ImageProps, 'src' | 'alt'> & { variant?: 'light' | 'dark' }
 
   return (
     <Image
-      src="/ontax_logo_transparent.svg"
+      src="/ontax_logo_transparent_white.svg"
       alt="Ontax branding"
       width={width}
       height={height}
