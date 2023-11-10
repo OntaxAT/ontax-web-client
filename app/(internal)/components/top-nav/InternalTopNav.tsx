@@ -21,7 +21,7 @@ import { getDisplayName, getInitials } from '@/lib/utils/user';
 import TbCopy from '@/components/icons/TbCopy';
 import { cn, copyToClipboard } from '@/lib/utils/misc';
 import TbCheck from '@/components/icons/TbCheck';
-import NotificationPreview from '@/components/features/notification/NotificationPreview';
+import NotificationPreviewPopover from '@/components/features/notification/NotificationPreviewPopover';
 
 /**
  * Top navigation bar for internal pages
@@ -56,7 +56,7 @@ const InternalTopNav: FC = () => {
               placeholder="Search..."
               className="w-full md:w-[100px] lg:w-[150px] xl:w-[250px]"
             />
-            <NotificationPreview />
+            <NotificationPreviewPopover />
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

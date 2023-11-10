@@ -1,5 +1,6 @@
 import { ENotificationCategory, TNotification } from "@/app/types/features/notification";
 import { currentUser, users } from "./user";
+import { HTMLAttributes } from "react";
 
 /**
  * Placeholder notifications
@@ -103,3 +104,15 @@ export const notifications: TNotification[] = [
         }
     }
 ];
+
+/**
+ * Notification category colors for tailwind (background colors)
+ */
+export const notificationColors: Record<ENotificationCategory, string> = {
+    critical: "bg-red-500",
+    alert: "bg-orange-500",
+    announcement: "bg-blue-500",
+    event: "bg-emerald-500",
+    reminder: "bg-yellow-500",
+    other: "bg-teal-500",
+}

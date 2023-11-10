@@ -11,7 +11,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 /**
  * Notification button for top navigation bar that opens a popover with notifications
  */
-const NotificationPreview: FC = () => {
+const NotificationPreviewPopover: FC = () => {
   const [hasUnreadNotifications, setHasUnreadNotifications] = useState(true);
   const [notificationCategory, setNotificationCategory] = useState<
     ENotificationCategory.CRITICAL | ENotificationCategory.ALERT | ENotificationCategory.OTHER
@@ -76,4 +76,4 @@ const NotificationPreview: FC = () => {
   );
 };
 
-export default NotificationPreview;
+export default NotificationPreviewPopover;

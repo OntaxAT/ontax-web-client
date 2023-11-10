@@ -1,5 +1,11 @@
 import { FC } from 'react';
-import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable
+} from '@tanstack/react-table';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from './table';
 
 interface IDataTableProps<TData, TValue> {
@@ -11,7 +17,8 @@ const DataTable = <TData, TValue>({ data, columns }: IDataTableProps<TData, TVal
   const table = useReactTable({
     data,
     columns,
-    getCoreRowModel: getCoreRowModel()
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel()
   });
   return (
     <div className="roundend-md border">

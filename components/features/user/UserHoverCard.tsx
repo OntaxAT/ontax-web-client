@@ -113,7 +113,9 @@ const UserHoverCard: FC<IUserHoverCardProps> = ({
                                   <TeamHoverCard
                                     team={team}
                                     triggerContent={<span>{badge.label}</span>}
-                                    showUserHoverCard={false}
+                                    showUserHoverCard={
+                                      team.members.findIndex(m => m?.id === user.id) === -1
+                                    }
                                   />
                                 </HoverCard>
                               );
