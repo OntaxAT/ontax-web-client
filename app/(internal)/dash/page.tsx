@@ -20,7 +20,7 @@ const Dashboard: FC = () => {
 
   useEffect(() => {
     const hash = window.location.hash.slice(1);
-    handleTabChange(hash);
+    handleTabChange(hash || 'overview');
   }, []);
 
   useEffect(() => {
