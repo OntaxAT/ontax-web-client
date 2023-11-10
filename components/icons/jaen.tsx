@@ -11,8 +11,8 @@ const Jaen: FC<IIconProps> = props => {
       stroke-width="2"
       stroke="currentColor"
       fill="none"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       {...props}
     >
       <g transform="matrix(1, 0, 0, 1, 70.402878, -4.070045)">

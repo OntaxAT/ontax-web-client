@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import TbLoader from '@/components/icons/TbLoader';
 import { FC, useState } from 'react';
-import Jaen from '@/components/icons/snek';
+import Jaen from '@/components/icons/jaen';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import {

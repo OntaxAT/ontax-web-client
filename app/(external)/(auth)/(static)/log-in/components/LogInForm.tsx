@@ -4,7 +4,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import TbEye from '@/components/icons/TbEye';
 import TbEyeOff from '@/components/icons/TbEyeOff';
 import TbLoader from '@/components/icons/TbLoader';
-import Jaen from '@/components/icons/snek';
+import Jaen from '@/components/icons/jaen';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { cn, validateEmail } from '@/lib/utils/misc';
