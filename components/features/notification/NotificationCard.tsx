@@ -66,9 +66,14 @@ const NotificationCard: FC<INotificationCardProps> = ({ data }) => {
   }
 
   return (
-    <Card className="relative overflow-hidden">
+    <Card className="group relative overflow-hidden motion-safe:hover:scale-[1.01] transition-transform">
       <CardContent className="px-6 p-4">
-        <div className={cn('absolute top-0 left-0 bg-gradient-to-r w-[100px] h-full', bgColor)} />
+        <div
+          className={cn(
+            'absolute top-0 left-0 bg-gradient-to-r w-[100px] group-hover:w-[150px] h-full transition-[width]',
+            bgColor
+          )}
+        />
         <div className="relative flex gap-x-6 items-center">
           {data.details.sender ? (
             <HoverCard>
