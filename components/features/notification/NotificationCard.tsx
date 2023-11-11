@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils/misc';
 import { format } from 'date-fns';
 import { FC } from 'react';
 import UserHoverCard from '../user/UserHoverCard';
+import { getTimeDifferenceInWords } from '@/lib/utils/time';
 
 interface INotificationCardProps {
   data: TNotification;
@@ -91,7 +92,7 @@ const NotificationCard: FC<INotificationCardProps> = ({ data }) => {
             <div className="text-sm text-muted-foreground">{data.description}</div>
           </div>
           <p className="text-muted-foreground text-sm">
-            {format(data.details.timestamp, 'dd. MMM yyyy')}
+            {getTimeDifferenceInWords(data.details.timestamp)}
           </p>
         </div>
       </CardContent>

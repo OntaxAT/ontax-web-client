@@ -1,6 +1,7 @@
 import { ENotificationCategory, TNotification } from "@/app/types/features/notification";
 import { currentUser, users } from "./user";
 import { HTMLAttributes } from "react";
+import { addDays, addMinutes, addMonths, addYears } from "date-fns";
 
 /**
  * Placeholder notifications
@@ -12,7 +13,7 @@ export const notifications: TNotification[] = [
         description: "A critical system update is scheduled tonight at 11:00 PM. Please save your work and log out before that time.",
         details: {
             category: ENotificationCategory.CRITICAL,
-            timestamp: new Date("2023-11-09T14:30:00"),
+            timestamp: new Date(),
         },
     },
     {
@@ -21,7 +22,7 @@ export const notifications: TNotification[] = [
         description: "We have implemented a new company policy regarding remote work. Please review the updated policy document in the shared folder.",
         details: {
             category: ENotificationCategory.ANNOUNCEMENT,
-            timestamp: new Date("2023-11-09T09:15:00"),
+            timestamp: addDays(new Date(), -14),
             sender: currentUser,
         }
     },
@@ -31,7 +32,7 @@ export const notifications: TNotification[] = [
         description: "Reminder: Deadline for Project Alpha tasks is approaching. Ensure all tasks are completed by Friday.",
         details: {
             category: ENotificationCategory.REMINDER,
-            timestamp: new Date("2023-11-09T16:45:00"),
+            timestamp: addMinutes(new Date(), -30),
             sender: users[0],
         }
     },
@@ -41,7 +42,7 @@ export const notifications: TNotification[] = [
         description: "An unauthorized access attempt was detected. Change your password immediately and report any suspicious activity to IT.",
         details: {
             category: ENotificationCategory.ALERT,
-            timestamp: new Date("2023-11-09T11:20:00")
+            timestamp: addMonths(new Date(), -2),
         }
     },
     {
@@ -50,7 +51,7 @@ export const notifications: TNotification[] = [
         description: "Join us for the quarterly town hall meeting on Friday at 2:00 PM. Important updates and Q&A session.",
         details: {
             category: ENotificationCategory.EVENT,
-            timestamp: new Date("2023-11-09T14:00:00"),
+            timestamp: addYears(new Date(), -1),
             sender: users[1]
         }
     },
