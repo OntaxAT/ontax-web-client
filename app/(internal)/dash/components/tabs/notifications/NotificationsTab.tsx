@@ -1,5 +1,4 @@
 import NotificationCard from '@/components/features/notification/NotificationCard';
-import NotificationDataTable from '@/components/features/notification/NotificationDataTable';
 import { notifications } from '@/lib/constants/notification';
 import { FC } from 'react';
 
@@ -12,7 +11,6 @@ const NotificationsTab: FC = () => {
       {notifications.map(notification => (
         <NotificationCard key={notification.id} data={notification} />
       ))}
-      {/* <NotificationDataTable /> */}
     </div>
   );
 };
